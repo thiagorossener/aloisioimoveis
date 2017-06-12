@@ -2,6 +2,7 @@
 
 System to insert and search for properties inside the Aloísio Imóveis real estate website.
 
+[![Build Status](https://travis-ci.org/thiagorossener/aloisioimoveis.svg?branch=master)](https://travis-ci.org/thiagorossener/aloisioimoveis)
 
 ## How to develop?
 
