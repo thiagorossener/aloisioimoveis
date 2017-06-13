@@ -6,3 +6,5 @@
 *.pyc
 __pycache__
 staticfiles
+.coverage
+.coveralls.yml
