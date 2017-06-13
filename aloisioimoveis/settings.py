@@ -119,3 +119,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Colored Tests
+
+RAINBOWTESTS_HIGHLIGHT_PATH = BASE_DIR
+TEST_RUNNER = 'rainbowtests.test.runner.RainbowDiscoverRunner'
+RAINBOWTESTS_SHOW_MESSAGES = False
