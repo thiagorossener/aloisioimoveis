@@ -1,0 +1,264 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+<div id="app">
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="img/novo-logo-inverse.png" width="125" height="52" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">Alugar</a></li>
+                    <li><a href="#">Comprar</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Entrar</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="jumbotron">
+        <div class="container">
+            <div id="search" class="search-box" v-cloak>
+                <form class="form-inline">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="finalidade">O que você precisa?</label><br>
+                            <div id="finalidade" class="btn-group" role="group">
+                                <button type="button" class="btn btn-default btn-lg"
+                                        v-bind:class="{ active: finalidade === 'alugar' }"
+                                        v-on:click="setFinalidade('alugar')">Alugar</button>
+                                <button type="button" class="btn btn-default btn-lg"
+                                        v-bind:class="{ active: finalidade === 'comprar' }"
+                                        v-on:click="setFinalidade('comprar')">Comprar</button>
+                            </div>
+                        </div>
+                        <div class="form-group search-group">
+                            <label>Qual tipo?</label><br>
+                            <div class="btn-group">
+                                <button id="btn-tipo-de-imovel" class="btn btn-default btn-lg dropdown-toggle"
+                                        type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ currentTipoDeImovel.label }} <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li v-for="tipoDeImovel in tiposDeImovel">
+                                        <a href="javascript:void(0);"
+                                           v-on:click="setTipoDeImovel(tipoDeImovel)">{{ tipoDeImovel.label }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group search-group">
+                            <label>Onde?</label><br>
+                            <div class="btn-group">
+                                <button id="btn-cidades" class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ currentCidade.label }} <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li v-for="cidade in cidades">
+                                        <a href="javascript:void(0);"
+                                           v-on:click="setCidade(cidade)">{{ cidade.label }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <button id="btn-bairros" class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ currentBairro.label }} <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li v-for="bairro in bairros">
+                                        <a href="javascript:void(0);"
+                                           v-on:click="setBairro(bairro)">{{ bairro.label }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pull-right search-button-group">
+                            <a href="#" v-if="!searchForFicha" v-on:click="searchForFicha = true">Buscar por ficha</a>
+                            <input id="input-numero-da-ficha" type="number" class="input-lg"
+                                   placeholder="Nº da ficha" v-else />
+                            <button id="btn-search" class="btn btn-lg" type="button"><i class="fa fa-search"></i> &nbsp;Buscar</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- Carousel -->
+    <div class="container">
+        <div id="home-carousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+                <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+                <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="item">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1><i class="fa fa-quote-left" aria-hidden="true"></i> Mais de 25 anos de tradição, <br>fazendo acontecer na cidade <i class="fa fa-quote-right" aria-hidden="true"></i></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1><i class="fa fa-quote-left" aria-hidden="true"></i> Respeitamos a sua família <br>e queremos o melhor pra você <i class="fa fa-quote-right" aria-hidden="true"></i></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="item active">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1><i class="fa fa-quote-left" aria-hidden="true"></i> Cuidamos do seu imóvel com <br>carinho pra não ter dor de cabeça <i class="fa fa-quote-right" aria-hidden="true"></i></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="img/destaque1.JPG" alt="">
+                    <div class="info">
+                        <span class="badge badge-finalidade">Alugar</span>
+                        <span class="badge badge-preco badge-primary pull-right">R$ 950,00</span>
+                    </div>
+                    <div class="caption">
+                        <h3>Casa</h3>
+                        <p>Independência - Taubaté/SP</p>
+                        <p><span class="badge badge-room">2</span> <i class="fa fa-bed"></i></p>
+                        <a href="#" class="btn btn-primary" role="button">Ver detalhes</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="img/destaque2.JPG" alt="">
+                    <div class="info">
+                        <span class="badge badge-finalidade">Comprar</span>
+                        <span class="badge badge-preco badge-primary pull-right">R$ 1.200.000,00</span>
+                    </div>
+                    <div class="caption">
+                        <h3>Apartamento</h3>
+                        <p>Independência - Taubaté/SP</p>
+                        <p><span class="badge badge-room">2</span> <i class="fa fa-bed"></i></p>
+                        <a href="#" class="btn btn-primary" role="button">Ver detalhes</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="img/destaque3.JPG" alt="">
+                    <div class="info">
+                        <span class="badge badge-finalidade">Comprar</span>
+                        <span class="badge badge-preco badge-primary pull-right">R$ 737.000,00</span>
+                    </div>
+                    <div class="caption">
+                        <h3>Terreno</h3>
+                        <p>Independência - Taubaté/SP</p>
+                        <p><span class="badge badge-room">2</span> <i class="fa fa-bed"></i></p>
+                        <a href="#" class="btn btn-primary" role="button">Ver detalhes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="load-more">
+            <button class="btn btn-default">Carregar mais<br><i class="glyphicon glyphicon-chevron-down"></i></button>
+        </div>
+    </div> <!-- /container -->
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 footerleft ">
+                    <div class="logofooter"><img src="img/footer-logo.png" /></div>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td align="right"><i class="fa fa-map-marker"></i></td>
+                            <td>Rua Dr. Jorge Winther, 297 - Centro, Taubaté/SP 12010-150</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><i class="fa fa-phone"></i></td>
+                            <td>(12) 3622-2800</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><i class="fa fa-envelope"></i></td>
+                            <td>imobiliaria@aloisioimoveis.com.br</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6 col-sm-6 paddingtop-bottom">
+                    <div class="fb-page pull-right" data-href="https://www.facebook.com/aloisioimoveis" data-tabs="timeline" data-height="300" data-small-header="false" style="margin-bottom:15px;" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                        <a href="https://www.facebook.com/facebook"><i class="fa fa-facebook-square"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Copyright -->
+    <div class="copyright">
+        <div class="container">
+            <p>&copy; 2017 Aloísio Imóveis | Todos os direitos reservados.</p>
+        </div>
+    </div>
+</div> <!-- /app -->
+
+<!-- Scripts -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="node_modules/vue/dist/vue.min.js"></script>
+<script src="js/main.js" type="text/javascript"></script>
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script>
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+</script>
+</body>
+</html>
