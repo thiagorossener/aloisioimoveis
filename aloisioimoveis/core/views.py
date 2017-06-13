@@ -8,3 +8,7 @@ def home(request):
 
 def rent(request):
     return render(request, 'rent.html')
+
+
+def buy(request):
+    return render(request, 'buy.html')
