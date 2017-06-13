@@ -1,0 +1,79 @@
+{% extends 'sub-base.html' %}
+
+{% load static %}
+
+{% block title %}Resultados de Busca | {% endblock title %}
+
+{% block sub_content %}
+<!-- Content -->
+<div class="container">
+
+    <!-- Title -->
+    <div class="title row">
+        <div class="col-md-6">
+            <h2>Resultados</h2>
+        </div>
+        <div class="col-md-6 order">
+            <div class="pull-right">
+                <span class="order-text">Ordenar por:</span>
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Mais recentes <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0);">Mais recentes</a></li>
+                    <li><a href="javascript:void(0);">Preço maior</a></li>
+                    <li><a href="javascript:void(0);">Preço menor</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- /container -->
+
+<!-- Results -->
+<section class="results">
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="img-overlay">
+                        <img src="{% static 'img/destaque1.JPG' %}" class="img-responsive" />
+                        <div class="layer-overlay">
+                            <div class="value">
+                                <span class="price">R$ 750,00</span>
+                                <span class="conditions">+ IPTU (R$ 46,00)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-8">
+                    <div class="dados-do-imovel">
+                        <div class="info">
+                            <h3>Casa</h3>
+                            <div class="bairro">Esplanada Independência - Taubaté</div>
+                            <div>
+                                <span>3 quartos</span>
+                                <span>2 suítes</span>
+                                <span>1 banheiro</span>
+                                <span>2 vagas</span>
+                            </div>
+                            <div class="obs">Locação com observação</div>
+                        </div>
+                        <div class="actions">
+                            <a href="#" class="btn btn-default btn-theme">Ver detalhes</a>
+                            <a href="#" class="btn btn-default btn-theme"><i class="fa fa-camera"></i> Ver fotos (7)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="pagination pagination-lg">
+            <li><a href="#">1</a></li>
+            <li class="active"><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+        </ul>
+    </div>
+</section>
+{% endblock sub_content %}

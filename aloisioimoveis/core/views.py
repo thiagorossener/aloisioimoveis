@@ -12,3 +12,7 @@ def rent(request):
 
 def buy(request):
     return render(request, 'buy.html')
+
+
+def search(request):
+    return render(request, 'search.html')
