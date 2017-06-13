@@ -3,8 +3,7 @@
 System to insert and search for properties inside the Aloísio Imóveis real estate website.
 
 [![Build Status](https://travis-ci.org/thiagorossener/aloisioimoveis.svg?branch=master)](https://travis-ci.org/thiagorossener/aloisioimoveis)
-[![Test Coverage](https://codeclimate.com/github/thiagorossener/aloisioimoveis/badges/coverage.svg)](https://codeclimate.com/github/thiagorossener/aloisioimoveis/coverage)
-[![CodeFactor](https://www.codefactor.io/repository/github/thiagorossener/aloisioimoveis/badge)](https://www.codefactor.io/repository/github/thiagorossener/aloisioimoveis)
+[![Coverage Status](https://coveralls.io/repos/github/thiagorossener/aloisioimoveis/badge.svg?branch=master)](https://coveralls.io/github/thiagorossener/aloisioimoveis?branch=master)
 
 ## How to develop?
 
