@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Aloísio Imóveis</title>
+    <title>{% block title %}{% endblock title %}Aloísio Imóveis</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -33,14 +33,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><img src="{% static 'img/novo-logo-inverse.png' %}"  width="125" height="52" /></a>
+                <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/novo-logo-inverse.png' %}"  width="125" height="52" /></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-                    <li><a href="/alugar">Alugar</a></li>
+                    <li class="{% if request.resolver_match.url_name == "home" %}active{% endif %}"><a href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a></li>
+                    <li class="{% if request.resolver_match.url_name == "rent" %}active{% endif %}"><a href="{% url 'rent' %}">Alugar</a></li>
                     <li><a href="#">Comprar</a></li>
                     <li><a href="#">Contato</a></li>
                 </ul>
