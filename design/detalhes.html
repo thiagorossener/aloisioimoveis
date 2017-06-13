@@ -1,0 +1,274 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+<div id="app">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="img/novo-logo-inverse.png" width="125" height="52" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">Alugar</a></li>
+                    <li><a href="#">Comprar</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Entrar</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <section class="top-page">
+        <div class="container">
+            <div id="search" class="search-box" v-cloak>
+                <form class="form-inline">
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="finalidade">O que você precisa?</label><br>
+                            <div id="finalidade" class="btn-group" role="group">
+                                <button type="button" class="btn btn-default"
+                                        v-bind:class="{ active: finalidade === 'alugar' }"
+                                        v-on:click="setFinalidade('alugar')">Alugar</button>
+                                <button type="button" class="btn btn-default"
+                                        v-bind:class="{ active: finalidade === 'comprar' }"
+                                        v-on:click="setFinalidade('comprar')">Comprar</button>
+                            </div>
+                        </div>
+                        <div class="form-group search-group">
+                            <label>Qual tipo?</label><br>
+                            <div class="btn-group">
+                                <button id="btn-tipo-de-imovel" class="btn btn-default dropdown-toggle"
+                                        type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ currentTipoDeImovel.label }} <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li v-for="tipoDeImovel in tiposDeImovel">
+                                        <a href="javascript:void(0);"
+                                           v-on:click="setTipoDeImovel(tipoDeImovel)">{{ tipoDeImovel.label }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group search-group">
+                            <label>Onde?</label><br>
+                            <div class="btn-group">
+                                <button id="btn-cidades" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ currentCidade.label }} <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li v-for="cidade in cidades">
+                                        <a href="javascript:void(0);"
+                                           v-on:click="setCidade(cidade)">{{ cidade.label }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <button id="btn-bairros" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ currentBairro.label }} <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li v-for="bairro in bairros">
+                                        <a href="javascript:void(0);"
+                                           v-on:click="setBairro(bairro)">{{ bairro.label }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button id="btn-search" class="btn" type="button"><i class="fa fa-search"></i> &nbsp;Buscar</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <div class="container">
+
+        <!-- Title -->
+        <div class="title row">
+            <h2>Alugar</h2>
+        </div>
+
+    </div> <!-- /container -->
+
+    <!-- Details -->
+    <section class="details">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <h3>Casa</h3>
+                    <p class="bairro">Esplanada Independência - Taubaté</p>
+                    <p class="ficha">Ficha n 1234</p>
+                </div>
+                <div class="col-md-3">
+                    <a href="#" class="btn btn-default btn-theme pull-right"><i class="fa fa-envelope"></i> &nbsp;Entrar em contato</a>
+                </div>
+            </div>
+            <div class="gallery">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="view">
+                            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                                </ol>
+
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <img src="img/destaque1.JPG" alt="Los Angeles" width="100%">
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="img/destaque2.JPG" alt="Chicago" width="100%">
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="img/destaque3.JPG" alt="New York" width="100%">
+                                    </div>
+                                </div>
+
+                                <!-- Left and right controls -->
+                                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="gallery-scroll">
+                            <a href="#" class="controller"><i class="fa fa-angle-up"></i></a>
+                            <a href="#" class="picture-thumbnail"><img src="img/destaque1.JPG" width="100%"></a>
+                            <a href="#" class="picture-thumbnail"><img src="img/destaque2.JPG" width="100%"></a>
+                            <a href="#" class="picture-thumbnail"><img src="img/destaque3.JPG" width="100%"></a>
+                            <a href="#" class="picture-thumbnail"><img src="img/destaque1.JPG" width="100%"></a>
+                            <a href="#" class="controller"><i class="fa fa-angle-down"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="dados-do-imovel">
+                            <div class="row body">
+                                <div class="col-md-3 col-left">
+                                    <div class="value">
+                                        <div class="price">R$ 300,00</div>
+                                        <div class="conditions">+ IPTU (R$ 46,00)</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row info">
+                                        <div class="col-md-6">
+                                            <p>1 quarto</p>
+                                            <p>1 suíte</p>
+                                            <p>1 banheiro</p>
+                                            <p>1 sala de TV</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>1 cozinha</p>
+                                            <p>1 área de serviço</p>
+                                            <p>2 vagas de garagem</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="obs">
+                            <span>Observações</span>
+                            <p>Textão</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 footerleft ">
+                    <div class="logofooter"><img src="img/footer-logo.png" /></div>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td align="right"><i class="fa fa-map-marker"></i></td>
+                            <td>Rua Dr. Jorge Winther, 297 - Centro, Taubaté/SP 12010-150</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><i class="fa fa-phone"></i></td>
+                            <td>(12) 3622-2800</td>
+                        </tr>
+                        <tr>
+                            <td align="right"><i class="fa fa-envelope"></i></td>
+                            <td>imobiliaria@aloisioimoveis.com.br</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6 col-sm-6 paddingtop-bottom">
+                    <div class="fb-page pull-right" data-href="https://www.facebook.com/aloisioimoveis" data-tabs="timeline" data-height="300" data-small-header="false" style="margin-bottom:15px;" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                        <a href="https://www.facebook.com/facebook"><i class="fa fa-facebook-square"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Copyright -->
+    <div class="copyright">
+        <div class="container">
+            <p>&copy; 2017 Aloísio Imóveis | Todos os direitos reservados.</p>
+        </div>
+    </div>
+</div> <!-- /app -->
+
+<!-- Scripts -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="node_modules/vue/dist/vue.min.js"></script>
+<script src="js/main.js" type="text/javascript"></script>
+
+</body>
+</html>
