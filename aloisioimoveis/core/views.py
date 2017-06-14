@@ -16,3 +16,7 @@ def buy(request):
 
 def search(request):
     return render(request, 'search.html')
+
+
+def contact(request):
+    return render(request, 'contact.html')
