@@ -42,6 +42,7 @@
                     <li class="{% if request.resolver_match.url_name == "home" %}active{% endif %}"><a href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a></li>
                     <li class="{% if request.resolver_match.url_name == "rent" %}active{% endif %}"><a href="{% url 'rent' %}">Alugar</a></li>
                     <li class="{% if request.resolver_match.url_name == "buy" %}active{% endif %}"><a href="{% url 'buy' %}">Comprar</a></li>
+                    <li class="{% if request.resolver_match.url_name == "company" %}active{% endif %}"><a href="{% url 'company' %}">Empresa</a></li>
                     <li class="{% if request.resolver_match.url_name == "contact" %}active{% endif %}"><a href="{% url 'contact' %}">Contato</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
