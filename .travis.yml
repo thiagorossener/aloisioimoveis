@@ -7,6 +7,6 @@ install:
   - pip install coveralls
 script:
   - python manage.py test
-  - coverage run --source=aloisioimoveis.core manage.py test
+  - coverage run --source=aloisioimoveis.core,aloisioimoveis.properties manage.py test
 after_success:
   coveralls
