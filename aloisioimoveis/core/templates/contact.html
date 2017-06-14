@@ -1,0 +1,75 @@
+{% extends 'sub-base.html' %}
+
+{% load static %}
+
+{% block title %}Contato | {% endblock title %}
+
+{% block sub_content %}
+<!-- Title -->
+<div class="container">
+    <div class="title row">
+        <h2>Contato</h2>
+    </div>
+</div>
+
+<!-- Contact -->
+<section class="contato">
+    <div class="container">
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label class="col-lg-1 control-label hidden-xs hidden-sm hidden-md">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-user fa-stack-1x"></i>
+                                </span>
+                            </label>
+                            <div class="col-lg-11 col-md-12">
+                                <input type="text" class="form-control input-lg" placeholder="Por favor digite o seu nome">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-1 control-label hidden-xs hidden-sm hidden-md">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-envelope fa-stack-1x"></i>
+                                </span>
+                            </label>
+                            <div class="col-lg-11 col-md-12">
+                                <input type="text" class="form-control input-lg" placeholder="Por favor digite o seu e-mail">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-1 control-label hidden-xs hidden-sm hidden-md">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-phone fa-stack-1x"></i>
+                                </span>
+                            </label>
+                            <div class="col-lg-11 col-md-12">
+                                <input type="text" class="form-control input-lg" placeholder="Por favor digite o telefone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-1 control-label hidden-xs hidden-sm hidden-md">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-pencil fa-stack-1x"></i>
+                                </span>
+                            </label>
+                            <div class="col-lg-11 col-md-12">
+                                <textarea class="form-control textarea-lg" rows="10" placeholder="Sua mensagem"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-offset-1">
+                            <button id="btn-send" class="btn">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</section>
+{% endblock sub_content %}
