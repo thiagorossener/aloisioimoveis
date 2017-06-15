@@ -1,24 +1,22 @@
 from datetime import datetime
 
+from django.contrib.auth.models import User
 from django.test import TestCase
 
-from aloisioimoveis.properties.models import Property, Neighborhood, City, User
+from aloisioimoveis.properties.models import City, Neighborhood, Apartment
 
 
-class PropertyModelTest(TestCase):
+class ApartmentModelTest(TestCase):
     def setUp(self):
         city = self.create_city()
         neighborhood = self.create_neighborhood(city=city)
         user = self.create_user()
 
-        self.obj = Property(
+        self.obj = Apartment(
             featured=True,
             num_record=1234,
-            intent='alugar',
-            property_type='casa',
+            intent='comprar',
             address='Rua Jorge Winther',
-            area='120m2',
-            in_front_of='Cool Street',
             total_bedroom=2,
             total_maids_room=0,
             total_maids_wc=0,
@@ -47,27 +45,15 @@ class PropertyModelTest(TestCase):
         self.obj.save()
 
     def test_create(self):
-        """Should create a Property"""
-        self.assertTrue(Property.objects.exists())
-
-    def test_user(self):
-        """Property must have a User attr"""
-        self.assertIsInstance(self.obj.user, User)
-
-    def test_city(self):
-        """Property must have a City attr"""
-        self.assertIsInstance(self.obj.city, City)
-
-    def test_neighborhood(self):
-        """Property must have a Neighborhood attr"""
-        self.assertIsInstance(self.obj.neighborhood, Neighborhood)
+        """Should create an Apartment"""
+        self.assertTrue(Apartment.objects.exists())
 
     def test_created_at(self):
-        """Property must have a created_at attr"""
+        """Apartment must have a created_at attr"""
         self.assertIsInstance(self.obj.created_at, datetime)
 
     def test_updated_at(self):
-        """Property must have a updated_at attr"""
+        """Apartment must have a updated_at attr"""
         self.assertIsInstance(self.obj.updated_at, datetime)
 
     def create_city(self):
@@ -95,17 +81,13 @@ class PropertyModelTest(TestCase):
         return user
 
 
-class PropertyFieldChoicesTest(TestCase):
+class ApartmentFieldChoicesTest(TestCase):
     def setUp(self):
-        self.obj = Property()
+        self.obj = Apartment()
 
     def test_has_intent_choices(self):
         """Should have rent and buy choices"""
         self.assertChoicesInField('intent', ['alugar', 'comprar'])
-
-    def test_has_property_type_choices(self):
-        """Should have property types house, apartment, comercial and terrain"""
-        self.assertChoicesInField('property_type', ['casa', 'apartamento', 'comercial', 'terreno'])
 
     def assertChoicesInField(self, field_name, choices):
         field = self.obj._meta.get_field(field_name)
