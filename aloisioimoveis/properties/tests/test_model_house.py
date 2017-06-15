@@ -3,7 +3,8 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from aloisioimoveis.properties.models import City, Neighborhood, House
+from aloisioimoveis.locations.models import City, Neighborhood
+from aloisioimoveis.properties.models import House
 
 
 class HouseModelTest(TestCase):
