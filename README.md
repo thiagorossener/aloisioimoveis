@@ -4,6 +4,7 @@ System to insert and search for properties inside the Aloísio Imóveis real est
 
 [![Build Status](https://travis-ci.org/thiagorossener/aloisioimoveis.svg?branch=master)](https://travis-ci.org/thiagorossener/aloisioimoveis)
 [![Coverage Status](https://coveralls.io/repos/github/thiagorossener/aloisioimoveis/badge.svg?branch=master)](https://coveralls.io/github/thiagorossener/aloisioimoveis?branch=master)
+[![Code Health](https://landscape.io/github/thiagorossener/aloisioimoveis/master/landscape.svg?style=flat)](https://landscape.io/github/thiagorossener/aloisioimoveis/master)
 
 ## How to develop?
 
