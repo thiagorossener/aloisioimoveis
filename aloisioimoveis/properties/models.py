@@ -15,7 +15,7 @@ class Property(BaseModel):
     )
 
     featured = models.BooleanField('destaque', default=False)
-    num_record = models.IntegerField('ficha', null=True)
+    num_record = models.IntegerField('ficha', null=True, blank=True)
     intent = models.CharField('finalidade', max_length=10, choices=INTENT_CHOICES)
     obs = models.TextField('observações', blank=True)
     price = models.DecimalField('preço', max_digits=11, decimal_places=2)
@@ -83,12 +83,12 @@ class Apartment(Property):
 class Commercial(Property):
     address = models.CharField('endereço', max_length=200, blank=True)
     area = models.CharField('área', max_length=30, blank=True)
-    total_kitchen = models.IntegerField('cozinhas', default=0)
-    total_service_area = models.IntegerField('áreas de serviço', default=0)
-    total_bathroom = models.IntegerField('banheiros', default=0)
     total_room = models.IntegerField('salas', default=0)
+    total_kitchen = models.IntegerField('cozinhas', default=0)
     total_office = models.IntegerField('escritórios', default=0)
+    total_bathroom = models.IntegerField('banheiros', default=0)
     total_garage = models.IntegerField('garagens', default=0)
+    total_service_area = models.IntegerField('áreas de serviço', default=0)
 
     class Meta:
         verbose_name = 'Ponto Comercial'
