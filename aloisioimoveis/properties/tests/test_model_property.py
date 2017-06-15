@@ -13,6 +13,7 @@ class PropertyModelTest(TestCase):
 
         self.obj = Property(
             featured=True,
+            num_record=1234,
             intent='alugar',
             property_type='casa',
             address='Rua Jorge Winther',
@@ -92,3 +93,22 @@ class PropertyModelTest(TestCase):
         )
         user.save()
         return user
+
+
+class PropertyFieldChoicesTest(TestCase):
+    def setUp(self):
+        self.obj = Property()
+
+    def test_has_intent_choices(self):
+        """Should have rent and buy choices"""
+        self.assertChoicesInField('intent', ['alugar', 'comprar'])
+
+    def test_has_property_type_choices(self):
+        """Should have property types house, apartment, comercial and terrain"""
+        self.assertChoicesInField('property_type', ['casa', 'apartamento', 'comercial', 'terreno'])
+
+    def assertChoicesInField(self, field_name, choices):
+        field = self.obj._meta.get_field(field_name)
+        for choice in choices:
+            with self.subTest():
+                self.assertIn(choice, [c[0] for c in field.choices])
