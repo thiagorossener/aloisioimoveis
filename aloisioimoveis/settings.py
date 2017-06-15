@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'test_without_migrations',
     'aloisioimoveis.core',
-    'aloisioimoveis.properties',
+    'aloisioimoveis.properties.apps.PropertiesConfig',
 ]
 
 MIDDLEWARE = [
