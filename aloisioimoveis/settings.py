@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'test_without_migrations',
     'aloisioimoveis.core',
     'aloisioimoveis.properties.apps.PropertiesConfig',
+    'aloisioimoveis.locations.apps.LocationsConfig',
 ]
 
 MIDDLEWARE = [
