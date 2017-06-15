@@ -40,20 +40,17 @@ class House(Property):
     total_maids_room = models.IntegerField('dormitórios de empregada', default=0)
     total_maids_wc = models.IntegerField('banheiros de empregada', default=0)
     total_lavatory = models.IntegerField('lavabos', default=0)
-    total_dining_room = models.IntegerField('salas de refeição', default=0)
+    total_room = models.IntegerField('salas', default=0)
     total_kitchen = models.IntegerField('cozinhas', default=0)
     total_hall = models.IntegerField('halls', default=0)
     total_service_area = models.IntegerField('áreas de serviço', default=0)
     total_leisure_area = models.IntegerField('ranchos', default=0)
     total_suite = models.IntegerField('suítes', default=0)
     total_bathroom = models.IntegerField('banheiros', default=0)
-    total_living_room = models.IntegerField('salas de estar', default=0)
-    total_tv_room = models.IntegerField('salas de tv', default=0)
     total_coffe_room = models.IntegerField('copas', default=0)
     total_pantry = models.IntegerField('despensas', default=0)
     total_office = models.IntegerField('escritórios', default=0)
     total_garage = models.IntegerField('garagens', default=0)
-    total_other = models.IntegerField('outros', default=0)
 
     class Meta:
         verbose_name = 'Casa'
@@ -62,24 +59,21 @@ class House(Property):
 
 class Apartment(Property):
     address = models.CharField('endereço', max_length=200, blank=True)
+    area = models.CharField('área', max_length=30, blank=True)
     total_bedroom = models.IntegerField('dormitórios', default=0)
     total_maids_room = models.IntegerField('dormitórios de empregada', default=0)
     total_maids_wc = models.IntegerField('banheiros de empregada', default=0)
     total_lavatory = models.IntegerField('lavabos', default=0)
-    total_dining_room = models.IntegerField('salas de refeição', default=0)
+    total_room = models.IntegerField('salas', default=0)
     total_kitchen = models.IntegerField('cozinhas', default=0)
     total_hall = models.IntegerField('halls', default=0)
     total_service_area = models.IntegerField('áreas de serviço', default=0)
-    total_leisure_area = models.IntegerField('ranchos', default=0)
     total_suite = models.IntegerField('suítes', default=0)
     total_bathroom = models.IntegerField('banheiros', default=0)
-    total_living_room = models.IntegerField('salas de estar', default=0)
-    total_tv_room = models.IntegerField('salas de tv', default=0)
     total_coffe_room = models.IntegerField('copas', default=0)
     total_pantry = models.IntegerField('despensas', default=0)
     total_office = models.IntegerField('escritórios', default=0)
     total_garage = models.IntegerField('garagens', default=0)
-    total_other = models.IntegerField('outros', default=0)
 
     class Meta:
         verbose_name = 'Apartamento'
@@ -89,9 +83,12 @@ class Apartment(Property):
 class Commercial(Property):
     address = models.CharField('endereço', max_length=200, blank=True)
     area = models.CharField('área', max_length=30, blank=True)
-    obs = models.TextField('observações', blank=True)
-    price = models.DecimalField('preço', max_digits=11, decimal_places=2)
-    conditions = models.CharField('condições', max_length=50, blank=True)
+    total_kitchen = models.IntegerField('cozinhas', default=0)
+    total_service_area = models.IntegerField('áreas de serviço', default=0)
+    total_bathroom = models.IntegerField('banheiros', default=0)
+    total_room = models.IntegerField('salas', default=0)
+    total_office = models.IntegerField('escritórios', default=0)
+    total_garage = models.IntegerField('garagens', default=0)
 
     class Meta:
         verbose_name = 'Ponto Comercial'
@@ -99,8 +96,8 @@ class Commercial(Property):
 
 
 class Land(Property):
+    address = models.CharField('endereço', max_length=200, blank=True)
     area = models.CharField('área', max_length=30, blank=True)
-    in_front_of = models.TextField('em frente a', blank=True)
 
     class Meta:
         verbose_name = 'Terreno'
