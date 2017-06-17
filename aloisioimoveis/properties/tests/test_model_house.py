@@ -54,6 +54,11 @@ class HouseModelTest(TestCase):
         """House must have a updated_at attr"""
         self.assertIsInstance(self.obj.updated_at, datetime)
 
+    def test_str(self):
+        """str() must return 'Casa [id] localizado em [Neightbodhood]/[City]"""
+        self.assertEqual('Casa {} localizada em Centro/Taubaté'.format(self.obj.id),
+                         str(self.obj))
+
     def create_city(self):
         city = City(
             name='Taubaté'

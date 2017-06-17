@@ -1,10 +1,26 @@
-from datetime import datetime
-
-from django.db import models
+from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
+from django.db import models
 
 from aloisioimoveis.core.models import BaseModel
 from aloisioimoveis.locations.models import City, Neighborhood
+
+
+class Photo(models.Model):
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    property = GenericForeignKey()
+    image_url = CloudinaryField('imagem')
+    order = models.IntegerField('ordem', default=0)
+
+    class Meta:
+        verbose_name = 'Foto'
+        verbose_name_plural = 'Fotos'
+
+    def __str__(self):
+        return self.image_url
 
 
 class Property(BaseModel):
@@ -29,6 +45,7 @@ class Property(BaseModel):
     user = models.ForeignKey(
         User, verbose_name='usuário', related_name='%(app_label)s_%(class)s'
     )
+    photos = GenericRelation(Photo)
 
     class Meta:
         abstract = True
@@ -56,6 +73,11 @@ class House(Property):
         verbose_name = 'Casa'
         verbose_name_plural = 'Casas'
 
+    def __str__(self):
+        return 'Casa {} localizada em {}/{}'.format(self.id,
+                                                    self.neighborhood,
+                                                    self.city)
+
 
 class Apartment(Property):
     address = models.CharField('endereço', max_length=200, blank=True)
@@ -79,6 +101,11 @@ class Apartment(Property):
         verbose_name = 'Apartamento'
         verbose_name_plural = 'Apartamentos'
 
+    def __str__(self):
+        return 'Apartamento {} localizado em {}/{}'.format(self.id,
+                                                           self.neighborhood,
+                                                           self.city)
+
 
 class Commercial(Property):
     address = models.CharField('endereço', max_length=200, blank=True)
@@ -94,6 +121,10 @@ class Commercial(Property):
         verbose_name = 'Ponto Comercial'
         verbose_name_plural = 'Pontos Comerciais'
 
+    def __str__(self):
+        return 'Ponto Comercial {} localizado em {}/{}'.format(self.id,
+                                                               self.neighborhood,
+                                                               self.city)
 
 class Land(Property):
     address = models.CharField('endereço', max_length=200, blank=True)
@@ -102,3 +133,8 @@ class Land(Property):
     class Meta:
         verbose_name = 'Terreno'
         verbose_name_plural = 'Terrenos'
+
+    def __str__(self):
+        return 'Terreno {} localizado em {}/{}'.format(self.id,
+                                                       self.neighborhood,
+                                                       self.city)

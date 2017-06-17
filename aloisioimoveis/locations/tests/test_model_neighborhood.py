@@ -24,6 +24,10 @@ class NeighborhoodModelTest(TestCase):
         """Neighborhood must have updated_at attr"""
         self.assertIsInstance(self.obj.updated_at, datetime)
 
+    def test_str(self):
+        """str() must return neighborhood name"""
+        self.assertEqual('Belém', str(self.obj))
+
     def create_city(self):
         city = City(
             name='Taubaté'
