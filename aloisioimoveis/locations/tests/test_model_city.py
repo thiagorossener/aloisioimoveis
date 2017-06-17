@@ -1,15 +1,14 @@
 from datetime import datetime
 
 from django.test import TestCase
+from model_mommy import mommy
+
 from aloisioimoveis.properties.models import City
 
 
 class CityModelTest(TestCase):
     def setUp(self):
-        self.obj = City(
-            name='Taubaté'
-        )
-        self.obj.save()
+        self.obj = mommy.make(City)
 
     def test_create(self):
         """Should create a City"""
@@ -25,4 +24,4 @@ class CityModelTest(TestCase):
 
     def test_str(self):
         """str() must return city name"""
-        self.assertEqual('Taubaté', str(self.obj))
+        self.assertEqual(self.obj.name, str(self.obj))

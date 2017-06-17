@@ -1,32 +1,14 @@
 from datetime import datetime
 
-from django.contrib.auth.models import User
 from django.test import TestCase
+from model_mommy import mommy
 
-from aloisioimoveis.locations.models import City, Neighborhood
 from aloisioimoveis.properties.models import Land
 
 
 class LandModelTest(TestCase):
     def setUp(self):
-        city = self.create_city()
-        neighborhood = self.create_neighborhood(city=city)
-        user = self.create_user()
-
-        self.obj = Land(
-            featured=True,
-            num_record=1234,
-            intent='comprar',
-            address='Cool Street',
-            area='120m2',
-            obs='Bem grande',
-            price=1000,
-            conditions='Condomínio',
-            neighborhood=neighborhood,
-            city=city,
-            user=user,
-        )
-        self.obj.save()
+        self.obj = mommy.make(Land)
 
     def test_create(self):
         """Should create a Land"""
@@ -42,43 +24,6 @@ class LandModelTest(TestCase):
 
     def test_str(self):
         """str() must return 'Terreno [id] localizado em [Neightbodhood]/[City]"""
-        self.assertEqual('Terreno {} localizado em Centro/Taubaté'.format(self.obj.id), str(self.obj))
-
-    def create_city(self):
-        city = City(
-            name='Taubaté'
-        )
-        city.save()
-        return city
-
-    def create_neighborhood(self, city):
-        neighborhood = Neighborhood(
-            name='Centro',
-            city=city
-        )
-        neighborhood.save()
-        return neighborhood
-
-    def create_user(self):
-        user = User(
-            first_name='Thiago',
-            last_name='Rossener',
-            email='thiago@rossener.com'
-        )
-        user.save()
-        return user
-
-
-class LandFieldChoicesTest(TestCase):
-    def setUp(self):
-        self.obj = Land()
-
-    def test_has_intent_choices(self):
-        """Should have rent and buy choices"""
-        self.assertChoicesInField('intent', ['alugar', 'comprar'])
-
-    def assertChoicesInField(self, field_name, choices):
-        field = self.obj._meta.get_field(field_name)
-        for choice in choices:
-            with self.subTest():
-                self.assertIn(choice, [c[0] for c in field.choices])
+        self.assertEqual('Terreno {} localizado em {}/{}'
+                         .format(self.obj.id, self.obj.neighborhood, self.obj.city),
+                         str(self.obj))
