@@ -12,7 +12,7 @@ class Photo(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     property = GenericForeignKey()
-    image_url = CloudinaryField('imagem')
+    image = CloudinaryField('imagem')
     order = models.IntegerField('ordem', default=0)
 
     class Meta:
@@ -20,7 +20,7 @@ class Photo(models.Model):
         verbose_name_plural = 'Fotos'
 
     def __str__(self):
-        return self.image_url
+        return str(self.image)
 
 
 class Property(BaseModel):
@@ -126,6 +126,7 @@ class Commercial(Property):
                                                                self.neighborhood,
                                                                self.city)
 
+
 class Land(Property):
     address = models.CharField('endereço', max_length=200, blank=True)
     area = models.CharField('área', max_length=30, blank=True)
@@ -136,5 +137,5 @@ class Land(Property):
 
     def __str__(self):
         return 'Terreno {} localizado em {}/{}'.format(self.id,
-                                                       self.neighborhood,
-                                                       self.city)
+                                                       str(self.neighborhood),
+                                                       str(self.city))

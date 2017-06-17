@@ -6,7 +6,7 @@ from aloisioimoveis.properties.models import Photo
 
 class PhotoModelTest(TestCase):
     def setUp(self):
-        self.obj = mommy.make(Photo, image_url='photo.jpg')
+        self.obj = mommy.make(Photo, image='photo.jpg')
 
     def test_create(self):
         """Should create a Photo"""
@@ -14,4 +14,4 @@ class PhotoModelTest(TestCase):
 
     def test_str(self):
         """str() must return the image url"""
-        self.assertEqual(self.obj.image_url, str(self.obj))
+        self.assertEqual(self.obj.image, str(self.obj))
