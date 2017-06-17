@@ -1,16 +1,14 @@
 from datetime import datetime
 
 from django.test import TestCase
-from aloisioimoveis.properties.models import Neighborhood, City
+from model_mommy import mommy
+
+from aloisioimoveis.properties.models import Neighborhood
 
 
 class NeighborhoodModelTest(TestCase):
     def setUp(self):
-        self.obj = Neighborhood(
-            name='Belém',
-            city=self.create_city()
-        )
-        self.obj.save()
+        self.obj = mommy.make(Neighborhood)
 
     def test_create(self):
         """Should create a Neighborhood"""
@@ -26,11 +24,4 @@ class NeighborhoodModelTest(TestCase):
 
     def test_str(self):
         """str() must return neighborhood name"""
-        self.assertEqual('Belém', str(self.obj))
-
-    def create_city(self):
-        city = City(
-            name='Taubaté'
-        )
-        city.save()
-        return city
+        self.assertEqual(self.obj.name, str(self.obj))

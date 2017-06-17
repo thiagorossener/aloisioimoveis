@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+
 import cloudinary
 from decouple import config, Csv
 from dj_database_url import parse as dburl
