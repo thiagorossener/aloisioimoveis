@@ -22,3 +22,7 @@ class CityModelTest(TestCase):
     def test_updated_at(self):
         """City must have updated_at attr"""
         self.assertIsInstance(self.obj.updated_at, datetime)
+
+    def test_str(self):
+        """str() must return city name"""
+        self.assertEqual('Taubaté', str(self.obj))

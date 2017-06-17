@@ -1,6 +1,12 @@
 from django.contrib import admin
+from django.contrib.contenttypes import admin as generic
 
-from aloisioimoveis.properties.models import House, Apartment, Commercial, Land
+from aloisioimoveis.properties.models import House, Apartment, Commercial, Land, Photo
+
+
+class PhotoInline(generic.GenericTabularInline):
+    model = Photo
+    extra = 1
 
 
 class HouseAdmin(admin.ModelAdmin):
@@ -38,6 +44,7 @@ class HouseAdmin(admin.ModelAdmin):
             'fields': ('user',),
         }),
     )
+    inlines = [PhotoInline, ]
 
 
 class ApartmentAdmin(admin.ModelAdmin):
@@ -76,6 +83,7 @@ class ApartmentAdmin(admin.ModelAdmin):
             'fields': ('user',),
         }),
     )
+    inlines = [PhotoInline, ]
 
 
 class CommercialAdmin(admin.ModelAdmin):
@@ -111,6 +119,7 @@ class CommercialAdmin(admin.ModelAdmin):
             'fields': ('user',),
         }),
     )
+    inlines = [PhotoInline, ]
 
 
 class LandAdmin(admin.ModelAdmin):
@@ -144,6 +153,7 @@ class LandAdmin(admin.ModelAdmin):
             'fields': ('user',),
         }),
     )
+    inlines = [PhotoInline,]
 
 
 admin.site.register(House, HouseAdmin)
