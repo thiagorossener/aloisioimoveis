@@ -4,7 +4,7 @@ from model_mommy import mommy
 from aloisioimoveis.properties.models import House, Apartment, Commercial, Land
 
 
-class PropertyFieldChoicesTeset(TestCase):
+class PropertyFieldChoicesTest(TestCase):
     def test_has_intent_choices(self):
         """All Property models should have rent and buy choices"""
         models = [
