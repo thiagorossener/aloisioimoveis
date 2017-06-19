@@ -1,6 +1,8 @@
 language: python
 python:
   - "3.5"
+before_install:
+  - sudo apt-get update && sudo apt-get --reinstall install -qq language-pack-en language-pack-pt
 install:
   - cp contrib/env-sample .env
   - pip install -q -r requirements.txt
