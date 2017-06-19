@@ -19,12 +19,6 @@ from dj_database_url import parse as dburl
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-cloudinary.config(
-  cloud_name='aloisioimoveis',
-  api_key='735123744188629',
-  api_secret='NpQvUNQESi3nZbPZFzFjlE91oT4',
-)
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -35,6 +29,13 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
+
+# SECURITY WARNING: keep the cloudinary config used in production secret!
+cloudinary.config(
+  cloud_name=config('CLOUDINARY_CLOUD_NAME'),
+  api_key=config('CLOUDINARY_API_KEY'),
+  api_secret=config('CLOUDINARY_API_SECRET'),
+)
 
 # IPs to use django-debug-toolbar
 INTERNAL_IPS = config('INTERNAL_IPS', default=[], cast=Csv())
