@@ -1,4 +1,5 @@
-from django.conf.urls import url
+from django.conf import settings
+from django.conf.urls import url, include
 from django.contrib import admin
 
 from aloisioimoveis.core.views import home, rent, buy, search, contact, company
@@ -12,3 +13,9 @@ urlpatterns = [
     url(r'^contato/$', contact, name='contact'),
     url(r'^admin/', admin.site.urls),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

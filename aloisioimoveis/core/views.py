@@ -7,15 +7,11 @@ from aloisioimoveis.properties.models import House, Apartment, Commercial, Land
 
 
 def home(request):
-    query1 = list(House.objects.filter(featured=True))
-    query2 = list(Apartment.objects.filter(featured=True))
-    query3 = list(Commercial.objects.filter(featured=True))
-    query4 = list(Land.objects.filter(featured=True))
-    properties = sorted(
-        chain(query1, query2, query3, query4),
-        key=attrgetter('updated_at'),
-        reverse=True
-    )[:3]
+    models = (House, Apartment, Commercial, Land)
+    queries = (model.objects.filter(featured=True) for model in models)
+    properties = sorted(chain(*queries),
+                        key=attrgetter('updated_at'),
+                        reverse=True)[:3]
     context = {
         'properties': properties
     }
