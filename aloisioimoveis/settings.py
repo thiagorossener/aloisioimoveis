@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'test_without_migrations',
+    'cloudinary',
     'aloisioimoveis.core',
     'aloisioimoveis.properties.apps.PropertiesConfig',
     'aloisioimoveis.locations.apps.LocationsConfig',

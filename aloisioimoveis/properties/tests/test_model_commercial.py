@@ -27,3 +27,7 @@ class CommercialModelTest(TestCase):
         self.assertEqual('Ponto Comercial {} localizado em {}/{}'
                          .format(self.obj.id, self.obj.neighborhood, self.obj.city),
                          str(self.obj))
+
+    def test_property_type(self):
+        """property_type() must return 'Ponto Comercial'"""
+        self.assertEqual('Ponto Comercial', self.obj.property_type())

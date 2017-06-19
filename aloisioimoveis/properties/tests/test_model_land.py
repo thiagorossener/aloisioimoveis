@@ -27,3 +27,7 @@ class LandModelTest(TestCase):
         self.assertEqual('Terreno {} localizado em {}/{}'
                          .format(self.obj.id, self.obj.neighborhood, self.obj.city),
                          str(self.obj))
+
+    def test_property_type(self):
+        """property_type() must return 'Terreno'"""
+        self.assertEqual('Terreno', self.obj.property_type())

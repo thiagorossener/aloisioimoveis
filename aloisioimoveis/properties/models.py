@@ -18,6 +18,7 @@ class Photo(models.Model):
     class Meta:
         verbose_name = 'Foto'
         verbose_name_plural = 'Fotos'
+        ordering = ['order']
 
     def __str__(self):
         return str(self.image)
@@ -49,6 +50,15 @@ class Property(BaseModel):
 
     class Meta:
         abstract = True
+
+    def property_type(self):
+        return self._meta.verbose_name
+
+    def is_house(self):
+        return isinstance(self, House)
+
+    def is_apartment(self):
+        return isinstance(self, Apartment)
 
 
 class House(Property):
