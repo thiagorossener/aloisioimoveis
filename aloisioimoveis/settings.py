@@ -36,6 +36,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 
+# IPs to use django-debug-toolbar
+INTERNAL_IPS = config('INTERNAL_IPS', default=[], cast=Csv())
 
 # Application definition
 
@@ -46,9 +48,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
+    'debug_toolbar',
     'django_extensions',
     'test_without_migrations',
-    'cloudinary',
     'aloisioimoveis.core',
     'aloisioimoveis.properties.apps.PropertiesConfig',
     'aloisioimoveis.locations.apps.LocationsConfig',
@@ -62,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'aloisioimoveis.urls'
