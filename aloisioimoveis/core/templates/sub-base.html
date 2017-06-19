@@ -1,73 +1,19 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
     <!-- Search -->
-    <section class="top-page">
-        <div class="container">
-            <div id="search" class="search-box" v-cloak>
-                <form class="form-inline">
-                    <fieldset>
-                        <div class="form-group">
-                            <label for="finalidade">O que você precisa?</label><br>
-                            <div id="finalidade" class="btn-group" role="group">
-                                <button type="button" class="btn btn-default"
-                                        v-bind:class="{ active: finalidade === 'alugar' }"
-                                        v-on:click="setFinalidade('alugar')">Alugar</button>
-                                <button type="button" class="btn btn-default"
-                                        v-bind:class="{ active: finalidade === 'comprar' }"
-                                        v-on:click="setFinalidade('comprar')">Comprar</button>
-                            </div>
-                        </div>
-                        <div class="form-group search-group">
-                            <label>Qual tipo?</label><br>
-                            <div class="btn-group">
-                                <button id="btn-tipo-de-imovel" class="btn btn-default dropdown-toggle"
-                                        type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {% verbatim %} {{ currentTipoDeImovel.label }} {% endverbatim %} <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li v-for="tipoDeImovel in tiposDeImovel">
-                                        <a href="javascript:void(0);"
-                                           v-on:click="setTipoDeImovel(tipoDeImovel)">{% verbatim %} {{ tipoDeImovel.label }} {% endverbatim %}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="form-group search-group">
-                            <label>Onde?</label><br>
-                            <div class="btn-group">
-                                <button id="btn-cidades" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {% verbatim %} {{ currentCidade.label }} {% endverbatim %} <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li v-for="cidade in cidades">
-                                        <a href="javascript:void(0);"
-                                           v-on:click="setCidade(cidade)">{% verbatim %} {{ cidade.label }} {% endverbatim %}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="btn-group">
-                                <button id="btn-bairros" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {% verbatim %} {{ currentBairro.label }} {% endverbatim %} <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li v-for="bairro in bairros">
-                                        <a href="javascript:void(0);"
-                                           v-on:click="setBairro(bairro)">{% verbatim %} {{ bairro.label }} {% endverbatim %}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button id="btn-search" class="btn" type="button"><i class="fa fa-search"></i> &nbsp;Buscar</button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
-    </section>
+    <search-bar finalidade="comprar"></search-bar>
 
     {% block sub_content %}
     {% endblock sub_content %}
 
 {% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/jquery.mobile.custom.min.js' %}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/vue-resource/1.3.3/vue-resource.js"></script>
+<script src="{% static 'js/components/search-bar.js' %}"  type="text/javascript"></script>
+<script src="{% static 'js/components/sort-options.js' %}"  type="text/javascript"></script>
+{% endblock scripts %}

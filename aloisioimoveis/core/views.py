@@ -23,7 +23,13 @@ def rent(request):
 
 
 def buy(request):
-    return render(request, 'buy.html')
+    models = (House, Apartment, Commercial, Land)
+    queries = (model.objects.filter(intent='comprar') for model in models)
+    properties = list(chain(*queries))
+    context = {
+        'properties': properties
+    }
+    return render(request, 'buy.html', context)
 
 
 def search(request):
