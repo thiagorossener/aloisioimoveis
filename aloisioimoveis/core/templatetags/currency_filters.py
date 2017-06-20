@@ -1,5 +1,3 @@
-import locale
-
 from django import template
 
 register = template.Library()
@@ -7,5 +5,4 @@ register = template.Library()
 
 @register.filter
 def currency_brl(value):
-    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
-    return 'R$ {}'.format(locale.currency(value, grouping=True, symbol=None))
+    return 'R$ {:,.2f}'.format(1000).replace(',', 'X').replace('.', ',').replace('X', '.')
