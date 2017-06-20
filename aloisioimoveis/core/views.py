@@ -1,6 +1,7 @@
 from itertools import chain
 from operator import attrgetter
 
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render
 
 from aloisioimoveis.properties.models import House, Apartment, Commercial, Land
@@ -23,7 +24,25 @@ def rent(request):
 
 
 def buy(request):
-    return render(request, 'buy.html')
+    # Get all properties
+    models = (House, Apartment, Commercial, Land)
+    queries = (model.objects.filter(intent='comprar') for model in models)
+    properties_list = list(chain(*queries))
+
+    # Pagination
+    page = request.GET.get('pagina', 1)
+    paginator = Paginator(properties_list, 10)
+    try:
+        properties = paginator.page(page)
+    except PageNotAnInteger:
+        properties = paginator.page(1)
+    except EmptyPage:
+        properties = paginator.page(paginator.num_pages)
+
+    context = {
+        'properties': properties
+    }
+    return render(request, 'buy_list.html', context)
 
 
 def search(request):
