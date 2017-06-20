@@ -17,4 +17,4 @@ class TextFiltersTest(TestCase):
         """Given a line with many linebreaks, truncate before given number"""
         text = 'Esta é\n\numa linha\n\n\ncom várias\nquebras de\nlinha'
         self.assertEqual('Esta é\numa linha\ncom várias...',
-                         text_filters.truncatelinebreaks(text, 3))
+                         text_filters.truncatelinebreaks(text, '3,100'))

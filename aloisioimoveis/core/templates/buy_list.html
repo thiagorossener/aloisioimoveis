@@ -72,13 +72,28 @@
                 </div>
             </div>
         {% endfor %}
-        <ul class="pagination pagination-lg">
-            <li><a href="#">1</a></li>
-            <li class="active"><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-        </ul>
+
+        {% if properties.has_other_pages %}
+            <ul class="pagination pagination-lg">
+                {% if properties.has_previous %}
+                    <li><a href="?pagina={{ properties.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in properties.paginator.page_range %}
+                    {% if properties.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li><a href="?pagina={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if properties.has_next %}
+                    <li><a href="?pagina={{ properties.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
+        {% endif %}
     </div>
 </section>
 {% endblock sub_content %}

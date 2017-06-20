@@ -8,3 +8,4 @@ __pycache__
 staticfiles
 .coverage
 .coveralls.yml
+.ipynb_checkpoints
