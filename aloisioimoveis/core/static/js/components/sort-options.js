@@ -10,26 +10,41 @@ Vue.component('sort-options', {
                         </li>
                     </ul>
                 </div>`,
-    props: ['selected', 'parameters'],
+    props: {
+        selected: {
+            type: String
+        },
+        params: {
+            type: Object
+        }
+    },
     data: function() {
         return {
             currentOption: {},
             options: [
                 { label: 'Mais recentes primeiro', value: '' },
-                { label: 'Preço menor para o maior', value: 'valorcresc' },
-                { label: 'Preço maior para o menor', value: 'valordecresc' }
+                { label: 'Preço menor para o maior', value: 'preco' },
+                { label: 'Preço maior para o menor', value: '-preco' }
             ]
         }
     },
     methods: {
+        serializedData: function(data) {
+            return Object.keys(data).map(function(k) {
+                return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
+            }).sort().join('&');
+        },
         setCurrentOption: function(index) {
             this.currentOption = this.options[index];
         },
         getOptionLink: function(index) {
-            if (this.parameters) {
-                return this.parameters + '&ordem=' + this.options[index].value;
+            let sortKey = this.options[index].value;
+            if (sortKey && sortKey !== '') {
+                this.params['ordem'] = sortKey;
+            } else {
+                delete this.params['ordem'];
             }
-            return '?ordem=' + this.options[index].value;
+            return '?' + this.serializedData(this.params);
         }
     },
     created: function() {

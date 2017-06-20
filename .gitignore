@@ -9,3 +9,4 @@ staticfiles
 .coverage
 .coveralls.yml
 .ipynb_checkpoints
+db.tmp

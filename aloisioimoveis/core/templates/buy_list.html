@@ -4,6 +4,7 @@
 {% load cloudinary %}
 {% load currency_filters %}
 {% load text_filters %}
+{% load url_tags %}
 
 {% block title %}Comprar | {% endblock title %}
 
@@ -17,7 +18,7 @@
             <h2>Comprar</h2>
         </div>
         <div class="col-md-6 order">
-            <sort-options selected=""></sort-options>
+            <sort-options selected="{{ params.ordem }}" v-bind:params="{{ params }}"></sort-options>
         </div>
     </div>
 
@@ -76,7 +77,7 @@
         {% if properties.has_other_pages %}
             <ul class="pagination pagination-lg">
                 {% if properties.has_previous %}
-                    <li><a href="?pagina={{ properties.previous_page_number }}">&laquo;</a></li>
+                    <li><a href="?{% url_replace pagina=properties.previous_page_number %}">&laquo;</a></li>
                 {% else %}
                     <li class="disabled"><span>&laquo;</span></li>
                 {% endif %}
@@ -84,11 +85,11 @@
                     {% if properties.number == i %}
                         <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
                     {% else %}
-                        <li><a href="?pagina={{ i }}">{{ i }}</a></li>
+                        <li><a href="?{% url_replace pagina=i %}">{{ i }}</a></li>
                     {% endif %}
                 {% endfor %}
                 {% if properties.has_next %}
-                    <li><a href="?pagina={{ properties.next_page_number }}">&raquo;</a></li>
+                    <li><a href="?{% url_replace pagina=properties.next_page_number %}">&raquo;</a></li>
                 {% else %}
                     <li class="disabled"><span>&raquo;</span></li>
                 {% endif %}

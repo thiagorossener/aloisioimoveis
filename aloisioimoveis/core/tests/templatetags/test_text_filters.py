@@ -1,4 +1,5 @@
 from django.test import TestCase
+
 from aloisioimoveis.core.templatetags import text_filters
 
 

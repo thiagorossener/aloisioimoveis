@@ -35,9 +35,17 @@ class BuyListContextTest(TestCase):
 
     def test_only_properties_to_buy(self):
         """Buy page must load only properties with 'comprar' intent"""
-        for property in self.properties:
+        for prop in self.properties:
             with self.subTest():
-                self.assertEqual('comprar', property.intent)
+                self.assertEqual('comprar', prop.intent)
+
+
+class BuyListParamsInContextTest(TestCase):
+    def test_get_params(self):
+        """Buy list should load params in context"""
+        params = {'pagina': '1', 'ordem': 'preco'}
+        response = self.client.get(r('buy'), params)
+        self.assertEqual(params, response.context['params'])
 
 
 class BuyListPaginationTest(TestCase):
@@ -67,6 +75,48 @@ class BuyListPaginationTest(TestCase):
                           quantity_each=3)
         response = self.client.get(r('buy'), {'pagina': page})
         return response.context['properties']
+
+
+class BuyListSortingTest(TestCase):
+    def test_sort_by_most_recent(self):
+        """Should return properties sorted by most recent"""
+        p1, p2, p3, p4 = self.properties_with_prices([House, Apartment, Commercial, Land],
+                                                     [0]*4)
+        expected_order = [p4, p3, p2, p1]
+
+        response = self.client.get(r('buy'))
+        properties = response.context['properties'].object_list
+
+        self.assertSequenceEqual(expected_order, properties)
+
+    def test_sort_by_lowest_price(self):
+        """Should return properties sorted by lowest price"""
+        p1, p2, p3, p4 = self.properties_with_prices([House, Apartment, Commercial, Land],
+                                                     [2, 3, 1, 4])
+        expected_order = [p3, p1, p2, p4]
+
+        response = self.client.get(r('buy'), {'ordem': 'preco'})
+        properties = response.context['properties'].object_list
+
+        self.assertSequenceEqual(expected_order, properties)
+
+    def test_sort_by_highest_price(self):
+        """Should return properties sorted by highest price"""
+        p1, p2, p3, p4 = self.properties_with_prices([House, Apartment, Commercial, Land],
+                                                     [4, 2, 3, 1])
+        expected_order = [p1, p3, p2, p4]
+
+        response = self.client.get(r('buy'), {'ordem': '-preco'})
+        properties = response.context['properties'].object_list
+
+        self.assertSequenceEqual(expected_order, properties)
+
+    @staticmethod
+    def properties_with_prices(models, prices):
+        result = []
+        for index, model in enumerate(models):
+            result.append(mommy.make(model, intent='comprar', price=prices[index]))
+        return result
 
 
 def create_properties(models, intent, quantity_each):
