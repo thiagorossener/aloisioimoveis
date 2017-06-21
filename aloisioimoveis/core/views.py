@@ -23,8 +23,19 @@ def rent(request):
     models = (House, Apartment, Commercial, Land)
     queries = [model.objects.filter(intent='alugar') for model in models]
     properties_list = list(chain(*queries))
+
+    # Pagination
+    page = request.GET.get('pagina', 1)
+    paginator = Paginator(properties_list, 10)
+    try:
+        properties = paginator.page(page)
+    except PageNotAnInteger:
+        properties = paginator.page(1)
+    except EmptyPage:
+        properties = paginator.page(paginator.num_pages)
+
     context = {
-        'properties': properties_list
+        'properties': properties
     }
     return render(request, 'rent_list.html', context)
 
