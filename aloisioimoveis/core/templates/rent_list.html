@@ -18,17 +18,7 @@
             <h2>Alugar</h2>
         </div>
         <div class="col-md-6 order">
-            <div class="pull-right">
-                <span class="order-text">Ordenar por:</span>
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Mais recentes <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="javascript:void(0);">Mais recentes</a></li>
-                    <li><a href="javascript:void(0);">Preço maior</a></li>
-                    <li><a href="javascript:void(0);">Preço menor</a></li>
-                </ul>
-            </div>
+            <sort-options selected="{{ params.ordem }}" v-bind:params="{{ params }}"></sort-options>
         </div>
     </div>
 

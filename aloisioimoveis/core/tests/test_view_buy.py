@@ -40,14 +40,6 @@ class BuyListContextTest(TestCase):
                 self.assertEqual('comprar', prop.intent)
 
 
-class BuyListParamsInContextTest(TestCase):
-    def test_get_params(self):
-        """Buy list should load params in context"""
-        params = {'pagina': '1', 'ordem': 'preco'}
-        response = self.client.get(r('buy'), params)
-        self.assertEqual(params, response.context['params'])
-
-
 class BuyListPaginationTest(TestCase):
     def test_load_10_properties_per_page(self):
         """Buy page must load at maximum 10 properties per page"""
@@ -117,6 +109,14 @@ class BuyListSortingTest(TestCase):
         for index, model in enumerate(models):
             result.append(mommy.make(model, intent='comprar', price=prices[index]))
         return result
+
+
+class BuyListParamsInContextTest(TestCase):
+    def test_get_params(self):
+        """Buy list should load params in context"""
+        params = {'pagina': '1', 'ordem': 'preco'}
+        response = self.client.get(r('buy'), params)
+        self.assertEqual(params, response.context['params'])
 
 
 class BuyListTemplateRegressionTest(TestCase):

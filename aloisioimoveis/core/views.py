@@ -22,7 +22,15 @@ def home(request):
 def rent(request):
     models = (House, Apartment, Commercial, Land)
     queries = [model.objects.filter(intent='alugar') for model in models]
-    properties_list = list(chain(*queries))
+
+    # Sorting
+    sort_key = request.GET.get('ordem')
+    if sort_key == 'preco':
+        properties_list = sorted(chain(*queries), key=attrgetter('price'))
+    elif sort_key == '-preco':
+        properties_list = sorted(chain(*queries), key=attrgetter('price'), reverse=True)
+    else:
+        properties_list = sorted(chain(*queries), key=attrgetter('updated_at'), reverse=True)
 
     # Pagination
     page = request.GET.get('pagina', 1)
@@ -35,7 +43,8 @@ def rent(request):
         properties = paginator.page(paginator.num_pages)
 
     context = {
-        'properties': properties
+        'properties': properties,
+        'params': request.GET.dict(),
     }
     return render(request, 'rent_list.html', context)
 
