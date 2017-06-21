@@ -14,7 +14,7 @@ class BuyListTest(TestCase):
         self.assertEqual(200, self.response.status_code)
 
     def test_template(self):
-        """Must use buy.html"""
+        """Must use buy_list.html"""
         self.assertTemplateUsed(self.response, 'buy_list.html')
 
 
@@ -117,6 +117,14 @@ class BuyListSortingTest(TestCase):
         for index, model in enumerate(models):
             result.append(mommy.make(model, intent='comprar', price=prices[index]))
         return result
+
+
+class BuyListTemplateRegressionTest(TestCase):
+    def test_price_is_right(self):
+        """The page should show the property price correctly"""
+        mommy.make(House, intent='comprar', price=4455)
+        response = self.client.get(r('buy'))
+        self.assertContains(response, '<span class="price">R$ 4.455,00</span>')
 
 
 def create_properties(models, intent, quantity_each):

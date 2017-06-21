@@ -566,6 +566,11 @@ header .search-box button.active {
     border-bottom: 1px solid #e5e5e5;
 }
 
+.results .dados-do-imovel .info .rua {
+    margin-top: 5px;
+    color: #999;
+}
+
 .results .dados-do-imovel .info span {
     margin-right: 30px;
 }
@@ -574,7 +579,7 @@ header .search-box button.active {
     margin-top: 12px;
     margin-bottom: 12px;
     font-size: 11pt;
-    color: #999;
+    color: #333;
 }
 
 .results .dados-do-imovel .actions {

@@ -20,7 +20,13 @@ def home(request):
 
 
 def rent(request):
-    return render(request, 'rent.html')
+    models = (House, Apartment, Commercial, Land)
+    queries = [model.objects.filter(intent='alugar') for model in models]
+    properties_list = list(chain(*queries))
+    context = {
+        'properties': properties_list
+    }
+    return render(request, 'rent_list.html', context)
 
 
 def buy(request):

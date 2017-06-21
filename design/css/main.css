@@ -49,7 +49,6 @@ body {
     border-color: #CC1818;
 }
 
-
 /* Navigation */
 
 .navbar {
@@ -83,13 +82,17 @@ body {
 }
 
 .navbar-inverse .navbar-nav > li > a {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .navbar-inverse .navbar-nav>.active>a,
 .navbar-inverse .navbar-nav>.active>a:hover,
 .navbar-inverse .navbar-nav>.active>a:focus {
     background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navbar-inverse .navbar-nav a:active {
+    background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 /* Jumbotron */
@@ -108,7 +111,6 @@ header .search-box {
     display: block;
     background: rgba(0, 0, 0, 0.5);
     max-width: 780px;
-    height: 170px;
     position: relative;
     margin: 0 auto;
     -webkit-border-radius: 5px;
@@ -130,7 +132,7 @@ header .search-group {
 }
 
 header .search-group #btn-tipo-de-imovel {
-    width: 198px;
+    width: 158px;
 }
 
 header .search-group #btn-cidades,
@@ -141,7 +143,7 @@ header .search-group #btn-bairros {
 }
 
 header .search-group #btn-cidades {
-    width: 135px;
+    width: 175px;
 }
 
 header .search-group #btn-bairros {
@@ -149,7 +151,7 @@ header .search-group #btn-bairros {
     margin-left: 9px;
 }
 
-header .search-group #btn-bairros + .dropdown-menu {
+header .search-group .dropdown-menu-bairros {
     margin-left: 9px;
 }
 
@@ -174,6 +176,8 @@ header .search-box #btn-search {
     color: #fff;
     text-transform: uppercase;
     outline: none;
+    margin-right: 0;
+    padding: 12px 16px;
 }
 
 header .search-box #btn-search i {
@@ -226,7 +230,7 @@ header .search-box button.active {
     border-radius: 5px;
     padding: 21px;
     margin-top: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .top-page .search-box label {
@@ -245,7 +249,8 @@ header .search-box button.active {
 }
 
 .top-page .search-group #btn-tipo-de-imovel {
-    width: 200px;
+    width: 100%;
+    min-width: 100px;
 }
 
 .top-page .search-group #btn-cidades,
@@ -256,11 +261,13 @@ header .search-box button.active {
 }
 
 .top-page .search-group #btn-cidades {
-    width: 220px;
+    width: 100%;
+    min-width: 150px;
 }
 
 .top-page .search-group #btn-bairros {
-    width: 250px;
+    width: 100%;
+    min-width: 150px;
     margin-left: 9px;
 }
 
@@ -269,8 +276,7 @@ header .search-box button.active {
 }
 
 .top-page .search-box #btn-search {
-    width: 157px;
-    font-size: 11pt;
+    font-size: 10pt;
     font-weight: 700;
     height: 32px;
     background-color: #CC1818;
@@ -278,7 +284,7 @@ header .search-box button.active {
     text-transform: uppercase;
     outline: none;
     margin-top: 29px;
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 .top-page .search-box #btn-search i {
@@ -315,7 +321,12 @@ header .search-box button.active {
     height: 42px;
 }
 
-/*#home-carousel  */
+.dropdown-menu {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+/* Caroulsel  */
 
 #home#home-carousel {
     height: 150px;
@@ -332,7 +343,7 @@ header .search-box button.active {
 }
 
 #home-carousel .item h1 {
-    font-size: 25pt;
+    font-size: 24pt;
     color: #999;
     text-shadow: none;
 }
@@ -401,7 +412,9 @@ header .search-box button.active {
 }
 
 .thumbnail .info .badge-preco {
-    background-color: #0275D8;
+    /*background-color: #f7eac1;*/
+    background-color: #FBDA6E;
+    color: #CC1818;
 }
 
 .thumbnail h3 {
@@ -459,7 +472,7 @@ header .search-box button.active {
 
 .title {
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     border-bottom: 2px solid rgba(204, 24, 24, 0.5);
     margin-left: 0;
     margin-right: 0;
@@ -508,7 +521,6 @@ header .search-box button.active {
 
 .results .img-overlay {
     position: relative;
-    max-width: 500px;
 }
 
 .results .layer-overlay {
@@ -554,6 +566,11 @@ header .search-box button.active {
     border-bottom: 1px solid #e5e5e5;
 }
 
+.results .dados-do-imovel .info .rua {
+    margin-top: 5px;
+    color: #999;
+}
+
 .results .dados-do-imovel .info span {
     margin-right: 30px;
 }
@@ -562,11 +579,26 @@ header .search-box button.active {
     margin-top: 12px;
     margin-bottom: 12px;
     font-size: 11pt;
-    color: #999;
+    color: #333;
 }
 
 .results .dados-do-imovel .actions {
     margin-top: 30px;
+}
+
+.results .wrapper {
+    position: relative;
+    width: 100%; /* <-- just a default, can be anything. */
+}
+
+.results .four-by-three.aspect-ratio {
+    padding-bottom: 75%
+}
+
+.results .content {
+    position: absolute;
+    top: 0;  bottom: 0;  left: 0;  right: 0;
+    overflow: hidden;
 }
 
 /* Details */
@@ -613,14 +645,27 @@ header .search-box button.active {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+    padding: 0 !important;
 }
 
-.gallery-scroll .controller:hover {
+.gallery-scroll .controller:hover,
+.gallery-scroll .controller.list-group-item:hover {
+    color: #CC1818;
     border: 1px solid #CC1818;
     -webkit-transition: border 1.0s ease-out;
     -moz-transition: border 1.0s ease-out;
     -o-transition: border 1.0s ease-out;
     transition: border 1.0s ease-out;
+}
+
+.gallery-scroll .controller.disabled {
+    color: rgba(119, 119, 119, 0.3);
+    background-color: #fff;
+}
+
+.gallery-scroll .controller.disabled:hover {
+    color: rgba(119, 119, 119, 0.3);
+    border: 1px solid #fff;
 }
 
 .gallery-scroll .picture-thumbnail {
@@ -649,8 +694,14 @@ header .search-box button.active {
     border-radius: 3px;
 }
 
+.gallery-scroll-content {
+    max-height: 420px;
+    overflow-y: scroll;
+}
+
 .details .dados-do-imovel {
-    border: 1px solid #4990E2;
+    background-color: #f7eac1;
+    border: 1px solid #f7eac1;
     -webkit-border-bottom-right-radius: 5px;
     -webkit-border-bottom-left-radius: 5px;
     -moz-border-radius-bottomright: 5px;
@@ -661,7 +712,7 @@ header .search-box button.active {
 }
 
 .details .dados-do-imovel .value {
-    color: #fff;
+    color: #CC1818;
     text-align: center;
 }
 
@@ -683,15 +734,17 @@ header .search-box button.active {
 }
 
 .details .dados-do-imovel .body .col-left {
-    background-color: #4990E2;
+    /*background-color: #4990E2;*/
+    background-color: #FBDA6E;
     float: none;
     display: table-cell;
     vertical-align: middle;
-    -webkit-border-bottom-left-radius: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    border-bottom-left-radius: 5px;
+    /*-webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-left-radius: 4px;*/
     padding-left: 30px;
     padding-right: 30px;
+    /*left: -1px;*/
 }
 
 .details .obs {
@@ -704,20 +757,27 @@ header .search-box button.active {
 }
 
 .details .obs p {
-    color: #999;
+    color: #333;
     margin-top: 5px;
 }
 
 /* Contato */
 
 .contato .form-group {
-    display: block !important;
     margin-bottom: 20px;
+}
+
+.contato .form-group .error {
+    background: #f2dede;
 }
 
 .contato .control-label {
     padding-top: 0;
     font-size: 14pt;
+}
+
+.contato .control-label .active {
+    color: #CC1818;
 }
 
 .contato .fa-stack-2x {
@@ -762,6 +822,11 @@ header .search-box button.active {
     outline: none;
     padding-left: 30px;
     padding-right: 30px;
+}
+
+.contato .message {
+    padding: 10px 20px;
+    margin-bottom: 20px;
 }
 
 /* Footer */
@@ -810,32 +875,244 @@ footer .fb-page a {
 }
 
 .footerleft p i {
-    width:20px;
-    color:#999;
+    width: 20px;
+    color: #999;
 }
 
 .paddingtop-bottom {
-    margin-top:50px;
+    margin-top: 50px;
 }
 
 .copyright {
-    min-height:40px;
-    background-color:#000000;
+    min-height: 40px;
+    background-color: #000000;
 }
 
 .copyright p {
-    text-align:left;
-    color:#FFF;
-    padding:10px 0;
-    margin-bottom:0px;
+    text-align: left;
+    color: #FFF;
+    padding: 10px 0;
+    margin-bottom: 0px;
+}
+
+@media only screen and (max-width: 992px) {
+
+    /* Header */
+    .jumbotron {
+        height: inherit;
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+        margin-bottom: 10px;
+    }
+    header .form-inline .form-group {
+        display: block;
+    }
+    header .search-box {
+        margin-top: 0;
+    }
+    #finalidade {
+        width: 100%;
+    }
+    #finalidade button {
+        width: 50%;
+    }
+    header .search-group {
+        margin-top: 10px;
+        margin-left: 0;
+    }
+    header .search-group .btn-group,
+    header .search-group .btn-group button {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+    header .search-group #btn-bairros {
+        margin-top: 20px;
+    }
+    header .search-group .dropdown-menu-bairros {
+        margin-left: 0 !important;
+    }
+    .open>.dropdown-menu {
+        width: 100%;
+    }
+    .open>.dropdown-menu a {
+        padding: 10px 20px;
+    }
+    header .search-box #btn-search {
+        margin-right: 0;
+        padding: 12px 16px;
+    }
+    header .search-box #input-numero-da-ficha {
+        width: 125px;
+    }
+
+    /* Top Page */
+    .top-page .form-inline .form-group {
+        display: block;
+        margin-bottom: 0;
+    }
+    .top-page .search-group {
+        margin-top: 10px;
+        margin-left: 0;
+    }
+    .top-page .search-group .btn-group,
+    .top-page .search-group .btn-group button {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+    .top-page .search-group #btn-bairros {
+        margin-top: 20px;
+    }
+    .top-page .search-group .dropdown-menu-bairros {
+        margin-left: 0 !important;
+    }
+    .top-page .search-box #btn-search {
+        width: 100%;
+        margin-top: 20px !important;
+        margin-left: 0;
+        height: inherit;
+    }
+
 }
 
 
+@media only screen and (max-width: 768px) {
 
+    /* Brand */
+    .navbar-brand > img {
+        margin-left: 10px;
+    }
 
+    /* Toggle Menu Button */
+    .navbar-inverse .navbar-toggle:hover,
+    .navbar-inverse .navbar-toggle:focus {
+        background-color: #CC1818;
+    }
+    .navbar-inverse .navbar-toggle {
+        border: 0;
+    }
+    .navbar-toggle {
+        margin-top: 19px;
+        margin-bottom: 19px;
+    }
 
+    /* Menu */
+    .navbar-inverse .navbar-collapse,
+    .navbar-inverse .navbar-form {
+        border: 0;
+    }
+    .navbar-nav > li > a, .navbar-brand {
+        height: inherit;
+    }
 
+    /* Carousel */
+    #home-carousel .item {
+        height: 170px;
+    }
+    #home-carousel .item h1,
+    #home-carousel .item h1 .fa-quote-left,
+    #home-carousel .item h1 .fa-quote-right {
+        font-size: 16pt;
+    }
+    #home-carousel .carousel-caption {
+        top: 0;
+        padding-top: 0;
+    }
 
+    /* Footer */
+    footer {
+        font-size: 10pt !important;
+    }
+    footer .table > tbody > tr > td .fa {
+        font-size: 14pt;
+    }
+    footer .logofooter {
+        text-align: center;
+    }
+    footer .table>tbody>tr>td {
+        padding: 5px;
+    }
 
+    /* Title */
+    .title {
+      padding-bottom: 14px;
+    }
+    .order {
+      position: inherit;
+      bottom: 0;
+    }
+}
 
+/* Bootstrap .sm */
+@media only screen and (max-width: 750px) {
+    .results .actions .btn-theme {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .results .dados-do-imovel .info span {
+        display: block;
+        margin-right: 0;
+        width: 100%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}
 
+/* Bootstrap .md */
+@media only screen and (max-width: 991px) {
+    .results .dados-do-imovel {
+        padding: 0px 20px 20px 20px;
+    }
+    .results .layer-overlay {
+        -webkit-border-bottom-left-radius: 0px;
+        -moz-border-radius-bottomleft: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    .pull-left-md {
+        float: left !important;
+    }
+    .pull-left-md.btn-theme {
+        margin-bottom: 10px;
+    }
+    .details .dados-do-imovel .body .col-left {
+        vertical-align: top;
+        padding-top: 20px;
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+
+    /* Carousel */
+    #home-carousel .item h1,
+    #home-carousel .item h1 .fa-quote-left,
+    #home-carousel .item h1 .fa-quote-right {
+        font-size: 17pt;
+    }
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+
+    /* Navbar */
+    .navbar-nav > li > a {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* Carousel */
+    #home-carousel .item h1,
+    #home-carousel .item h1 .fa-quote-left,
+    #home-carousel .item h1 .fa-quote-right {
+        font-size: 19pt;
+    }
+
+}
+
+/* iPhone 5 */
+@media only screen and (max-width: 400px) {
+    .details .dados-do-imovel .value .price {
+        font-size: 13pt;
+    }
+    .details .dados-do-imovel .info {
+      font-size: 11pt;
+    }
+}
