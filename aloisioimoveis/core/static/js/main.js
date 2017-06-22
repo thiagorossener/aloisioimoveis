@@ -2,12 +2,12 @@ new Vue({
     el: '#app'
 });
 
-
 $(document).ready(function() {
-   $("#myCarousel").swiperight(function() {
-      $(this).carousel('prev');
+    let carousel = $("#myCarousel");
+    carousel.swiperight(function() {
+        $(this).carousel('prev');
     });
-   $("#myCarousel").swipeleft(function() {
-      $(this).carousel('next');
-   });
+    carousel.swipeleft(function() {
+        $(this).carousel('next');
+    });
 });
