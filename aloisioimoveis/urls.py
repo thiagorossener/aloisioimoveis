@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from aloisioimoveis.core.views import home, rent, buy, search, contact, company, record_house
+from aloisioimoveis.core.views import home, rent, buy, search, contact, company, record_house, record_apartment
 
 urlpatterns = [
     url(r'^$', home, name='home'),
@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^comprar/$', buy, name='buy'),
     url(r'^buscar/$', search, name='search'),
     url(r'^imovel/casa/(?P<pk>\d+)/$', record_house, name='record_house'),
+    url(r'^imovel/apartamento/(?P<pk>\d+)/$', record_apartment, name='record_apartment'),
     url(r'^empresa/$', company, name='company'),
     url(r'^contato/$', contact, name='contact'),
     url(r'^admin/', admin.site.urls),
