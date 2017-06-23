@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^imovel/', include('aloisioimoveis.properties.urls', namespace='records')),
     url(r'^empresa/$', company, name='company'),
     url(r'^contato/$', contact, name='contact'),
-    url(r'^admin/', admin.site.urls),
+    url(r'^sistema/', admin.site.urls),
 ]
 
 if settings.DEBUG:
