@@ -63,6 +63,11 @@
                                 </div>
                                 <div class="col-md-9">
                                     <div class="row info">
+                                        {% if property.area %}
+                                            <div class="col-md-12">
+                                                <div class="area">Área de {{ property.area }}</div>
+                                            </div><br><br>
+                                        {% endif %}
                                         {% for col, total, field in fields %}
                                             {% for cur_col in cols %}
                                                 <div class="col-md-6">

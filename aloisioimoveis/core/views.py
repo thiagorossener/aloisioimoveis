@@ -130,6 +130,28 @@ def record_apartment(request, pk):
     return render(request, 'record.html', context)
 
 
+def record_commercial(request, pk):
+    prop = get_object_or_404(Commercial, pk=pk)
+
+    # Build field tuples like (col, total, field). Ex: (0, 1, 'bedroom'), (1, 2, 'room')
+    total_fields = [f.attname for f in prop._meta.fields if f.attname.startswith('total')]
+    prop_dict = model_to_dict(prop)
+    fields = []
+    for field_name in total_fields:
+        if prop_dict[field_name] > 0:
+            col = len(fields) % 2
+            total = prop_dict[field_name]
+            field = field_name.split('total_')[1]
+            fields.append((col, total, field))
+
+    context = {
+        'property': prop,
+        'fields': fields,
+        'cols': (0, 1),
+    }
+    return render(request, 'record.html', context)
+
+
 def company(request):
     return render(request, 'company.html')
 
