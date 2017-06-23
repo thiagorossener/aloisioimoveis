@@ -75,8 +75,8 @@
                                 {% endif %}
                             </div>
                             <div class="actions">
-                                <a href="#" class="btn btn-default btn-theme">Ver detalhes</a>
-                                <a href="#" class="btn btn-default btn-theme"><i class="fa fa-camera"></i> Ver fotos ({{ property.photos.count }})</a>
+                                <a href="{{ property.get_absolute_url }}" class="btn btn-default btn-theme">Ver detalhes</a>
+                                <a href="{{ property.get_absolute_url }}" class="btn btn-default btn-theme"><i class="fa fa-camera"></i> Ver fotos ({{ property.photos.count }})</a>
                             </div>
                         </div>
                     </div>

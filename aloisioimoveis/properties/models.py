@@ -79,6 +79,10 @@ class House(Property):
     total_office = models.IntegerField('escritórios', default=0)
     total_garage = models.IntegerField('garagens', default=0)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return 'records:house', (), { 'pk': self.pk }
+
     class Meta:
         verbose_name = 'Casa'
         verbose_name_plural = 'Casas'
@@ -107,6 +111,10 @@ class Apartment(Property):
     total_office = models.IntegerField('escritórios', default=0)
     total_garage = models.IntegerField('garagens', default=0)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return 'records:apartment', (), {'pk': self.pk}
+
     class Meta:
         verbose_name = 'Apartamento'
         verbose_name_plural = 'Apartamentos'
@@ -127,6 +135,10 @@ class Commercial(Property):
     total_garage = models.IntegerField('garagens', default=0)
     total_service_area = models.IntegerField('áreas de serviço', default=0)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return 'records:commercial', (), {'pk': self.pk}
+
     class Meta:
         verbose_name = 'Ponto Comercial'
         verbose_name_plural = 'Pontos Comerciais'
@@ -140,6 +152,10 @@ class Commercial(Property):
 class Land(Property):
     address = models.CharField('endereço', max_length=200, blank=True)
     area = models.CharField('área', max_length=30, blank=True)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'records:land', (), {'pk': self.pk}
 
     class Meta:
         verbose_name = 'Terreno'

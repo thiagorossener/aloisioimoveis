@@ -65,7 +65,7 @@
                         {% if property.is_house or property.is_apartment %}
                             <p><span class="badge badge-room">2</span> <i class="fa fa-bed"></i></p>
                         {% endif %}
-                        <a href="#" class="btn btn-primary" role="button">Ver detalhes</a>
+                        <a href="{{ property.get_absolute_url }}" class="btn btn-primary" role="button">Ver detalhes</a>
                     </div>
                 </div>
             </div>
