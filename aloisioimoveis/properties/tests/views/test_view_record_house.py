@@ -8,7 +8,7 @@ from aloisioimoveis.properties.models import House
 class HouseRecordViewTest(TestCase):
     def setUp(self):
         self.house = mommy.make(House)
-        self.response = self.client.get(r('record_house', self.house.pk))
+        self.response = self.client.get(r('records:house', self.house.pk))
 
     def test_get(self):
         """GET /imovel/casa/[pk]/ should return status 200"""
@@ -24,13 +24,13 @@ class HouseRecordViewTest(TestCase):
 
     def test_404(self):
         """GET /imovel/casa/[invalid_pk]/ should return status 404"""
-        response = self.client.get(r('record_house', 234))
+        response = self.client.get(r('records:house', 234))
         self.assertEqual(404, response.status_code)
 
     def test_context_with_fields(self):
         """Must have tuple of fields in context"""
         mommy.make(House, pk=2, total_bedroom=1, total_room=1)
-        response = self.client.get(r('record_house', 2))
+        response = self.client.get(r('records:house', 2))
         self.assertIn((0, 1, 'bedroom'), response.context['fields'])
         self.assertIn((1, 1, 'room'), response.context['fields'])
 
