@@ -152,6 +152,14 @@ def record_commercial(request, pk):
     return render(request, 'record.html', context)
 
 
+def record_land(request, pk):
+    prop = get_object_or_404(Land, pk=pk)
+    context = {
+        'property': prop,
+    }
+    return render(request, 'record.html', context)
+
+
 def company(request):
     return render(request, 'company.html')
 

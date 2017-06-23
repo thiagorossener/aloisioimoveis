@@ -5,7 +5,7 @@ from model_mommy import mommy
 from aloisioimoveis.properties.models import Commercial
 
 
-class RecordCommercialViewTest(TestCase):
+class CommercialRecordViewTest(TestCase):
     def setUp(self):
         self.commercial = mommy.make(Commercial)
         self.response = self.client.get(r('record_commercial', pk=1))

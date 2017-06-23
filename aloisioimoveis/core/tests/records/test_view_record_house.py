@@ -5,7 +5,7 @@ from model_mommy import mommy
 from aloisioimoveis.properties.models import House
 
 
-class RecordHouseViewTest(TestCase):
+class HouseRecordViewTest(TestCase):
     def setUp(self):
         self.house = mommy.make(House)
         self.response = self.client.get(r('record_house', self.house.pk))
