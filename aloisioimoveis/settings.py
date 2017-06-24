@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'debug_toolbar',
     'django_extensions',
+    'rest_framework',
     'test_without_migrations',
     'aloisioimoveis.core',
     'aloisioimoveis.properties.apps.PropertiesConfig',

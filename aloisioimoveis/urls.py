@@ -5,6 +5,7 @@ from django.contrib import admin
 from aloisioimoveis.core.views import home, rent, buy, search, contact, company
 
 urlpatterns = [
+    # Views
     url(r'^$', home, name='home'),
     url(r'^alugar/$', rent, name='rent'),
     url(r'^comprar/$', buy, name='buy'),
@@ -13,6 +14,8 @@ urlpatterns = [
     url(r'^empresa/$', company, name='company'),
     url(r'^contato/$', contact, name='contact'),
     url(r'^sistema/', admin.site.urls),
+    # API
+    url(r'^api/locations/', include('aloisioimoveis.locations.urls', namespace='locations')),
 ]
 
 if settings.DEBUG:
