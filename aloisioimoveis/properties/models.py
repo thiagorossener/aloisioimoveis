@@ -25,10 +25,25 @@ class Photo(models.Model):
 
 
 class Property(BaseModel):
+    TYPE = 'tipo'
+    HOUSE = 'casa'
+    APARTMENT = 'apartamento'
+    COMMERCIAL = 'comercial'
+    LAND = 'terreno'
+
+    INTENT = 'finalidade'
+    RENT = 'alugar'
+    BUY = 'comprar'
+
+    CITY = 'cidade'
+    ALL_CITIES = 0
+
+    NEIGHBORHOOD = 'bairro'
+    ALL_NEIGHBORHOODS = 0
 
     INTENT_CHOICES = (
-        ('alugar', 'Alugar'),
-        ('comprar', 'Comprar'),
+        (RENT, 'Alugar'),
+        (BUY, 'Comprar'),
     )
 
     featured = models.BooleanField('destaque', default=False)

@@ -117,12 +117,13 @@ Vue.component('home-search', {
 	computed: {
 		submitButtonLink: function() {
             if (this.ficha !== '') {
-                return 'busca.php?ficha=' + this.ficha;
+                return 'buscar?ficha=' + this.ficha;
             }
-			return 'busca.php?finalidade=' + this.params.finalidade
-				   + '&tipo=' + this.params.tipo
-				   + '&cidade=' + this.params.cidade
-				   + '&bairro=' + this.params.bairro;
+            return 'buscar?'
+					+ 'bairro=' + this.params.bairro
+					+ '&cidade=' + this.params.cidade
+					+ '&finalidade=' + this.params.finalidade
+					+ '&tipo=' + this.params.tipo;
 		}
 	},
 	methods: {

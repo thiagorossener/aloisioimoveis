@@ -2,9 +2,10 @@ from itertools import chain
 from operator import attrgetter
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import Http404
 from django.shortcuts import render
 
-from aloisioimoveis.properties.models import House, Apartment, Commercial, Land
+from aloisioimoveis.properties.models import House, Apartment, Commercial, Land, Property
 
 
 def home(request):
@@ -21,7 +22,7 @@ def home(request):
 
 def rent(request):
     models = (House, Apartment, Commercial, Land)
-    queries = [model.objects.filter(intent='alugar') for model in models]
+    queries = [model.objects.filter(intent=Property.RENT) for model in models]
 
     # Sorting
     sort_key = request.GET.get('ordem')
@@ -52,7 +53,7 @@ def rent(request):
 def buy(request):
     # Get all properties
     models = (House, Apartment, Commercial, Land)
-    queries = (model.objects.filter(intent='comprar') for model in models)
+    queries = (model.objects.filter(intent=Property.BUY) for model in models)
 
     # Sorting
     sort_key = request.GET.get('ordem')
@@ -81,7 +82,49 @@ def buy(request):
 
 
 def search(request):
-    return render(request, 'search.html')
+    # Property Type
+    property_type = request.GET.get(Property.TYPE)
+    if property_type == Property.HOUSE:
+        manager = House.objects
+    elif property_type == Property.APARTMENT:
+        manager = Apartment.objects
+    elif property_type == Property.COMMERCIAL:
+        manager = Commercial.objects
+    elif property_type == Property.LAND:
+        manager = Land.objects
+    else:
+        raise Http404('No property matches the type.')
+
+    # Intent
+    intent = request.GET.get(Property.INTENT)
+    if intent == Property.RENT:
+        queryset = manager.filter(intent=Property.RENT)
+    elif intent == Property.BUY:
+        queryset = manager.filter(intent=Property.BUY)
+    else:
+        raise Http404('No property matches the intent.')
+
+    # City
+    try:
+        city_id = int(request.GET.get(Property.CITY, 0))
+    except ValueError:
+        city_id = 0
+    if city_id > 0:
+        queryset = queryset.filter(city__pk=city_id)
+
+    # Neighborhood
+    try:
+        neighborhood_id = int(request.GET.get(Property.NEIGHBORHOOD, 0))
+    except ValueError:
+        neighborhood_id = 0
+    if neighborhood_id > 0:
+        queryset = queryset.filter(neighborhood__pk=neighborhood_id)
+
+    context = {
+        'results': list(queryset),
+        'params': request.GET.dict(),
+    }
+    return render(request, 'search.html', context)
 
 
 def company(request):

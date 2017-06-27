@@ -1,7 +1,7 @@
 from django.test import TestCase
 from model_mommy import mommy
 
-from aloisioimoveis.properties.models import House, Apartment, Commercial, Land
+from aloisioimoveis.properties.models import House, Apartment, Commercial, Land, Property
 
 
 class PropertyFieldChoicesTest(TestCase):
@@ -14,7 +14,7 @@ class PropertyFieldChoicesTest(TestCase):
             Land,
         ]
         for model in models:
-            self.assertChoicesInField(model, 'intent', ['alugar', 'comprar'])
+            self.assertChoicesInField(model, 'intent', [Property.RENT, Property.BUY])
 
     def assertChoicesInField(self, model, field_name, choices):
         obj = mommy.make(model)

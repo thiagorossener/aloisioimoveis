@@ -2,7 +2,7 @@ from django.shortcuts import resolve_url as r
 from django.test import TestCase
 from model_mommy import mommy
 
-from aloisioimoveis.properties.models import House, Apartment, Commercial, Land
+from aloisioimoveis.properties.models import House, Apartment, Commercial, Land, Property
 
 
 class RentListTest(TestCase):
@@ -21,10 +21,10 @@ class RentListTest(TestCase):
 class RentListContextText(TestCase):
     def setUp(self):
         self.properties_to_rent = create_properties([House, Apartment, Commercial, Land],
-                                                    intent='alugar',
+                                                    intent=Property.RENT,
                                                     quantity_each=3)
         self.properties_to_buy = create_properties([House, Apartment, Commercial, Land],
-                                                   intent='comprar',
+                                                   intent=Property.BUY,
                                                    quantity_each=2)
         response = self.client.get(r('rent'))
         self.properties = response.context['properties']
@@ -37,13 +37,13 @@ class RentListContextText(TestCase):
         """Rent page must load only properties with 'alugar' intent"""
         for prop in self.properties:
             with self.subTest():
-                self.assertEqual('alugar', prop.intent)
+                self.assertEqual(Property.RENT, prop.intent)
 
 
 class RentListTemplateTest(TestCase):
     def test_show_address(self):
         """Rent template should show property address"""
-        mommy.make(House, intent='alugar', address='Rua Silvester, 123')
+        mommy.make(House, intent=Property.RENT, address='Rua Silvester, 123')
         response = self.client.get(r('rent'))
         self.assertContains(response, '<div class="rua">')
 
@@ -71,7 +71,7 @@ class RentListPaginationTest(TestCase):
 
     def get_properties_to_rent_list(self, page=None):
         create_properties([House, Apartment, Commercial, Land],
-                          intent='alugar',
+                          intent=Property.RENT,
                           quantity_each=3)
         response = self.client.get(r('rent'), {'pagina': page})
         return response.context['properties']
@@ -115,7 +115,7 @@ class RentListSortingTest(TestCase):
     def properties_with_prices(models, prices):
         result = []
         for index, model in enumerate(models):
-            result.append(mommy.make(model, intent='alugar', price=prices[index]))
+            result.append(mommy.make(model, intent=Property.RENT, price=prices[index]))
         return result
 
 

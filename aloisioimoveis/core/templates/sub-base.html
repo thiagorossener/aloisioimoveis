@@ -4,7 +4,11 @@
 
 {% block content %}
     <!-- Search -->
-    <search-bar finalidade="comprar"></search-bar>
+    <search-bar finalidade="{{ params.finalidade }}"
+                tipo="{{ params.tipo }}"
+                :cidade="{{ params.cidade }}"
+                :bairro="{{ params.bairro }}">
+    </search-bar>
 
     {% block sub_content %}
     {% endblock sub_content %}

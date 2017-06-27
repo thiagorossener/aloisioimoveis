@@ -2,7 +2,7 @@ from django.shortcuts import resolve_url as r
 from django.test import TestCase
 from model_mommy import mommy
 
-from aloisioimoveis.properties.models import House, Apartment, Commercial, Land
+from aloisioimoveis.properties.models import House, Apartment, Commercial, Land, Property
 
 
 class BuyListTest(TestCase):
@@ -21,10 +21,10 @@ class BuyListTest(TestCase):
 class BuyListContextTest(TestCase):
     def setUp(self):
         self.properties_to_buy = create_properties([House, Apartment, Commercial, Land],
-                                                   intent='comprar',
+                                                   intent=Property.BUY,
                                                    quantity_each=3)
         self.properties_to_rent = create_properties([House, Apartment, Commercial, Land],
-                                                    intent='alugar',
+                                                    intent=Property.RENT,
                                                     quantity_each=2)
         response = self.client.get(r('buy'))
         self.properties = response.context['properties']
@@ -37,7 +37,7 @@ class BuyListContextTest(TestCase):
         """Buy page must load only properties with 'comprar' intent"""
         for prop in self.properties:
             with self.subTest():
-                self.assertEqual('comprar', prop.intent)
+                self.assertEqual(Property.BUY, prop.intent)
 
 
 class BuyListPaginationTest(TestCase):
@@ -63,7 +63,7 @@ class BuyListPaginationTest(TestCase):
 
     def get_properties_to_buy_list(self, page=None):
         create_properties([House, Apartment, Commercial, Land],
-                          intent='comprar',
+                          intent=Property.BUY,
                           quantity_each=3)
         response = self.client.get(r('buy'), {'pagina': page})
         return response.context['properties']
@@ -107,7 +107,7 @@ class BuyListSortingTest(TestCase):
     def properties_with_prices(models, prices):
         result = []
         for index, model in enumerate(models):
-            result.append(mommy.make(model, intent='comprar', price=prices[index]))
+            result.append(mommy.make(model, intent=Property.BUY, price=prices[index]))
         return result
 
 
@@ -122,7 +122,7 @@ class BuyListParamsInContextTest(TestCase):
 class BuyListTemplateRegressionTest(TestCase):
     def test_price_is_right(self):
         """The page should show the property price correctly"""
-        mommy.make(House, intent='comprar', price=4455)
+        mommy.make(House, intent=Property.BUY, price=4455)
         response = self.client.get(r('buy'))
         self.assertContains(response, '<span class="price">R$ 4.455,00</span>')
 
