@@ -829,6 +829,24 @@ header .search-box button.active {
     margin-bottom: 20px;
 }
 
+.contato .message.error {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+.contato .message.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.contato .errorlist {
+    list-style-type: none;
+    padding: 0;
+    color: #a94442;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
 /* Footer */
 
 footer {

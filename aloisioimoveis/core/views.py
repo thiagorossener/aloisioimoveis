@@ -1,10 +1,15 @@
 from itertools import chain
 from operator import attrgetter
 
+from django.conf import settings
+from django.contrib import messages
+from django.core.mail import EmailMultiAlternatives
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.shortcuts import render
+from django.template.loader import render_to_string
 
+from aloisioimoveis.core.forms import ContactForm
 from aloisioimoveis.properties.models import House, Apartment, Commercial, Land, Property
 
 
@@ -144,4 +149,28 @@ def company(request):
 
 
 def contact(request):
-    return render(request, 'contact.html')
+    form = ContactForm()
+
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Send email
+            subject = 'Contato - De: {}'.format(form.cleaned_data['name'])
+            from_ = form.cleaned_data['email']
+            to = settings.DEFAULT_TO_EMAIL
+            content = render_to_string('core/contact_email.html', form.cleaned_data)
+            email = EmailMultiAlternatives(subject, content, from_, [to])
+            email.attach_alternative(content, "text/html")
+            email.send()
+
+            # Clean form
+            form = ContactForm()
+
+            # Show success message
+            messages.success(request, '<strong>Mensagem enviada com sucesso</strong><br />'
+                                      'Retornaremos assim que possível.<br />Obrigado!')
+
+    context = {
+        'form': form
+    }
+    return render(request, 'contact.html', context)

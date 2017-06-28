@@ -30,6 +30,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 
+DEFAULT_TO_EMAIL = 'contato@aloisioimoveis.com.br'
+
 # SECURITY WARNING: keep the cloudinary config used in production secret!
 cloudinary.config(
   cloud_name=config('CLOUDINARY_CLOUD_NAME'),
@@ -54,6 +56,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'test_without_migrations',
+    'widget_tweaks',
     'aloisioimoveis.core',
     'aloisioimoveis.properties.apps.PropertiesConfig',
     'aloisioimoveis.locations.apps.LocationsConfig',
@@ -137,6 +140,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+# Email configuration
+
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
 
 # Colored Tests
 
