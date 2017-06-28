@@ -66,28 +66,16 @@ Vue.component('search-bar', {
 	</section>`,
 	props: {
 		finalidade: {
-			type: String,
-			default: function() {
-				return 'alugar';
-			}
+			type: String
 		},
 		tipo: {
-			type: String,
-			default: function() {
-				return '';
-			}
+			type: String
 		},
 		cidade: {
-			type: Number,
-			default: function() {
-				return 0;
-			}
+			type: Number
 		},
 		bairro: {
-			type: Number,
-			default: function() {
-				return 0;
-			}
+			type: Number
 		}
 	},
 	data: function() {

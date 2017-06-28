@@ -25,6 +25,8 @@ class Photo(models.Model):
 
 
 class Property(BaseModel):
+    RECORD = 'ficha'
+
     TYPE = 'tipo'
     HOUSE = 'casa'
     APARTMENT = 'apartamento'

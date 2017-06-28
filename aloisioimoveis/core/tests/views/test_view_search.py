@@ -187,3 +187,25 @@ class NeighborhoodSearchTest(TestCase):
                                     Property.CITY: city,
                                     Property.NEIGHBORHOOD: neighborhood})
         return response.context['results']
+
+
+class RecordSearchTest(TestCase):
+    def test_existent_record(self):
+        """Should return a list with the existent record"""
+        house = mommy.make(House, num_record=1234)
+        response = self.client.get(r('search'),
+                                   {Property.RECORD: house.num_record})
+        results = response.context['results']
+        self.assertIn(house, results)
+
+    def test_non_existent_record(self):
+        """Should return status 404"""
+        response = self.client.get(r('search'),
+                                   {Property.RECORD: 555})
+        self.assertEqual(404, response.status_code)
+
+    def test_invalid_record(self):
+        """Should return status 404"""
+        response = self.client.get(r('search'),
+                                   {Property.RECORD: 'invalid'})
+        self.assertEqual(404, response.status_code)
