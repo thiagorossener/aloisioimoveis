@@ -1,8 +1,10 @@
+from urllib.parse import urlencode
+
 from django.shortcuts import resolve_url as r
 from django.test import TestCase
 from model_mommy import mommy
 
-from aloisioimoveis.properties.models import House
+from aloisioimoveis.properties.models import House, Property
 
 
 class HouseRecordViewTest(TestCase):
@@ -37,3 +39,8 @@ class HouseRecordViewTest(TestCase):
     def test_context_with_cols(self):
         """Must have cols in context"""
         self.assertEqual((0, 1), self.response.context['cols'])
+
+    def test_contact_link(self):
+        """Must have a link to the contact page"""
+        data = [('id', self.house.pk), (Property.TYPE, Property.HOUSE)]
+        self.assertContains(self.response, '?'.join([r('contact'), urlencode(data)]))

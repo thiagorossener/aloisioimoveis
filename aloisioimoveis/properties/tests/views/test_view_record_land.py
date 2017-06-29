@@ -1,8 +1,10 @@
+from urllib.parse import urlencode
+
 from django.shortcuts import resolve_url as r
 from django.test import TestCase
 from model_mommy import mommy
 
-from aloisioimoveis.properties.models import Land
+from aloisioimoveis.properties.models import Land, Property
 
 
 class LandRecordViewTest(TestCase):
@@ -32,3 +34,8 @@ class LandRecordViewTest(TestCase):
         mommy.make(Land, pk=2, area='500m2')
         response = self.client.get(r('records:land', 2))
         self.assertContains(response, '<div class="area">Área de 500m2</div>')
+
+    def test_contact_link(self):
+        """Must have a link to the contact page"""
+        data = [('id', self.land.pk), (Property.TYPE, Property.LAND)]
+        self.assertContains(self.response, '?'.join([r('contact'), urlencode(data)]))

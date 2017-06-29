@@ -35,7 +35,7 @@
                     {% endif %}
                 </div>
                 <div class="col-sm-12 col-md-3">
-                    <a href="#" class="btn btn-default btn-theme pull-right"><i class="fa fa-envelope"></i> &nbsp;Entrar em contato</a>
+                    <a href="{% url 'contact' %}?id={{ property.id }}&tipo={{ property.short_type }}" class="btn btn-default btn-theme pull-right"><i class="fa fa-envelope"></i> &nbsp;Entrar em contato</a>
                 </div>
             </div>
             <div class="gallery">

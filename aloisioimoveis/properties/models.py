@@ -100,6 +100,9 @@ class House(Property):
     def get_absolute_url(self):
         return 'records:house', (), {'pk': self.pk}
 
+    def short_type(self):
+        return Property.HOUSE
+
     class Meta:
         verbose_name = 'Casa'
         verbose_name_plural = 'Casas'
@@ -132,6 +135,9 @@ class Apartment(Property):
     def get_absolute_url(self):
         return 'records:apartment', (), {'pk': self.pk}
 
+    def short_type(self):
+        return Property.APARTMENT
+
     class Meta:
         verbose_name = 'Apartamento'
         verbose_name_plural = 'Apartamentos'
@@ -156,6 +162,9 @@ class Commercial(Property):
     def get_absolute_url(self):
         return 'records:commercial', (), {'pk': self.pk}
 
+    def short_type(self):
+        return Property.COMMERCIAL
+
     class Meta:
         verbose_name = 'Ponto Comercial'
         verbose_name_plural = 'Pontos Comerciais'
@@ -173,6 +182,9 @@ class Land(Property):
     @models.permalink
     def get_absolute_url(self):
         return 'records:land', (), {'pk': self.pk}
+
+    def short_type(self):
+        return Property.LAND
 
     class Meta:
         verbose_name = 'Terreno'
