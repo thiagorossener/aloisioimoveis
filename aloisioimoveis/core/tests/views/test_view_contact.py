@@ -42,15 +42,12 @@ class ContactViewTest(TestCase):
         self.assertIsInstance(form, ContactForm)
 
 
-class ContactFormPostValid(TestCase):
+class ContactFormPostValidTest(TestCase):
     def setUp(self):
-        self.data = dict(name='Thiago Rossener',
-                         email='thiago@rossener.com',
-                         phone='12-981491771',
-                         message='Olá')
+        self.data = get_form_data()
         self.response = self.client.post(r('contact'), self.data)
 
-    def test_post(self):
+    def test_success_message(self):
         """Valid post should show a success message"""
         self.assertContains(self.response,
                             '<strong>Mensagem enviada com sucesso</strong><br />'
@@ -82,38 +79,36 @@ class ContactFormPostValid(TestCase):
             with self.subTest():
                 self.assertTrue(value in body)
 
-    def test_form_content(self):
+    def test_empty_form(self):
         """Form should be empty when the message is sent successfully"""
         form = self.response.context['form']
         self.assertFalse(form.is_bound)
 
 
-class ContactFormPostInvalid(TestCase):
+class ContactFormPostInvalidTest(TestCase):
     def setUp(self):
         self.response = self.client.post(r('contact'))
 
-    def test_not_send_email(self):
+    def test_email_not_sent(self):
         """Invalid post should not send an email"""
         self.assertEqual(len(mail.outbox), 0)
 
-    def test_form_content(self):
+    def test_filled_form(self):
         """Form should contain all the filled data"""
         form = self.response.context['form']
         self.assertTrue(form.is_bound)
 
 
-class ContactFormFieldsValidation(TestCase):
+class ContactFormFieldsValidationTest(TestCase):
     def test_phone_is_optional(self):
         """Phone field should be optional"""
-        data = dict(name='Thiago Rossener',
-                    email='thiago@rossener.com',
-                    message='Olá')
+        data = get_form_data(phone='')
         response = self.client.post(r('contact'), data)
         form = response.context['form']
         self.assertEqual(len(form.errors), 0)
 
 
-class ContactFormFromRecordView(TestCase):
+class ContactFormFromRecordViewTest(TestCase):
     def test_load_record_data(self):
         """Should load a record id and type in hidden inputs"""
         contents = [
@@ -128,38 +123,40 @@ class ContactFormFromRecordView(TestCase):
             with self.subTest():
                 self.assertContains(response, content, count)
 
-    def test_send_link(self):
+    def test_link_on_email(self):
         """Should send email with a link to the record view"""
         house = mommy.make(House, pk=777)
-        data = dict(name='Thiago Rossener',
-                    email='thiago@rossener.com',
-                    phone='12-981491771',
-                    message='Olá meu chapa',
-                    record_id=house.pk,
-                    record_type=Property.HOUSE)
-        self.client.post(r('contact'), data)
-        body = mail.outbox[0].body
-        self.assertTrue(house.get_absolute_url() in body)
+        self.submit_form(record_id=house.pk, record_type=Property.HOUSE)
+        self.assertTrue(house.get_absolute_url() in mail.outbox[0].body)
 
     def test_non_existent_record(self):
         """Should not send link when the record does not exist"""
-        data = dict(name='Thiago Rossener',
-                    email='thiago@rossener.com',
-                    phone='12-981491771',
-                    message='Olá meu chapa',
-                    record_id=1234,
-                    record_type=Property.HOUSE)
-        self.client.post(r('contact'), data)
-        body = mail.outbox[0].body
-        self.assertFalse('Clique aqui para visualizar' in body)
+        self.submit_form(record_id=1234, record_type=Property.HOUSE)
+        self.assertFalse('Clique aqui para visualizar' in mail.outbox[0].body)
 
     def test_invalid_record_data(self):
         """Should show message with error when record data is invalid"""
-        data = dict(name='Thiago Rossener',
-                    email='thiago@rossener.com',
-                    phone='12-981491771',
-                    message='Olá meu chapa',
-                    record_id='invalid')
-        response = self.client.post(r('contact'), data)
+        response = self.submit_form(record_id='invalid')
         self.assertContains(response, 'Ocorreu um erro interno. '
                                       'Por favor, tente novamente mais tarde.')
+
+    def submit_form(self, **kwargs):
+        return self.client.post(r('contact'), get_form_data(**kwargs))
+
+
+class ContactEmailHtmlTest(TestCase):
+    def setUp(self):
+        data = get_form_data(message='Fala rapaz\naqui é da quebrada')
+        self.client.post(r('contact'), data)
+        self.email_body = mail.outbox[0].body
+
+    def test_br_in_message(self):
+        """Email message should break lines"""
+        self.assertTrue('Fala rapaz<br />aqui é da quebrada' in self.email_body)
+
+
+def get_form_data(name='Thiago Rossener', email='thiago@rossener.com',
+                  phone='12-981491771', message='Olá', **kwargs):
+    form_data = dict(name=name, email=email, phone=phone, message=message)
+    form_data.update(**kwargs)
+    return form_data
