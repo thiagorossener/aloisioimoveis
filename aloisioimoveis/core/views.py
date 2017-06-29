@@ -3,6 +3,7 @@ from operator import attrgetter
 
 from django.conf import settings
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import EmailMultiAlternatives
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
@@ -149,8 +150,6 @@ def company(request):
 
 
 def contact(request):
-    form = ContactForm()
-
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -158,7 +157,24 @@ def contact(request):
             subject = 'Contato - De: {}'.format(form.cleaned_data['name'])
             from_ = form.cleaned_data['email']
             to = settings.DEFAULT_TO_EMAIL
-            content = render_to_string('core/contact_email.html', form.cleaned_data)
+
+            context = form.cleaned_data
+            record_id, record_type = form.cleaned_data['record_id'], form.cleaned_data['record_type']
+            if record_id and record_type:
+                try:
+                    if record_type == Property.HOUSE:
+                        context['url'] = request.build_absolute_uri(House.objects.get(pk=record_id).get_absolute_url())
+                    elif record_type == Property.APARTMENT:
+                        context['url'] = Apartment.objects.get(pk=record_id).get_absolute_url()
+                    elif record_type == Property.COMMERCIAL:
+                        context['url'] = Commercial.objects.get(pk=record_id).get_absolute_url()
+                    elif record_type == Property.LAND:
+                        context['url'] = Land.objects.get(pk=record_id).get_absolute_url()
+                except ObjectDoesNotExist:
+                    pass
+
+            content = render_to_string('core/contact_email.html', context)
+
             email = EmailMultiAlternatives(subject, content, from_, [to])
             email.attach_alternative(content, "text/html")
             email.send()
@@ -169,6 +185,17 @@ def contact(request):
             # Show success message
             messages.success(request, '<strong>Mensagem enviada com sucesso</strong><br />'
                                       'Retornaremos assim que possível.<br />Obrigado!')
+
+        elif form.errors.get('record_id') or form.errors.get('record_type'):
+            # Show error message
+            messages.error(request, 'Ocorreu um erro interno. '
+                                    'Por favor, tente novamente mais tarde.')
+
+    else:
+        form = ContactForm()
+        if request.GET.get('id') and request.GET.get('tipo'):
+            form.fields['record_id'].initial = request.GET.get('id')
+            form.fields['record_type'].initial = request.GET.get('tipo')
 
     context = {
         'form': form

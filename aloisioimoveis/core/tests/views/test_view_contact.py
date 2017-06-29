@@ -2,8 +2,10 @@ from django.conf import settings
 from django.core import mail
 from django.shortcuts import resolve_url as r
 from django.test import TestCase
+from model_mommy import mommy
 
 from aloisioimoveis.core.forms import ContactForm
+from aloisioimoveis.properties.models import House, Property
 
 
 class ContactViewTest(TestCase):
@@ -21,7 +23,7 @@ class ContactViewTest(TestCase):
     def test_html(self):
         """Html must contain input tags"""
         tags = (('<form', 1),
-                ('<input', 4),
+                ('<input', 6),
                 ('type="email"', 1),
                 ('<textarea', 1),
                 ('type="submit"', 1))
@@ -109,3 +111,55 @@ class ContactFormFieldsValidation(TestCase):
         response = self.client.post(r('contact'), data)
         form = response.context['form']
         self.assertEqual(len(form.errors), 0)
+
+
+class ContactFormFromRecordView(TestCase):
+    def test_load_record_data(self):
+        """Should load a record id and type in hidden inputs"""
+        contents = [
+            ('type="hidden"', 2),
+            ('name="record_id"', 1),
+            ('value="999"', 1),
+            ('name="record_type"', 1),
+            ('value="casa"', 1),
+        ]
+        response = self.client.get(r('contact'), {'id': 999, 'tipo': 'casa'})
+        for content, count in contents:
+            with self.subTest():
+                self.assertContains(response, content, count)
+
+    def test_send_link(self):
+        """Should send email with a link to the record view"""
+        house = mommy.make(House, pk=777)
+        data = dict(name='Thiago Rossener',
+                    email='thiago@rossener.com',
+                    phone='12-981491771',
+                    message='Olá meu chapa',
+                    record_id=house.pk,
+                    record_type=Property.HOUSE)
+        self.client.post(r('contact'), data)
+        body = mail.outbox[0].body
+        self.assertTrue(house.get_absolute_url() in body)
+
+    def test_non_existent_record(self):
+        """Should not send link when the record does not exist"""
+        data = dict(name='Thiago Rossener',
+                    email='thiago@rossener.com',
+                    phone='12-981491771',
+                    message='Olá meu chapa',
+                    record_id=1234,
+                    record_type=Property.HOUSE)
+        self.client.post(r('contact'), data)
+        body = mail.outbox[0].body
+        self.assertFalse('Clique aqui para visualizar' in body)
+
+    def test_invalid_record_data(self):
+        """Should show message with error when record data is invalid"""
+        data = dict(name='Thiago Rossener',
+                    email='thiago@rossener.com',
+                    phone='12-981491771',
+                    message='Olá meu chapa',
+                    record_id='invalid')
+        response = self.client.post(r('contact'), data)
+        self.assertContains(response, 'Ocorreu um erro interno. '
+                                      'Por favor, tente novamente mais tarde.')

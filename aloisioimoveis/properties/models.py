@@ -98,7 +98,7 @@ class House(Property):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'records:house', (), { 'pk': self.pk }
+        return 'records:house', (), {'pk': self.pk}
 
     class Meta:
         verbose_name = 'Casa'

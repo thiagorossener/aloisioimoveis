@@ -21,9 +21,11 @@
                 <p class="message {{ message.tags }}">{{ message|safe }}</p>
             {% endfor %}
         {% endif %}
-        <form action="." method="post" class="form-horizontal" novalidate>
+        <form method="post" class="form-horizontal" novalidate>
             {% csrf_token %}
             <fieldset>
+                {{ form.record_id }}
+                {{ form.record_type }}
                 <div class="row">
                     <div class="col-md-6 col-sm-6">
                         <div class="form-group">

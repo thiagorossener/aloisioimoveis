@@ -28,3 +28,11 @@ class ContactForm(forms.Form):
             'placeholder': 'Sua mensagem',
         })
     )
+    record_id = forms.IntegerField(
+        required=False,
+        widget=forms.HiddenInput()
+    )
+    record_type = forms.CharField(
+        required=False,
+        widget=forms.HiddenInput()
+    )
