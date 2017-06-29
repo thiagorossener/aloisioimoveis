@@ -21,7 +21,7 @@ class Photo(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        return str(self.image)
+        return 'Foto {}'.format(self.pk)
 
 
 class Property(BaseModel):

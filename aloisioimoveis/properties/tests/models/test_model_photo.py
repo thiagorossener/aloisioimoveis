@@ -11,7 +11,3 @@ class PhotoModelTest(TestCase):
     def test_create(self):
         """Should create a Photo"""
         self.assertTrue(Photo.objects.exists())
-
-    def test_str(self):
-        """str() must return the image url"""
-        self.assertEqual(self.obj.image, str(self.obj))

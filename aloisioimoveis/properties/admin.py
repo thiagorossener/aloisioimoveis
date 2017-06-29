@@ -7,6 +7,14 @@ from aloisioimoveis.properties.models import House, Apartment, Commercial, Land,
 class PhotoInline(generic.GenericTabularInline):
     model = Photo
     extra = 1
+    readonly_fields = ['photo_img']
+    fields = ['photo_img', 'image', 'order']
+
+    def photo_img(self, obj):
+        return '<a href="{0}"><img width="300" src="{0}" /></a>'.format(obj.image.url)
+
+    photo_img.allow_tags = True
+    photo_img.short_description = 'foto'
 
 
 class HouseAdmin(admin.ModelAdmin):
