@@ -4,7 +4,8 @@
 
 {% block content %}
     <!-- Search -->
-    <search-bar finalidade="{{ params.finalidade|default:"alugar" }}"
+    <search-bar base-url="{% url 'search' %}"
+                finalidade="{{ params.finalidade|default:"alugar" }}"
                 tipo="{{ params.tipo|default:"casa" }}"
                 :cidade="{{ params.cidade|default:0 }}"
                 :bairro="{{ params.bairro|default:0 }}">

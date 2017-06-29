@@ -66,6 +66,10 @@ Vue.component('home-search', {
                     </form>
                 </div>`,
 	props: {
+	    baseUrl: {
+	        type: String,
+            required: true
+        },
 		finalidade: {
 			type: String,
 			default: function() {
@@ -117,9 +121,9 @@ Vue.component('home-search', {
 	computed: {
 		submitButtonLink: function() {
             if (this.ficha !== '') {
-                return 'buscar?ficha=' + this.ficha;
+                return this.baseUrl + '?ficha=' + this.ficha;
             }
-            return 'buscar?'
+            return this.baseUrl + '?'
 					+ 'bairro=' + this.params.bairro
 					+ '&cidade=' + this.params.cidade
 					+ '&finalidade=' + this.params.finalidade

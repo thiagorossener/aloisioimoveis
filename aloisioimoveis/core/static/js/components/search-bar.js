@@ -65,6 +65,10 @@ Vue.component('search-bar', {
 	    </div>
 	</section>`,
 	props: {
+	    baseUrl: {
+	        type: String,
+            required: true
+        },
 		finalidade: {
 			type: String
 		},
@@ -101,7 +105,7 @@ Vue.component('search-bar', {
 	},
 	computed: {
 		submitButtonLink: function() {
-			return 'buscar?'
+			return this.baseUrl + '?'
 					+ 'bairro=' + this.params.bairro
 					+ '&cidade=' + this.params.cidade
 					+ '&finalidade=' + this.params.finalidade
