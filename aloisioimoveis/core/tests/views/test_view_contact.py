@@ -146,13 +146,17 @@ class ContactFormFromRecordViewTest(TestCase):
 
 class ContactEmailHtmlTest(TestCase):
     def setUp(self):
-        data = get_form_data(message='Fala rapaz\naqui é da quebrada')
+        data = get_form_data(phone='', message='Fala rapaz\naqui é da quebrada')
         self.client.post(r('contact'), data)
         self.email_body = mail.outbox[0].body
 
     def test_br_in_message(self):
         """Email message should break lines"""
         self.assertTrue('Fala rapaz<br />aqui é da quebrada' in self.email_body)
+
+    def test_phone_not_informed(self):
+        """Should show a message when the phone isn't informed"""
+        self.assertTrue('Telefone: <strong>Não informado</strong>' in self.email_body)
 
 
 def get_form_data(name='Thiago Rossener', email='thiago@rossener.com',

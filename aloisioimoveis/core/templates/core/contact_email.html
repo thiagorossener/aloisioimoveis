@@ -5,7 +5,7 @@
     E-mail: <strong>{{ email }}</strong>
 </p>
 <p>
-    Telefone: <strong>{{ phone }}</strong>
+    Telefone: <strong>{{ phone|default:"Não informado" }}</strong>
 </p>
 {% if url %}
 <p>
