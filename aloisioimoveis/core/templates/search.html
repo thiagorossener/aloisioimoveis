@@ -54,7 +54,7 @@
                                 <h3>{{ property.property_type }}</h3>
                                 <div class="bairro">
                                     {{ property.neighborhood }} - {{ property.city }}
-                                    {% if property.address %}
+                                    {% if property.address and property.intent == 'alugar' %}
                                         <br><div class="rua">{{ property.address }}</div>
                                     {% endif %}
                                 </div>

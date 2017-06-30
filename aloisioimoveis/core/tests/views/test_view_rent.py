@@ -1,7 +1,9 @@
 from django.shortcuts import resolve_url as r
 from django.test import TestCase
 from model_mommy import mommy
+from model_mommy.recipe import Recipe
 
+from aloisioimoveis.locations.models import City, Neighborhood
 from aloisioimoveis.properties.models import House, Apartment, Commercial, Land, Property
 
 
@@ -41,11 +43,55 @@ class RentListContextText(TestCase):
 
 
 class RentListTemplateTest(TestCase):
-    def test_show_address(self):
-        """Rent template should show property address"""
-        mommy.make(House, intent=Property.RENT, address='Rua Silvester, 123')
-        response = self.client.get(r('rent'))
-        self.assertContains(response, '<div class="rua">')
+    def setUp(self):
+        self.city = mommy.make(City, name='Taubaté')
+        self.neighborhood = mommy.make(Neighborhood, name='Belém', city=self.city)
+        self.props = [self.build_property(prop) for prop in [House, Apartment, Commercial, Land]]
+        self.response = self.client.get(r('rent'))
+
+    def test_html(self):
+        """Rent list template should show data"""
+        contents = [
+            ('Casa', 1),
+            ('Apartamento', 1),
+            ('Ponto Comercial', 1),
+            ('Terreno', 1),
+            ('Rua Silvester, 123', 4),
+            ('R$ 100,00', 4),
+            ('IPTU R$ 45,00', 4),
+            ('Belém - Taubaté', 4),
+            ('4 quartos', 2),
+            ('3 suítes', 2),
+            ('2 banheiros', 2),
+            ('1 vaga de garagem', 2),
+            ('Área de 120m2', 2),
+            ('Propriedade com piscina e churrasqueira', 4),
+        ]
+        for prop in self.props:
+            contents.append((prop.get_absolute_url(), 2))
+        for content, count in contents:
+            with self.subTest():
+                self.assertContains(self.response, content, count)
+
+    def build_property(self, model):
+        prop = Recipe(model,
+                      intent=Property.RENT,
+                      address='Rua Silvester, 123',
+                      price=100,
+                      conditions='IPTU R$ 45,00',
+                      neighborhood=self.neighborhood,
+                      city=self.city,
+                      obs='Propriedade com piscina e churrasqueira',
+                      )
+        if model is House or model is Apartment:
+            prop = prop.extend(total_bedroom=4,
+                               total_suite=3,
+                               total_bathroom=2,
+                               total_garage=1,
+                               ).make()
+        else:
+            prop = prop.extend(area='120m2').make()
+        return prop
 
 
 class RentListPaginationTest(TestCase):
