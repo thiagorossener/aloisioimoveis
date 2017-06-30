@@ -1,4 +1,5 @@
 from cloudinary.models import CloudinaryField
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
@@ -9,7 +10,7 @@ from aloisioimoveis.locations.models import City, Neighborhood
 
 
 class Photo(models.Model):
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey('contenttypes.ContentType')
     object_id = models.PositiveIntegerField()
     property = GenericForeignKey()
     image = CloudinaryField('imagem')
@@ -61,7 +62,7 @@ class Property(BaseModel):
         Neighborhood, verbose_name='bairro', related_name='%(app_label)s_%(class)s'
     )
     user = models.ForeignKey(
-        User, verbose_name='usuário', related_name='%(app_label)s_%(class)s'
+        settings.AUTH_USER_MODEL, verbose_name='usuário', related_name='%(app_label)s_%(class)s'
     )
     photos = GenericRelation(Photo)
 
