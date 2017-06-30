@@ -7,129 +7,128 @@
 {% block title %}Detalhes do Imóvel | {% endblock title %}
 
 {% block sub_content %}
-<!-- Content -->
-<div class="container">
 
     <!-- Title -->
-    <div class="title row">
-        <h2>{{ property.intent|upper }}</h2>
-    </div>
-
-</div> <!-- /container -->
-
-<!-- Details -->
-<section class="details">
     <div class="container">
-        {%  if property %}
-            <div class="row">
-                <div class="col-sm-12 col-md-9">
-                    <h3>{{ property.property_type }}</h3>
-                    <p class="bairro">{{ property.neighborhood }} - {{ property.city }}</p>
-                    {% if property.intent == 'alugar' and property.address %}
-                        <p class="rua">{{ property.address }}</p>
-                    {% endif %}
-                    {% if property.num_record and property.num_record != 0 %}
-                        <p class="ficha">Ficha nº {{ property.num_record }}</p>
-                    {% else %}
-                        <p class="ficha">Sem nº de ficha</p>
-                    {% endif %}
-                </div>
-                <div class="col-sm-12 col-md-3">
-                    <a href="{% url 'contact' %}?id={{ property.id }}&tipo={{ property.short_type }}" class="btn btn-default btn-theme pull-right"><i class="fa fa-envelope"></i> &nbsp;Entrar em contato</a>
-                </div>
-            </div>
-            <div class="gallery">
-                <gallery-view :photos-total="{{ property.photos.count }}">
-                    {% for photo in property.photos.all %}
-                        <div slot="main-view" class="item {% if photo == property.photos.first %}active{% endif %}">
-                            <img src="{% cloudinary_url photo.image %}" width="100%">
-                        </div>
-                        <gallery-menu-item slot="menu-view" :index="{{ forloop.counter0 }}">
-                            <img src="{% cloudinary_url photo.image %}" width="100%">
-                        </gallery-menu-item>
-                    {% endfor %}
-                </gallery-view>
-                <div class="row">
-                    <div class="col-md-12 col-lg-10">
-                        <div class="dados-do-imovel">
-                            <div class="row body">
-                                <div class="col-md-3 col-left">
-                                    <div class="value">
-                                        <div class="price">{{ property.price|currency_brl }}</div>
-                                        {% if property.conditions %}
-                                            <div class="conditions">+ {{ property.conditions }}</div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="row info">
-                                        {% if property.area %}
-                                            <div class="col-md-12">
-                                                <div class="area">Área de {{ property.area }}</div>
-                                            </div><br><br>
-                                        {% endif %}
-                                        {% for col, total, field in fields %}
-                                            {% for cur_col in cols %}
-                                                <div class="col-md-6">
-                                                    {% if col == cur_col %}
-                                                        {% if field == 'bedroom' %}
-                                                            <p>{{ total }} quarto{{ total|pluralize:"s" }}</p>
-                                                        {% elif field == 'maids_room' %}
-                                                            <p>{{ total }} quarto{{ total|pluralize:"s" }} de empregada</p>
-                                                        {% elif field == 'maids_wc' %}
-                                                            <p>{{ total }} banheiro{{ total|pluralize:"s" }} de empregada</p>
-                                                        {% elif field == 'lavatory' %}
-                                                            <p>{{ total }} lavatório{{ total|pluralize:"s" }}</p>
-                                                        {% elif field == 'room' %}
-                                                            <p>{{ total }} sala{{ total|pluralize:"s" }}</p>
-                                                        {% elif field == 'kitchen' %}
-                                                            <p>{{ total }} cozinha{{ total|pluralize:"s" }}</p>
-                                                        {% elif field == 'hall' %}
-                                                            <p>{{ total }} hall{{ total|pluralize:"s" }}</p>
-                                                        {% elif field == 'service_area' %}
-                                                            <p>{{ total }} área{{ total|pluralize:"s" }} de serviço</p>
-                                                        {% elif field == 'leisure_area' %}
-                                                            <p>{{ total }} rancho{{ total|pluralize:"s" }}</p>
-                                                        {% elif field == 'suite' %}
-                                                            <p>{{ total }} suíte{{ total|pluralize:"s" }}</p>
-                                                        {% elif field == 'bathroom' %}
-                                                            <p>{{ total }} banheiro{{ total|pluralize:"s" }}</p>
-                                                        {% elif field == 'coffe_room' %}
-                                                            <p>{{ total }} copa{{ total|pluralize:"s" }}</p>
-                                                        {% elif field == 'pantry' %}
-                                                            <p>{{ total }} despensa{{ total|pluralize:"s" }}</p>
-                                                        {% elif field == 'office' %}
-                                                            <p>{{ total }} escritório{{ total|pluralize:"s" }}</p>
-                                                        {% elif field == 'garage' %}
-                                                            <p>{{ total }} vaga{{ total|pluralize:"s" }} de garagem</p>
-                                                        {% endif %}
-                                                    {% endif %}
-                                                </div>
-                                            {% endfor %}
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% if property.obs %}
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div class="obs">
-                                <span>Observações</span>
-                                <p>{{ property.obs|linebreaksbr }}</p>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            </div>
-        {% endif %}
+        <div class="title row">
+            <h2>{{ property.intent|upper }}</h2>
+        </div>
     </div>
-</section>
+
+    <!-- Details -->
+    <section class="details">
+        <div class="container">
+            {%  if property %}
+                <div class="row">
+                    <div class="col-sm-12 col-md-9">
+                        <h3>{{ property.property_type }}</h3>
+                        <p class="bairro">{{ property.neighborhood }} - {{ property.city }}</p>
+                        {% if property.intent == 'alugar' and property.address %}
+                            <p class="rua">{{ property.address }}</p>
+                        {% endif %}
+                        {% if property.num_record and property.num_record != 0 %}
+                            <p class="ficha">Ficha nº {{ property.num_record }}</p>
+                        {% else %}
+                            <p class="ficha">Sem nº de ficha</p>
+                        {% endif %}
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <a href="{% url 'contact' %}?id={{ property.id }}&tipo={{ property.short_type }}" class="btn btn-default btn-theme pull-right"><i class="fa fa-envelope"></i> &nbsp;Entrar em contato</a>
+                    </div>
+                </div>
+                <div class="gallery">
+                    <gallery-view :photos-total="{{ property.photos.count }}">
+                        {% for photo in property.photos.all %}
+                            <div slot="main-view" class="item {% if photo == property.photos.first %}active{% endif %}">
+                                <img src="{% cloudinary_url photo.image %}" width="100%">
+                            </div>
+                            <gallery-menu-item slot="menu-view" :index="{{ forloop.counter0 }}">
+                                <img src="{% cloudinary_url photo.image %}" width="100%">
+                            </gallery-menu-item>
+                        {% endfor %}
+                    </gallery-view>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-10">
+                            <div class="dados-do-imovel">
+                                <div class="row body">
+                                    <div class="col-md-3 col-left">
+                                        <div class="value">
+                                            <div class="price">{{ property.price|currency_brl }}</div>
+                                            {% if property.conditions %}
+                                                <div class="conditions">+ {{ property.conditions }}</div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="row info">
+                                            {% if property.area %}
+                                                <div class="col-md-12">
+                                                    <div class="area">Área de {{ property.area }}</div>
+                                                </div><br><br>
+                                            {% endif %}
+                                            {% for col, total, field in fields %}
+                                                {% for cur_col in cols %}
+                                                    <div class="col-md-6">
+                                                        {% if col == cur_col %}
+                                                            {% if field == 'bedroom' %}
+                                                                <p>{{ total }} quarto{{ total|pluralize:"s" }}</p>
+                                                            {% elif field == 'maids_room' %}
+                                                                <p>{{ total }} quarto{{ total|pluralize:"s" }} de empregada</p>
+                                                            {% elif field == 'maids_wc' %}
+                                                                <p>{{ total }} banheiro{{ total|pluralize:"s" }} de empregada</p>
+                                                            {% elif field == 'lavatory' %}
+                                                                <p>{{ total }} lavatório{{ total|pluralize:"s" }}</p>
+                                                            {% elif field == 'room' %}
+                                                                <p>{{ total }} sala{{ total|pluralize:"s" }}</p>
+                                                            {% elif field == 'kitchen' %}
+                                                                <p>{{ total }} cozinha{{ total|pluralize:"s" }}</p>
+                                                            {% elif field == 'hall' %}
+                                                                <p>{{ total }} hall{{ total|pluralize:"s" }}</p>
+                                                            {% elif field == 'service_area' %}
+                                                                <p>{{ total }} área{{ total|pluralize:"s" }} de serviço</p>
+                                                            {% elif field == 'leisure_area' %}
+                                                                <p>{{ total }} rancho{{ total|pluralize:"s" }}</p>
+                                                            {% elif field == 'suite' %}
+                                                                <p>{{ total }} suíte{{ total|pluralize:"s" }}</p>
+                                                            {% elif field == 'bathroom' %}
+                                                                <p>{{ total }} banheiro{{ total|pluralize:"s" }}</p>
+                                                            {% elif field == 'coffe_room' %}
+                                                                <p>{{ total }} copa{{ total|pluralize:"s" }}</p>
+                                                            {% elif field == 'pantry' %}
+                                                                <p>{{ total }} despensa{{ total|pluralize:"s" }}</p>
+                                                            {% elif field == 'office' %}
+                                                                <p>{{ total }} escritório{{ total|pluralize:"s" }}</p>
+                                                            {% elif field == 'garage' %}
+                                                                <p>{{ total }} vaga{{ total|pluralize:"s" }} de garagem</p>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    </div>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if property.obs %}
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="obs">
+                                    <span>Observações</span>
+                                    <p>{{ property.obs|linebreaksbr }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
 {% endblock sub_content %}
 
 {% block sub_scripts %}
-<script src="{% static 'js/vue-bus.js' %}"  type="text/javascript"></script>
-<script src="{% static 'js/components/gallery-view.js' %}"  type="text/javascript"></script>
+    <script src="{% static 'js/vue-bus.js' %}"  type="text/javascript"></script>
+    <script src="{% static 'js/components/gallery-view.js' %}"  type="text/javascript"></script>
 {% endblock sub_scripts %}
