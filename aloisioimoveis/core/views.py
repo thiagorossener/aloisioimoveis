@@ -13,25 +13,22 @@ from aloisioimoveis.properties.models import House, Apartment, Commercial, Land,
 
 def home(request):
     properties = Property.objects.filter(featured=True).order_by('-updated_at')[:3]
-
     context = {
         'properties': properties
     }
     return render(request, 'index.html', context)
 
 
-def rent(request):
-    # Sorting
+def get_context(request, intent):
     sort_key = request.GET.get('ordem')
     sort_dict = {
         'preco': 'price',
         '-preco': '-price',
     }
-    properties_list = Property.objects.filter(intent=Property.RENT).order_by(sort_dict.get(sort_key, '-updated_at'))
+    props = Property.objects.filter(intent=intent).order_by(sort_dict.get(sort_key, '-updated_at'))
 
-    # Pagination
     page = request.GET.get('pagina', 1)
-    paginator = Paginator(properties_list, 10)
+    paginator = Paginator(props, 10)
     try:
         properties = paginator.page(page)
     except PageNotAnInteger:
@@ -43,33 +40,15 @@ def rent(request):
         'properties': properties,
         'params': request.GET.dict(),
     }
-    return render(request, 'rent_list.html', context)
+    return context
+
+
+def rent(request):
+    return render(request, 'rent_list.html', get_context(request, Property.RENT))
 
 
 def buy(request):
-    # Sorting
-    sort_key = request.GET.get('ordem')
-    sort_dict = {
-        'preco': 'price',
-        '-preco': '-price',
-    }
-    properties_list = Property.objects.filter(intent=Property.BUY).order_by(sort_dict.get(sort_key, '-updated_at'))
-
-    # Pagination
-    page = request.GET.get('pagina', 1)
-    paginator = Paginator(properties_list, 10)
-    try:
-        properties = paginator.page(page)
-    except PageNotAnInteger:
-        properties = paginator.page(1)
-    except EmptyPage:
-        properties = paginator.page(paginator.num_pages)
-
-    context = {
-        'properties': properties,
-        'params': request.GET.dict(),
-    }
-    return render(request, 'buy_list.html', context)
+    return render(request, 'buy_list.html', get_context(request, Property.BUY))
 
 
 def search(request):
