@@ -1,6 +1,3 @@
-from itertools import chain
-from operator import attrgetter
-
 from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
@@ -15,11 +12,8 @@ from aloisioimoveis.properties.models import House, Apartment, Commercial, Land,
 
 
 def home(request):
-    models = (House, Apartment, Commercial, Land)
-    queries = (model.objects.filter(featured=True) for model in models)
-    properties = sorted(chain(*queries),
-                        key=attrgetter('updated_at'),
-                        reverse=True)[:3]
+    properties = Property.objects.filter(featured=True).order_by('-updated_at')[:3]
+
     context = {
         'properties': properties
     }
@@ -27,17 +21,13 @@ def home(request):
 
 
 def rent(request):
-    models = (House, Apartment, Commercial, Land)
-    queries = [model.objects.filter(intent=Property.RENT) for model in models]
-
     # Sorting
     sort_key = request.GET.get('ordem')
-    if sort_key == 'preco':
-        properties_list = sorted(chain(*queries), key=attrgetter('price'))
-    elif sort_key == '-preco':
-        properties_list = sorted(chain(*queries), key=attrgetter('price'), reverse=True)
-    else:
-        properties_list = sorted(chain(*queries), key=attrgetter('updated_at'), reverse=True)
+    sort_dict = {
+        'preco': 'price',
+        '-preco': '-price',
+    }
+    properties_list = Property.objects.filter(intent=Property.RENT).order_by(sort_dict.get(sort_key, '-updated_at'))
 
     # Pagination
     page = request.GET.get('pagina', 1)
@@ -57,18 +47,13 @@ def rent(request):
 
 
 def buy(request):
-    # Get all properties
-    models = (House, Apartment, Commercial, Land)
-    queries = (model.objects.filter(intent=Property.BUY) for model in models)
-
     # Sorting
     sort_key = request.GET.get('ordem')
-    if sort_key == 'preco':
-        properties_list = sorted(chain(*queries), key=attrgetter('price'))
-    elif sort_key == '-preco':
-        properties_list = sorted(chain(*queries), key=attrgetter('price'), reverse=True)
-    else:
-        properties_list = sorted(chain(*queries), key=attrgetter('updated_at'), reverse=True)
+    sort_dict = {
+        'preco': 'price',
+        '-preco': '-price',
+    }
+    properties_list = Property.objects.filter(intent=Property.BUY).order_by(sort_dict.get(sort_key, '-updated_at'))
 
     # Pagination
     page = request.GET.get('pagina', 1)
@@ -92,9 +77,7 @@ def search(request):
     if num_record is not None:
         # Record Number
         try:
-            models = [House, Apartment, Commercial, Land]
-            queries = [m.objects.filter(num_record=int(num_record)) for m in models]
-            queryset = list(chain(*queries))
+            queryset = Property.objects.filter(num_record=int(num_record))
             if len(queryset) == 0:
                 raise Http404('No property matches the record number.')
         except ValueError:

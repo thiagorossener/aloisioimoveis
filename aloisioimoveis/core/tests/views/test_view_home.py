@@ -2,7 +2,7 @@ from django.shortcuts import resolve_url as r
 from django.test import TestCase
 from model_mommy import mommy
 
-from aloisioimoveis.properties.models import Property, House, Apartment, Commercial, Land
+from aloisioimoveis.properties.models import House, Apartment, Commercial, Land, Property
 
 
 class HomeTest(TestCase):
@@ -37,15 +37,16 @@ class HomeContextTest(TestCase):
 
     def test_context_all_property_types(self):
         """Home must load only property types"""
-        for property in self.properties:
+        for prop in self.properties:
             with self.subTest():
-                self.assertIsInstance(property, Property)
+                self.assertIsInstance(prop, Property)
 
     def test_context_featured_properties(self):
         """Home must load the last 3 featured properties"""
-        self.assertEqual(self.properties[0], self.models[3])
-        self.assertEqual(self.properties[1], self.models[2])
-        self.assertEqual(self.properties[2], self.models[1])
+        self.assertEqual(self.properties[0].specific(), self.models[3])
+        self.assertEqual(self.properties[1].specific(), self.models[2])
+        self.assertEqual(self.properties[2].specific(), self.models[1])
 
-    def create_properties(self, models):
+    @staticmethod
+    def create_properties(models):
         return [mommy.make(m, featured=True) for m in models]

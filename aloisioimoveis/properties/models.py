@@ -66,17 +66,15 @@ class Property(BaseModel):
     )
     photos = GenericRelation(Photo)
 
-    class Meta:
-        abstract = True
-
-    def property_type(self):
-        return self._meta.verbose_name
-
-    def is_house(self):
-        return isinstance(self, House)
-
-    def is_apartment(self):
-        return isinstance(self, Apartment)
+    def specific(self):
+        if hasattr(self, 'house'):
+            return self.house
+        elif hasattr(self, 'apartment'):
+            return self.apartment
+        elif hasattr(self, 'commercial'):
+            return self.commercial
+        elif hasattr(self, 'land'):
+            return self.land
 
 
 class House(Property):
@@ -100,6 +98,9 @@ class House(Property):
     @models.permalink
     def get_absolute_url(self):
         return 'records:house', (), {'pk': self.pk}
+
+    def property_type(self):
+        return self._meta.verbose_name
 
     def short_type(self):
         return Property.HOUSE
@@ -136,6 +137,9 @@ class Apartment(Property):
     def get_absolute_url(self):
         return 'records:apartment', (), {'pk': self.pk}
 
+    def property_type(self):
+        return self._meta.verbose_name
+
     def short_type(self):
         return Property.APARTMENT
 
@@ -163,6 +167,9 @@ class Commercial(Property):
     def get_absolute_url(self):
         return 'records:commercial', (), {'pk': self.pk}
 
+    def property_type(self):
+        return self._meta.verbose_name
+
     def short_type(self):
         return Property.COMMERCIAL
 
@@ -183,6 +190,9 @@ class Land(Property):
     @models.permalink
     def get_absolute_url(self):
         return 'records:land', (), {'pk': self.pk}
+
+    def property_type(self):
+        return self._meta.verbose_name
 
     def short_type(self):
         return Property.LAND

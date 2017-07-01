@@ -54,18 +54,18 @@
         {% for property in properties %}
             <div class="col-md-4">
                 <div class="thumbnail">
-                    {% cloudinary  property.photos.first.image %}
+                    {% cloudinary  property.specific.photos.first.image %}
                     <div class="info">
                         <span class="badge badge-finalidade">{{ property.intent }}</span>
                         <span class="badge badge-preco badge-primary pull-right">{{ property.price|currency_brl }}</span>
                     </div>
                     <div class="caption">
-                        <h3>{{ property.property_type }}</h3>
+                        <h3>{{ property.specific.property_type }}</h3>
                         <p>{{ property.neighborhood }} - {{ property.city }}</p>
-                        {% if property.is_house or property.is_apartment %}
+                        {% if property.house or property.apartment %}
                             <p><span class="badge badge-room">2</span> <i class="fa fa-bed"></i></p>
                         {% endif %}
-                        <a href="{{ property.get_absolute_url }}" class="btn btn-primary" role="button">Ver detalhes</a>
+                        <a href="{{ property.specific.get_absolute_url }}" class="btn btn-primary" role="button">Ver detalhes</a>
                     </div>
                 </div>
             </div>

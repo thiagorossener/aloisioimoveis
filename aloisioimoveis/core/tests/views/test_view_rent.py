@@ -126,8 +126,7 @@ class RentListPaginationTest(TestCase):
 class RentListSortingTest(TestCase):
     def test_sort_by_most_recent(self):
         """Should return properties sorted by most recent"""
-        p1, p2, p3, p4 = self.properties_with_prices([House, Apartment, Commercial, Land],
-                                                     [0]*4)
+        p1, p2, p3, p4 = self.properties_with_prices([Property] * 4, [0] * 4)
         expected_order = [p4, p3, p2, p1]
 
         response = self.client.get(r('rent'))
@@ -137,8 +136,7 @@ class RentListSortingTest(TestCase):
 
     def test_sort_by_lowest_price(self):
         """Should return properties sorted by lowest price"""
-        p1, p2, p3, p4 = self.properties_with_prices([House, Apartment, Commercial, Land],
-                                                     [2, 3, 1, 4])
+        p1, p2, p3, p4 = self.properties_with_prices([Property] * 4, [2, 3, 1, 4])
         expected_order = [p3, p1, p2, p4]
 
         response = self.client.get(r('rent'), {'ordem': 'preco'})
@@ -148,8 +146,7 @@ class RentListSortingTest(TestCase):
 
     def test_sort_by_highest_price(self):
         """Should return properties sorted by highest price"""
-        p1, p2, p3, p4 = self.properties_with_prices([House, Apartment, Commercial, Land],
-                                                     [4, 2, 3, 1])
+        p1, p2, p3, p4 = self.properties_with_prices([Property] * 4, [4, 2, 3, 1])
         expected_order = [p1, p3, p2, p4]
 
         response = self.client.get(r('rent'), {'ordem': '-preco'})

@@ -13,7 +13,7 @@
                             <div class="wrapper">
                                 <div class="four-by-three aspect-ratio"></div>
                                 <div class="content">
-                                    <img src="{% cloudinary_url property.photos.first.image %}" class="img-responsive" width="100%" />
+                                    <img src="{% cloudinary_url property.specific.photos.first.image %}" class="img-responsive" width="100%" />
                                 </div>
                             </div>
                             <div class="layer-overlay">
@@ -29,23 +29,23 @@
                     <div class="col-lg-8 col-md-8 col-xs-12">
                         <div class="dados-do-imovel">
                             <div class="info">
-                                <h3>{{ property.property_type }}</h3>
+                                <h3>{{ property.specific.property_type }}</h3>
                                 <div class="bairro">
                                     {{ property.neighborhood }} - {{ property.city }}
-                                    {% if property.address and property.intent == 'alugar' %}
-                                        <br><div class="rua">{{ property.address }}</div>
+                                    {% if property.specific.address and property.intent == 'alugar' %}
+                                        <br><div class="rua">{{ property.specific.address }}</div>
                                     {% endif %}
                                 </div>
-                                {% if property.is_house or property.is_apartment %}
+                                {% if property.house or property.apartment %}
                                     <div>
-                                        <span>{{ property.total_bedroom }} quarto{{ property.total_bedroom|pluralize:"s" }}</span>
-                                        <span>{{ property.total_suite }} suíte{{ property.total_suite|pluralize:"s" }}</span>
-                                        <span>{{ property.total_bathroom }} banheiro{{ property.total_bathroom|pluralize:"s" }}</span>
-                                        <span>{{ property.total_garage }} vaga{{ property.total_garage|pluralize:"s" }} de garagem</span>
+                                        <span>{{ property.specific.total_bedroom }} quarto{{ property.specific.total_bedroom|pluralize:"s" }}</span>
+                                        <span>{{ property.specific.total_suite }} suíte{{ property.specific.total_suite|pluralize:"s" }}</span>
+                                        <span>{{ property.specific.total_bathroom }} banheiro{{ property.specific.total_bathroom|pluralize:"s" }}</span>
+                                        <span>{{ property.specific.total_garage }} vaga{{ property.specific.total_garage|pluralize:"s" }} de garagem</span>
                                     </div>
-                                {% elif property.area %}
+                                {% else %}
                                     <div>
-                                        <span>Área de {{ property.area }}</span>
+                                        <span>Área de {{ property.specific.area }}</span>
                                     </div>
                                 {% endif %}
                                 {% if property.obs %}
@@ -53,8 +53,8 @@
                                 {% endif %}
                             </div>
                             <div class="actions">
-                                <a href="{{ property.get_absolute_url }}" class="btn btn-default btn-theme">Ver detalhes</a>
-                                <a href="{{ property.get_absolute_url }}" class="btn btn-default btn-theme"><i class="fa fa-camera"></i> Ver fotos ({{ property.photos.count }})</a>
+                                <a href="{{ property.specific.get_absolute_url }}" class="btn btn-default btn-theme">Ver detalhes</a>
+                                <a href="{{ property.specific.get_absolute_url }}" class="btn btn-default btn-theme"><i class="fa fa-camera"></i> Ver fotos ({{ property.photos.count }})</a>
                             </div>
                         </div>
                     </div>
