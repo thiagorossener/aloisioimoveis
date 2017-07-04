@@ -1,3 +1,4 @@
+from cloudinary import uploader
 from cloudinary.models import CloudinaryField
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -205,3 +206,12 @@ class Land(Property):
         return 'Terreno {} localizado em {}/{}'.format(self.id,
                                                        str(self.neighborhood),
                                                        str(self.city))
+
+
+def post_delete_photo(instance, **kwargs):
+    uploader.destroy(instance.image.public_id, invalidate=True)
+
+
+models.signals.post_delete.connect(
+    post_delete_photo, sender=Photo, dispatch_uid='post_delete_photo'
+)
