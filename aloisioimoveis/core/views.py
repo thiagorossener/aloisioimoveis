@@ -52,12 +52,14 @@ def buy(request):
 
 
 def search(request):
+    results = []
+
     num_record = request.GET.get(Property.RECORD)
     if num_record is not None:
         # Record Number
         try:
-            queryset = Property.objects.filter(num_record=int(num_record))
-            if len(queryset) == 0:
+            results = Property.objects.filter(num_record=int(num_record))
+            if len(results) == 0:
                 raise Http404('No property matches the record number.')
         except ValueError:
             raise Http404('No property matches the record number.')
@@ -100,8 +102,21 @@ def search(request):
         if neighborhood_id > 0:
             queryset = queryset.filter(neighborhood__pk=neighborhood_id)
 
+        # Sorting
+        queryset = queryset.order_by('-updated_at')
+
+        # Pagination
+        page = request.GET.get('pagina', 1)
+        paginator = Paginator(queryset, 10)
+        try:
+            results = paginator.page(page)
+        except PageNotAnInteger:
+            results = paginator.page(1)
+        except EmptyPage:
+            results = paginator.page(paginator.num_pages)
+
     context = {
-        'results': list(queryset),
+        'results': results,
         'params': request.GET.dict(),
     }
     return render(request, 'search.html', context)
