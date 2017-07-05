@@ -55,7 +55,7 @@ class Property(BaseModel):
     intent = models.CharField('finalidade', max_length=10, choices=INTENT_CHOICES)
     obs = models.TextField('observações', blank=True)
     price = models.DecimalField('preço', max_digits=11, decimal_places=2)
-    conditions = models.CharField('condições', max_length=50, blank=True)
+    conditions = models.CharField('condições', max_length=100, blank=True)
     city = models.ForeignKey(
         City, verbose_name='cidade', related_name='%(app_label)s_%(class)s'
     )
