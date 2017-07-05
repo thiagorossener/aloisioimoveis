@@ -348,6 +348,50 @@ class SearchPaginationTest(TestCase):
         return response.context['results']
 
 
+class SearchSortingTest(TestCase):
+    def test_sort_by_most_recent(self):
+        """Should return properties sorted by most recent"""
+        p1, p2, p3, p4 = self.properties_with_prices([Apartment] * 4, [0] * 4)
+        expected_order = [p4, p3, p2, p1]
+
+        response = self.client.get(r('search'), {Property.TYPE: Property.APARTMENT,
+                                                 Property.INTENT: Property.RENT})
+        properties = response.context['properties'].object_list
+
+        self.assertSequenceEqual(expected_order, properties)
+
+    def test_sort_by_lowest_price(self):
+        """Should return properties sorted by lowest price"""
+        p1, p2, p3, p4 = self.properties_with_prices([Apartment] * 4, [2, 3, 1, 4])
+        expected_order = [p3, p1, p2, p4]
+
+        response = self.client.get(r('search'), {Property.TYPE: Property.APARTMENT,
+                                                 Property.INTENT: Property.RENT,
+                                                 'ordem': 'preco'})
+        properties = response.context['properties'].object_list
+
+        self.assertSequenceEqual(expected_order, properties)
+
+    def test_sort_by_highest_price(self):
+        """Should return properties sorted by highest price"""
+        p1, p2, p3, p4 = self.properties_with_prices([Apartment] * 4, [4, 2, 3, 1])
+        expected_order = [p1, p3, p2, p4]
+
+        response = self.client.get(r('search'), {Property.TYPE: Property.APARTMENT,
+                                                 Property.INTENT: Property.RENT,
+                                                 'ordem': '-preco'})
+        properties = response.context['properties'].object_list
+
+        self.assertSequenceEqual(expected_order, properties)
+
+    @staticmethod
+    def properties_with_prices(models, prices):
+        result = []
+        for index, model in enumerate(models):
+            result.append(mommy.make(model, intent=Property.RENT, price=prices[index]))
+        return result
+
+
 def create_properties(models, intent, quantity_each):
     for model in models:
         mommy.make(model, intent=intent, _quantity=quantity_each)

@@ -52,8 +52,6 @@ def buy(request):
 
 
 def search(request):
-    results = []
-
     num_record = request.GET.get(Property.RECORD)
     if num_record is not None:
         # Record Number
@@ -103,7 +101,12 @@ def search(request):
             queryset = queryset.filter(neighborhood__pk=neighborhood_id)
 
         # Sorting
-        queryset = queryset.order_by('-updated_at')
+        sort_key = request.GET.get('ordem')
+        sort_dict = {
+            'preco': 'price',
+            '-preco': '-price',
+        }
+        queryset = queryset.order_by(sort_dict.get(sort_key, '-updated_at'))
 
         # Pagination
         page = request.GET.get('pagina', 1)
