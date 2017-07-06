@@ -2,6 +2,8 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from aloisioimoveis.core.redirects import redirect_rent, redirect_buy, redirect_company, redirect_contact, \
+    redirect_record
 from aloisioimoveis.core.views import home, rent, buy, search, contact, company
 
 urlpatterns = [
@@ -16,6 +18,12 @@ urlpatterns = [
     url(r'^sistema/', admin.site.urls),
     # API
     url(r'^api/locations/', include('aloisioimoveis.locations.urls', namespace='locations')),
+    # Redirects
+    url(r'^aluguel.php$', redirect_rent),
+    url(r'^venda.php$', redirect_buy),
+    url(r'^empresa.php$', redirect_company),
+    url(r'^contato.php$', redirect_contact),
+    url(r'^ficha.php$', redirect_record),
 ]
 
 if settings.DEBUG:
