@@ -1,10 +1,25 @@
 # Aloísio Imóveis
 
-System to insert and search for properties inside the Aloísio Imóveis real estate website.
+Real estate website and system built in Django and Vue.js for [Aloísio Imóveis](http://aloisioimoveis.com.br/)
 
 [![Build Status](https://travis-ci.org/thiagorossener/aloisioimoveis.svg?branch=master)](https://travis-ci.org/thiagorossener/aloisioimoveis)
 [![Coverage Status](https://coveralls.io/repos/github/thiagorossener/aloisioimoveis/badge.svg?branch=master)](https://coveralls.io/github/thiagorossener/aloisioimoveis?branch=master)
 [![Code Health](https://landscape.io/github/thiagorossener/aloisioimoveis/master/landscape.svg?style=flat)](https://landscape.io/github/thiagorossener/aloisioimoveis/master)
+
+![Aloísio Imóveis](http://res.cloudinary.com/dm7h7e8xj/image/upload/v1499797163/github-aloisioimoveis_tyxsk8.png)
+
+## Features
+
+* Create/Edit/Delete properties
+* Search for properties
+* Photo album
+* Contact form
+* Responsive
+
+## Release Notes
+
+Version 1.0.0
+* Initial release
 
 ## How to develop?
 
@@ -24,3 +39,7 @@ pip install -r requirements-dev.txt
 cp contrib/env-sample .env
 python manage.py test
 ```
+
+## Author
+
+[Thiago Rossener](http://www.rossener.com)
