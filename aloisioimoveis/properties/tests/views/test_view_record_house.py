@@ -88,6 +88,7 @@ class HouseRecordViewTest(TestCase):
             ('13 despensas', 1),
             ('14 escritórios', 1),
             ('15 vagas de garagem', 1),
+            ('no-photos.png', 2),
         ]
         for content, count in contents:
             with self.subTest():

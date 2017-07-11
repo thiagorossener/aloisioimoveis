@@ -68,10 +68,18 @@ class BuyListTemplateTest(TestCase):
             ('Propriedade com piscina e churrasqueira', 4),
         ]
         for prop in self.props:
-            contents.append((prop.get_absolute_url(), 2))
+            contents.append((prop.get_absolute_url(), 1))
         for content, count in contents:
             with self.subTest():
                 self.assertContains(self.response, content, count)
+
+    def test_show_no_photos_image(self):
+        """Buy list template should show no-photos.png image"""
+        self.assertContains(self.response, 'no-photos.png', 4)
+
+    def test_not_show_photos_button(self):
+        """Buy list template should not show photos button where there is no photo"""
+        self.assertContains(self.response, 'Ver fotos', 0)
 
     def build_property(self, model):
         prop = Recipe(model,

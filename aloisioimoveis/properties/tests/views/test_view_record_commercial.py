@@ -72,6 +72,7 @@ class CommercialRecordViewTest(TestCase):
             ('4 banheiros', 1),
             ('5 vagas de garagem', 1),
             ('6 áreas de serviço', 1),
+            ('no-photos.png', 2),
         ]
         for content, count in contents:
             with self.subTest():

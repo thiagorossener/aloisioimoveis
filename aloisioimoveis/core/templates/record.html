@@ -45,6 +45,13 @@
                             <gallery-menu-item slot="menu-view" :index="{{ forloop.counter0 }}">
                                 <img src="{% cloudinary_url photo.image %}" width="100%">
                             </gallery-menu-item>
+                            {% empty %}
+                            <div slot="main-view" class="item active">
+                                <img src="{% static 'img/no-photos.png' %}" width="100%">
+                            </div>
+                            <gallery-menu-item slot="menu-view" :index="0">
+                                <img src="{% static 'img/no-photos.png' %}" width="100%">
+                            </gallery-menu-item>
                         {% endfor %}
                     </gallery-view>
                     <div class="row">

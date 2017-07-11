@@ -43,7 +43,7 @@ class SearchTemplateTest(TestCase):
             ('3 suítes', 1),
             ('2 banheiros', 1),
             ('1 vaga de garagem', 1),
-            (house.get_absolute_url(), 2),
+            (house.get_absolute_url(), 1),
             ('Propriedade com piscina e churrasqueira', 1),
         ]
         self.assertContents(response, contents)
@@ -63,7 +63,7 @@ class SearchTemplateTest(TestCase):
             ('3 suítes', 1),
             ('2 banheiros', 1),
             ('1 vaga de garagem', 1),
-            (apartment.get_absolute_url(), 2),
+            (apartment.get_absolute_url(), 1),
             ('Propriedade com piscina e churrasqueira', 1),
         ]
         self.assertContents(response, contents)
@@ -80,7 +80,7 @@ class SearchTemplateTest(TestCase):
             ('IPTU R$ 45,00', 1),
             ('Belém - Taubaté', 1),
             ('Área de 120m2', 1),
-            (commercial.get_absolute_url(), 2),
+            (commercial.get_absolute_url(), 1),
             ('Propriedade com piscina e churrasqueira', 1),
         ]
         self.assertContents(response, contents)
@@ -97,10 +97,24 @@ class SearchTemplateTest(TestCase):
             ('IPTU R$ 45,00', 1),
             ('Belém - Taubaté', 1),
             ('Área de 120m2', 1),
-            (land.get_absolute_url(), 2),
+            (land.get_absolute_url(), 1),
             ('Propriedade com piscina e churrasqueira', 1),
         ]
         self.assertContents(response, contents)
+
+    def test_show_no_photos_image(self):
+        """Search results template should show no-photos.png image"""
+        self.build_property(House, Property.RENT)
+        response = self.client.get(r('search'), {Property.INTENT: Property.RENT,
+                                                 Property.TYPE: Property.HOUSE})
+        self.assertContains(response, 'no-photos.png', 1)
+
+    def test_not_show_photos_button(self):
+        """Search results template should not show photos button where there is no photo"""
+        self.build_property(House, Property.RENT)
+        response = self.client.get(r('search'), {Property.INTENT: Property.RENT,
+                                                 Property.TYPE: Property.HOUSE})
+        self.assertContains(response, 'Ver fotos', 0)
 
     def assertContents(self, response, contents):
         for content, count in contents:

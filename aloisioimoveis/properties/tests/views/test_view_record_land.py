@@ -60,6 +60,7 @@ class LandRecordViewTest(TestCase):
             ('Rua da Amargura, 456', 0),
             ('Piscina e churrasqueira', 1),
             ('Área de 150m2', 1),
+            ('no-photos.png', 2),
         ]
         for content, count in contents:
             with self.subTest():

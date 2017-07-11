@@ -1,3 +1,4 @@
+{% load static %}
 {% load cloudinary %}
 {% load currency_filters %}
 {% load text_filters %}
@@ -13,7 +14,11 @@
                             <div class="wrapper">
                                 <div class="four-by-three aspect-ratio"></div>
                                 <div class="content">
-                                    <img src="{% cloudinary_url property.specific.photos.first.image %}" class="img-responsive" width="100%" />
+                                    {% if property.specific.photos.count %}
+                                        <img src="{% cloudinary_url property.specific.photos.first.image %}" class="img-responsive" width="100%" />
+                                    {% else %}
+                                        <img src="{% static 'img/no-photos.png' %}" class="img-responsive" width="100%" />
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="layer-overlay">
@@ -54,7 +59,9 @@
                             </div>
                             <div class="actions">
                                 <a href="{{ property.specific.get_absolute_url }}" class="btn btn-default btn-theme">Ver detalhes</a>
-                                <a href="{{ property.specific.get_absolute_url }}" class="btn btn-default btn-theme"><i class="fa fa-camera"></i> Ver fotos ({{ property.specific.photos.count }})</a>
+                                {% if property.specific.photos.count %}
+                                    <a href="{{ property.specific.get_absolute_url }}" class="btn btn-default btn-theme"><i class="fa fa-camera"></i> Ver fotos ({{ property.specific.photos.count }})</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
