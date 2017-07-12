@@ -17,7 +17,23 @@ class PhotoInline(generic.GenericTabularInline):
     photo_img.short_description = 'foto'
 
 
-class HouseAdmin(admin.ModelAdmin):
+class PropertyAdmin(admin.ModelAdmin):
+    list_display = ('id', 'address', 'neighborhood_name', 'city_name', 'intent', 'price')
+
+    def neighborhood_name(self, obj):
+        return obj.neighborhood.name
+
+    neighborhood_name.short_description = 'bairro'
+    neighborhood_name.admin_order_field = 'neighborhood__name'
+
+    def city_name(self, obj):
+        return obj.city.name
+
+    city_name.short_description = 'cidade'
+    city_name.admin_order_field = 'city__name'
+
+
+class HouseAdmin(PropertyAdmin):
     fieldsets = (
         ('Dados do Registro', {
             'fields': ('featured',
@@ -55,7 +71,7 @@ class HouseAdmin(admin.ModelAdmin):
     inlines = [PhotoInline, ]
 
 
-class ApartmentAdmin(admin.ModelAdmin):
+class ApartmentAdmin(PropertyAdmin):
     fieldsets = (
         ('Dados do Registro', {
             'fields': ('featured',
@@ -94,7 +110,7 @@ class ApartmentAdmin(admin.ModelAdmin):
     inlines = [PhotoInline, ]
 
 
-class CommercialAdmin(admin.ModelAdmin):
+class CommercialAdmin(PropertyAdmin):
     fieldsets = (
         ('Dados do Registro', {
             'fields': ('featured',
@@ -130,7 +146,7 @@ class CommercialAdmin(admin.ModelAdmin):
     inlines = [PhotoInline, ]
 
 
-class LandAdmin(admin.ModelAdmin):
+class LandAdmin(PropertyAdmin):
     fieldsets = (
         ('Dados do Registro', {
             'fields': ('featured',
