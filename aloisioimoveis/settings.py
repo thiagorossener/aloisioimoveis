@@ -30,6 +30,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 
+PREPEND_WWW = config('PREPEND_WWW', default=False, cast=bool)
+
 DEFAULT_TO_EMAIL = 'contato@aloisioimoveis.com.br'
 
 # SECURITY WARNING: keep the cloudinary config used in production secret!
