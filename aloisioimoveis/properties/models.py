@@ -22,6 +22,29 @@ class Photo(models.Model):
         verbose_name_plural = 'Fotos'
         ordering = ['order']
 
+    def thumbnail_xs(self):
+        return self.image.build_url(height=120, width=160, crop='pad', background='#000000')
+
+    def thumbnail_md(self):
+        return self.image.build_url(height=480, width=640, crop='thumb')
+
+    def protected_thumbnail_md(self):
+        return self.image.build_url(transformation=[{'height': 480, 'width': 640, 'crop': 'thumb'},
+                                                    {'gravity': 'south_east',
+                                                     'overlay': 'watermark_oddlbc',
+                                                     'width': 150, 'x': 20, 'y': 20,
+                                                     'crop': 'thumb'}
+                                                    ])
+
+    def protected_thumbnail_lg(self):
+        return self.image.build_url(transformation=[{'height': 750, 'width': 1000,
+                                                     'crop': 'pad', 'background': '#000000'},
+                                                    {'gravity': 'south_east',
+                                                     'overlay': 'watermark_oddlbc',
+                                                     'width': 200, 'x': 20, 'y': 20,
+                                                     'crop': 'thumb'}
+                                                    ])
+
     def __str__(self):
         return 'Foto {}'.format(self.pk)
 
