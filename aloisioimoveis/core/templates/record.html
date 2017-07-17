@@ -1,7 +1,6 @@
 {% extends 'sub_base.html' %}
 
 {% load static %}
-{% load cloudinary %}
 {% load currency_filters %}
 
 {% block title %}Detalhes do Imóvel | {% endblock title %}
@@ -40,10 +39,10 @@
                     <gallery-view :photos-total="{{ property.photos.count }}">
                         {% for photo in property.photos.all %}
                             <div slot="main-view" class="item {% if photo == property.photos.first %}active{% endif %}">
-                                <img src="{% cloudinary_url photo.image %}" width="100%">
+                                <img src="{{ photo.protected_thumbnail_lg }}" width="100%">
                             </div>
                             <gallery-menu-item slot="menu-view" :index="{{ forloop.counter0 }}">
-                                <img src="{% cloudinary_url photo.image %}" width="100%">
+                                <img src="{{ photo.thumbnail_xs }}" width="100%">
                             </gallery-menu-item>
                             {% empty %}
                             <div slot="main-view" class="item active">

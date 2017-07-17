@@ -1,5 +1,4 @@
 {% load static %}
-{% load cloudinary %}
 {% load currency_filters %}
 {% load text_filters %}
 {% load url_tags %}
@@ -15,7 +14,7 @@
                                 <div class="four-by-three aspect-ratio"></div>
                                 <div class="content">
                                     {% if property.specific.photos.count %}
-                                        <img src="{% cloudinary_url property.specific.photos.first.image %}" class="img-responsive" width="100%" />
+                                        <img src="{{ property.specific.photos.first.thumbnail_md }}" class="img-responsive" width="100%" />
                                     {% else %}
                                         <img src="{% static 'img/no-photos.png' %}" class="img-responsive" width="100%" />
                                     {% endif %}
