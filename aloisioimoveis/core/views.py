@@ -25,7 +25,7 @@ def get_context(request, intent):
         'preco': 'price',
         '-preco': '-price',
     }
-    props = Property.objects.filter(intent=intent).order_by(sort_dict.get(sort_key, '-updated_at'))
+    props = Property.objects.filter(intent=intent).order_by(sort_dict.get(sort_key, '-id'))
 
     page = request.GET.get('pagina', 1)
     paginator = Paginator(props, 10)
