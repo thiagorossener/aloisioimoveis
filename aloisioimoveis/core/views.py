@@ -135,7 +135,8 @@ def contact(request):
         if form.is_valid():
             # Send email
             subject = 'Contato - De: {}'.format(form.cleaned_data['name'])
-            from_ = form.cleaned_data['email']
+            from_ = settings.DEFAULT_TO_EMAIL
+            reply_to = form.cleaned_data['email']
             to = settings.DEFAULT_TO_EMAIL
 
             context = form.cleaned_data
@@ -155,7 +156,7 @@ def contact(request):
 
             content = render_to_string('core/contact_email.html', context)
 
-            email = EmailMultiAlternatives(subject, content, from_, [to])
+            email = EmailMultiAlternatives(subject, content, from_, [to], reply_to=[reply_to])
             email.attach_alternative(content, "text/html")
             email.send()
 

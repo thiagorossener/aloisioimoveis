@@ -63,14 +63,19 @@ class ContactFormPostValidTest(TestCase):
         self.assertTrue(self.data['name'] in subject)
 
     def test_email_from(self):
-        """Email should have contact email in from"""
+        """Email should have default email in from"""
         from_email = mail.outbox[0].from_email
-        self.assertEqual(self.data['email'], from_email)
+        self.assertEqual(settings.DEFAULT_TO_EMAIL, from_email)
 
     def test_email_to(self):
         """Email should be sent to default email"""
         to = mail.outbox[0].to
         self.assertIn(settings.DEFAULT_TO_EMAIL, to)
+
+    def test_email_reply_to(self):
+        """Email should have contact email in reply_to"""
+        reply_to = mail.outbox[0].reply_to
+        self.assertIn(self.data['email'], reply_to)
 
     def test_email_body(self):
         """Email should contain the contact fields values in body"""
