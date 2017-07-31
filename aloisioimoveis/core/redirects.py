@@ -19,5 +19,5 @@ def redirect_record(request):
 
 
 def redirect_logo(request):
-    return redirect('http://res.cloudinary.com/aloisioimoveisdb/image/upload/v1501511160/assinatura_zrmsk0.png',
+    return redirect('http://res.cloudinary.com/aloisioimoveisdb/image/upload/v1501512755/logo-200x68_yrjimb.png',
                     permanent=True)
