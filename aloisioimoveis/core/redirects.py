@@ -16,3 +16,8 @@ def redirect_record(request):
         return redirect(prop.specific().get_absolute_url(), permanent=True)
     except (TypeError, ValueError):
         raise Http404()
+
+
+def redirect_logo(request):
+    return redirect('http://res.cloudinary.com/aloisioimoveisdb/image/upload/v1501511160/assinatura_zrmsk0.png',
+                    permanent=True)

@@ -1,10 +1,9 @@
 from django.conf import settings
-from django.conf.urls.static import static
 from django.conf.urls import url, include
 from django.contrib import admin
 
 from aloisioimoveis.core.redirects import redirect_rent, redirect_buy, redirect_company, redirect_contact, \
-    redirect_record
+    redirect_record, redirect_logo
 from aloisioimoveis.core.views import home, rent, buy, search, contact, company
 
 urlpatterns = [
@@ -25,6 +24,7 @@ urlpatterns = [
     url(r'^empresa.php$', redirect_company),
     url(r'^contato.php$', redirect_contact),
     url(r'^ficha.php$', redirect_record),
+    url(r'^images/logo.png$', redirect_logo),
 ]
 
 if settings.DEBUG:
@@ -32,4 +32,3 @@ if settings.DEBUG:
     urlpatterns = [
         url(r'^__debug__/', include(debug_toolbar.urls)),
     ] + urlpatterns
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
