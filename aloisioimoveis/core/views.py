@@ -146,11 +146,11 @@ def contact(request):
                     if record_type == Property.HOUSE:
                         context['url'] = request.build_absolute_uri(House.objects.get(pk=record_id).get_absolute_url())
                     elif record_type == Property.APARTMENT:
-                        context['url'] = Apartment.objects.get(pk=record_id).get_absolute_url()
+                        context['url'] = request.build_absolute_uri(Apartment.objects.get(pk=record_id).get_absolute_url())
                     elif record_type == Property.COMMERCIAL:
-                        context['url'] = Commercial.objects.get(pk=record_id).get_absolute_url()
+                        context['url'] = request.build_absolute_uri(Commercial.objects.get(pk=record_id).get_absolute_url())
                     elif record_type == Property.LAND:
-                        context['url'] = Land.objects.get(pk=record_id).get_absolute_url()
+                        context['url'] = request.build_absolute_uri(Land.objects.get(pk=record_id).get_absolute_url())
                 except ObjectDoesNotExist:
                     pass
 
