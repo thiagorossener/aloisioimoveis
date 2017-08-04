@@ -9,6 +9,7 @@ class City(BaseModel):
     class Meta:
         verbose_name = 'Cidade'
         verbose_name_plural = 'Cidades'
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -23,6 +24,7 @@ class Neighborhood(BaseModel):
     class Meta:
         verbose_name = 'Bairro'
         verbose_name_plural = 'Bairros'
+        ordering = ['name']
 
     def __str__(self):
         return self.name
