@@ -20,8 +20,8 @@ class NeighborhoodsViewTest(TestCase):
         mommy.make(Neighborhood, name='Madalena', city=city)
         response = self.client.get('/api/locations/neighborhoods', {'city': 1})
         self.assertJSONEqual(str(response.content, encoding='utf8'),
-                             [{'id': 1, 'name': 'São João'},
-                              {'id': 2, 'name': 'Madalena'}])
+                             [{'id': 2, 'name': 'Madalena'},
+                              {'id': 1, 'name': 'São João'}])
 
     def test_nonexistent_city(self):
         """GET /api/locations/neighborhoods?city=[nonexistent_pk] should return empty list"""
