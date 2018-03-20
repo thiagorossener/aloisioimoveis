@@ -5,6 +5,7 @@ from django.contrib import admin
 from aloisioimoveis.core.redirects import redirect_rent, redirect_buy, redirect_company, redirect_contact, \
     redirect_record, redirect_logo
 from aloisioimoveis.core.views import home, rent, buy, search, contact, company
+from aloisioimoveis.locations.views import CityAutocomplete, NeighborhoodAutocomplete
 
 urlpatterns = [
     # Views
@@ -25,6 +26,9 @@ urlpatterns = [
     url(r'^contato.php$', redirect_contact),
     url(r'^ficha.php$', redirect_record),
     url(r'^images/logo.png$', redirect_logo),
+    # Autocomplete
+    url(r'^city-autocomplete/$', CityAutocomplete.as_view(), name='city-autocomplete'),
+    url(r'^neighborhood-autocomplete/$', NeighborhoodAutocomplete.as_view(), name='neighborhood-autocomplete'),
 ]
 
 if settings.DEBUG:

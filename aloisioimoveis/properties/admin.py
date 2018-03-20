@@ -1,20 +1,8 @@
-from django import forms
 from django.contrib import admin
 from django.contrib.contenttypes import admin as generic
-from aloisioimoveis.locations.models import Neighborhood
-from aloisioimoveis.properties.models import Property, House, Apartment, Commercial, Land, Photo
 
-
-class CustomModelChoiceField(forms.ModelChoiceField):
-    def label_from_instance(self, obj):
-        return '%s (%s)' % (obj.name, obj.city.name)
-
-
-class MyPropertyAdminForm(forms.ModelForm):
-    neighborhood_choice = CustomModelChoiceField(label='Bairro', queryset=Neighborhood.objects.all())
-    class Meta:
-        model = Property
-        fields = '__all__'
+from aloisioimoveis.properties.models import House, Apartment, Commercial, Land, Photo
+from aloisioimoveis.properties.forms import PropertyForm
 
 
 class PhotoInline(generic.GenericTabularInline):
@@ -45,7 +33,7 @@ class PropertyAdmin(admin.ModelAdmin):
     city_name.short_description = 'cidade'
     city_name.admin_order_field = 'city__name'
 
-    form = MyPropertyAdminForm
+    form = PropertyForm
 
 
 class HouseAdmin(PropertyAdmin):
@@ -60,7 +48,7 @@ class HouseAdmin(PropertyAdmin):
             'fields': (
                 'address',
                 'city',
-                'neighborhood_choice',
+                'neighborhood',
             )
         }),
         ('Dados do Imóvel', {
