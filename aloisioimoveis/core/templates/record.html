@@ -127,6 +127,19 @@
                             </div>
                         </div>
                     {% endif %}
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="more-info">
+                                {% if property.intent == 'alugar' %}
+                                    <p>*O imóvel pode ter sido alugado ou ter seu valor alterado sem aviso prévio.</p>
+                                {% endif %}
+                                {% if property.intent == 'comprar' %}
+                                    <p>*O imóvel pode ter sido comprado ou ter seu valor alterado sem aviso prévio.</p>
+                                {% endif %}
+                                <p>*Os valores de condomínio e IPTU são aproximados.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             {% endif %}
         </div>
