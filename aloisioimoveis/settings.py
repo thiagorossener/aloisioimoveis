@@ -90,6 +90,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'aloisioimoveis.core.context_processors.settings_config'
             ],
         },
     },
@@ -160,3 +161,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 RAINBOWTESTS_HIGHLIGHT_PATH = BASE_DIR
 TEST_RUNNER = 'rainbowtests.test.runner.RainbowDiscoverRunner'
 RAINBOWTESTS_SHOW_MESSAGES = False
+
+# Google Analytics
+
+GOOGLE_ANALYTICS_CODE = config('GOOGLE_ANALYTICS_CODE')
