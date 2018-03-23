@@ -146,6 +146,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+
 # Email configuration
 
 EMAIL_BACKEND = config('EMAIL_BACKEND')
@@ -162,6 +163,9 @@ RAINBOWTESTS_HIGHLIGHT_PATH = BASE_DIR
 TEST_RUNNER = 'rainbowtests.test.runner.RainbowDiscoverRunner'
 RAINBOWTESTS_SHOW_MESSAGES = False
 
-# Google Analytics
+
+# Google
 
 GOOGLE_ANALYTICS_CODE = config('GOOGLE_ANALYTICS_CODE')
+GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY')
+GOOGLE_RECAPTCHA_SITE_KEY = config('GOOGLE_RECAPTCHA_SITE_KEY')

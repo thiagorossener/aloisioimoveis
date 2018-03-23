@@ -76,6 +76,8 @@
                                 </div>
                             </div>
                             <div class="col-lg-offset-1">
+                                <div class="g-recaptcha" data-sitekey="{{ SETTINGS.GOOGLE_RECAPTCHA_SITE_KEY }}"></div>
+                                <br>
                                 <button type="submit" id="btn-send" class="btn">Enviar</button>
                             </div>
                         </div>
@@ -86,3 +88,7 @@
     </section>
 
 {% endblock sub_content %}
+
+{% block sub_scripts %}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+{% endblock sub_scripts %}

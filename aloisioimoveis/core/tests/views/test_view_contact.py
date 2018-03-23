@@ -1,3 +1,5 @@
+import mock
+
 from django.conf import settings
 from django.core import mail
 from django.shortcuts import resolve_url as r
@@ -6,6 +8,11 @@ from model_mommy import mommy
 
 from aloisioimoveis.core.forms import ContactForm
 from aloisioimoveis.properties.models import House, Property
+
+'''Mocked methods'''
+
+def is_recaptcha_valid(request):
+    return True
 
 
 class ContactViewTest(TestCase):
@@ -43,6 +50,7 @@ class ContactViewTest(TestCase):
 
 
 class ContactFormPostValidTest(TestCase):
+    @mock.patch('aloisioimoveis.core.views.is_recaptcha_valid', is_recaptcha_valid)
     def setUp(self):
         self.data = get_form_data()
         self.response = self.client.post(r('contact'), self.data)
@@ -145,11 +153,13 @@ class ContactFormFromRecordViewTest(TestCase):
         self.assertContains(response, 'Ocorreu um erro interno. '
                                       'Por favor, tente novamente mais tarde.')
 
+    @mock.patch('aloisioimoveis.core.views.is_recaptcha_valid', is_recaptcha_valid)
     def submit_form(self, **kwargs):
         return self.client.post(r('contact'), get_form_data(**kwargs))
 
 
 class ContactEmailHtmlTest(TestCase):
+    @mock.patch('aloisioimoveis.core.views.is_recaptcha_valid', is_recaptcha_valid)
     def setUp(self):
         data = get_form_data(phone='', message='Fala rapaz\naqui é da quebrada')
         self.client.post(r('contact'), data)

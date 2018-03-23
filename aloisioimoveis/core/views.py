@@ -9,6 +9,7 @@ from django.template.loader import render_to_string
 
 from aloisioimoveis.core.forms import ContactForm
 from aloisioimoveis.properties.models import House, Apartment, Commercial, Land, Property
+from aloisioimoveis.core.helpers import is_recaptcha_valid
 
 
 def home(request):
@@ -133,39 +134,45 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            # Send email
-            subject = 'Contato - De: {}'.format(form.cleaned_data['name'])
-            from_ = settings.DEFAULT_TO_EMAIL
-            reply_to = form.cleaned_data['email']
-            to = settings.DEFAULT_TO_EMAIL
+            if is_recaptcha_valid(request):
+                # Send email
+                subject = 'Contato - De: {}'.format(form.cleaned_data['name'])
+                from_ = settings.DEFAULT_TO_EMAIL
+                reply_to = form.cleaned_data['email']
+                to = settings.DEFAULT_TO_EMAIL
 
-            context = form.cleaned_data
-            record_id, record_type = form.cleaned_data['record_id'], form.cleaned_data['record_type']
-            if record_id and record_type:
-                try:
-                    if record_type == Property.HOUSE:
-                        context['url'] = request.build_absolute_uri(House.objects.get(pk=record_id).get_absolute_url())
-                    elif record_type == Property.APARTMENT:
-                        context['url'] = request.build_absolute_uri(Apartment.objects.get(pk=record_id).get_absolute_url())
-                    elif record_type == Property.COMMERCIAL:
-                        context['url'] = request.build_absolute_uri(Commercial.objects.get(pk=record_id).get_absolute_url())
-                    elif record_type == Property.LAND:
-                        context['url'] = request.build_absolute_uri(Land.objects.get(pk=record_id).get_absolute_url())
-                except ObjectDoesNotExist:
-                    pass
+                context = form.cleaned_data
+                record_id, record_type = form.cleaned_data['record_id'], form.cleaned_data['record_type']
+                if record_id and record_type:
+                    try:
+                        if record_type == Property.HOUSE:
+                            context['url'] = request.build_absolute_uri(House.objects.get(pk=record_id).get_absolute_url())
+                        elif record_type == Property.APARTMENT:
+                            context['url'] = request.build_absolute_uri(Apartment.objects.get(pk=record_id).get_absolute_url())
+                        elif record_type == Property.COMMERCIAL:
+                            context['url'] = request.build_absolute_uri(Commercial.objects.get(pk=record_id).get_absolute_url())
+                        elif record_type == Property.LAND:
+                            context['url'] = request.build_absolute_uri(Land.objects.get(pk=record_id).get_absolute_url())
+                    except ObjectDoesNotExist:
+                        pass
 
-            content = render_to_string('core/contact_email.html', context)
+                content = render_to_string('core/contact_email.html', context)
 
-            email = EmailMultiAlternatives(subject, content, from_, [to], reply_to=[reply_to])
-            email.attach_alternative(content, "text/html")
-            email.send()
+                email = EmailMultiAlternatives(subject, content, from_, [to], reply_to=[reply_to])
+                email.attach_alternative(content, "text/html")
+                email.send()
 
-            # Clean form
-            form = ContactForm()
+                # Clean form
+                form = ContactForm()
 
-            # Show success message
-            messages.success(request, '<strong>Mensagem enviada com sucesso</strong><br />'
-                                      'Retornaremos assim que possível.<br />Obrigado!')
+                # Show success message
+                messages.success(request, '<strong>Mensagem enviada com sucesso</strong><br />'
+                                        'Retornaremos assim que possível.<br />Obrigado!')
+
+            else:
+                # Show error message
+                messages.error(request, 'Ocorreu um erro. '
+                                        'reCAPTCHA inválido. Por favor tente novamente.')
 
         elif form.errors.get('record_id') or form.errors.get('record_type'):
             # Show error message

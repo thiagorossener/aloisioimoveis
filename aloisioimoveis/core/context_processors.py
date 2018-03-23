@@ -6,6 +6,7 @@ def settings_config(request):
 
     return {
         'SETTINGS': {
-            'GOOGLE_ANALYTICS_CODE': settings.GOOGLE_ANALYTICS_CODE
+            'GOOGLE_ANALYTICS_CODE': settings.GOOGLE_ANALYTICS_CODE,
+            'GOOGLE_RECAPTCHA_SITE_KEY': settings.GOOGLE_RECAPTCHA_SITE_KEY
         }
     }
