@@ -189,3 +189,7 @@ def contact(request):
         'form': form
     }
     return render(request, 'contact.html', context)
+
+
+def credpago_rent(request):
+    return render(request, 'credpago_rent.html')

@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Alugue com Credpago | {% endblock title %}
+
+{% block content %}
+
+    {% url 'contact' as contact_url %}
+
+    <section class="block block--icons" style="background-image: url({% static 'img/bg-icons.png' %})">
+        <div class="block__content">
+            <img class="block__badge-image img-responsive" src="{% static 'img/badge-aluguel-sem-fiador.png' %}" title="Aluguel com cartão de crédito">
+        </div>
+    </section>
+
+    <section class="block block--red">
+        <div class="block__content">
+            <div class="row equal">
+                <div class="col-xs-12 col-sm-offset-1 col-sm-7">
+                    <h1 class="block__title">#adeusburocracia</h1>
+                    <p>
+                        A Aloísio Imóveis fechou uma parceria inédita em Taubaté com a Credpago e agilizamos o processo de locação. Eliminamos a
+                        burocracia de alugar o imóvel e
+                        <strong>sem comprovação de renda</strong>.
+                    </p>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <img class="block__promo-image img-responsive" src="{% static 'img/bruno-gagliasso.png' %}" title="Aluguel com cartão de crédito">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="block block--cream">
+        <div class="block__content">
+            <div class="row">
+                <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+                    <h1 class="block__title">#rápidoefácil</h1>
+                    <p>
+                        É só ir até a Aloísio Imóveis e apresentar apenas:
+                    </p>
+                    <div class="block__items">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-2 text-center">
+                                <img src="{% static 'img/icon-id.png' %}" alt="Documento">
+                            </div>
+                            <div class="col-xs-12 col-sm-10">
+                                RG e CPF
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-2 text-center">
+                                <img src="{% static 'img/icon-credit-card.png' %}" alt="Cartão de Crédito">
+                            </div>
+                            <div class="col-xs-12 col-sm-10">
+                                Número do cartão de crédito e data do vencimento
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-2 text-center">
+                                <img src="{% static 'img/icon-fatura.png' %}" alt="Fatura">
+                            </div>
+                            <div class="col-xs-12 col-sm-10">
+                                Cópia da última fatura do cartão de crédito
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        Apenas com esses três documentos conseguimos verificar se você consegue alugar um imóvel com a gente. <strong>É só isso mesmo!</strong>
+                    </p>
+                    <p>
+                        E depois damos continuidade para marcarmos a assinatura do contrato.
+                        <br><br>
+                        <small>*Sujeito a rejeição de cadastro sem motivo.</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="block block--white">
+        <div class="block__content">
+            <div class="row">
+                <div class="col-xs-12 col-sm-offset-1 col-sm-9">
+                    <h1 class="block__title">#atenção</h1>
+                    <p>
+                        Essa modalidade serve para imóveis <span>residenciais</span> e <span>comerciais</span>.
+                    </p>
+                    <br><br>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <img class="img-responsive" src="{% static 'img/logo-credpago.png' %}" alt="Logo - Credpago">
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <img class="img-responsive" src="{% static 'img/logo-aloisio-vermelho.png' %}" alt="Logo - Aloísio Imóveis">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="block block--red">
+        <div class="block__content">
+            <div class="row">
+                <div class="col-xs-12 col-sm-offset-1 col-sm-4 text-center">
+                    <img class="block__contact-image" src="{% static 'img/icon-secretary.png' %}">
+                    <br><br>
+                </div>
+                <div class="col-xs-12 col-sm-7">
+                    <h1 class="block__title">#falecomagente</h1>
+                    <p>
+                        Entre em contato conosco para ajudarmos você a alugar seu imóvel sem burocracia.
+                    </p>
+                    <p>
+                        Rua Dr. Jorge Winther, 297<br>Centro - Taubaté/SP
+                    </p>
+                    <p>
+                        3622-2800 ou 99127-6854 (Whatsapp)
+                    </p>
+                    <p>
+                        <a href="{{ contact_url }}" title="Entrar em contato">contato@aloisioimoveis.com.br</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
+
+{% block footer %}
+
+{% endblock footer %}

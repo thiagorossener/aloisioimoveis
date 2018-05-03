@@ -4,7 +4,7 @@ from django.contrib import admin
 
 from aloisioimoveis.core.redirects import redirect_rent, redirect_buy, redirect_company, redirect_contact, \
     redirect_record, redirect_logo
-from aloisioimoveis.core.views import home, rent, buy, search, contact, company
+from aloisioimoveis.core.views import home, rent, buy, search, contact, company, credpago_rent
 from aloisioimoveis.locations.views import CityAutocomplete, NeighborhoodAutocomplete
 
 urlpatterns = [
@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^imovel/', include('aloisioimoveis.properties.urls', namespace='records')),
     url(r'^empresa/$', company, name='company'),
     url(r'^contato/$', contact, name='contact'),
+    url(r'^aluguel-credpago/$', credpago_rent, name='credpago_rent'),
     url(r'^sistema/', admin.site.urls),
     # API
     url(r'^api/locations/', include('aloisioimoveis.locations.urls', namespace='locations')),

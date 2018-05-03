@@ -1,0 +1,29 @@
+{% load static %}
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/novo-logo-inverse.png' %}"  width="125" height="52" /></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="{% if request.resolver_match.url_name == "home" %}active{% endif %}"><a href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a></li>
+                <li class="{% if request.resolver_match.url_name == "rent" %}active{% endif %}"><a href="{% url 'rent' %}">Alugar</a></li>
+                <li class="{% if request.resolver_match.url_name == "buy" %}active{% endif %}"><a href="{% url 'buy' %}">Comprar</a></li>
+                <li class="{% if request.resolver_match.url_name == "company" %}active{% endif %}"><a href="{% url 'company' %}">Empresa</a></li>
+                <li class="{% if request.resolver_match.url_name == "contact" %}active{% endif %}"><a href="{% url 'contact' %}">Contato</a></li>
+                <li class="{% if request.resolver_match.url_name == "credpago_rent" %}active{% endif %}"><a href="{% url 'credpago_rent' %}">Credpago</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+</nav>
