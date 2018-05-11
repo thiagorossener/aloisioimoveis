@@ -20,6 +20,7 @@
     }
 
     .block__content {
+        position: relative;
         max-width: 1000px;
         margin: 0 auto;
     }
@@ -40,6 +41,20 @@
         transform: rotate(-30deg);
         margin: 0 auto;
     }
+
+        .block__badge-image__legend {
+            position: absolute;
+            left: calc(50% - 50px);
+            bottom: -20px;
+            font-size: 1.1rem;
+            color: #CC1818;
+        }
+        @media (max-width: 768px) {
+            .block__badge-image__legend {
+                left: calc(50% - 40px);
+                font-size: 1rem;
+            }
+        }
 
     .block__promo-image {
         position: absolute;

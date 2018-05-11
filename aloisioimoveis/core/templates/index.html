@@ -15,31 +15,46 @@
 <!-- Carousel -->
 <section id="home-carousel">
     <div class="container">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-                <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-                <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="item">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Mais de 25 anos de experiência<br><br></h1>
+        <div class="row">
+            <div class="col-xs-12 col-sm-3 col-sm-push-9">
+                <a href="{% url 'credpago_rent' %}" title="Clique e saiba mais">
+                    <img class="stamp img-responsive" src="{% static 'img/credpago-stamp.png' %}">
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-sm-pull-3">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+                        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+                        <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <h1>Mais de 25 anos de experiência
+                                        <br>
+                                        <br>
+                                    </h1>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Confiança e credibilidade<br><br></h1>
+                        <div class="item">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <h1>Confiança e credibilidade
+                                        <br>
+                                        <br>
+                                    </h1>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="item active">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Departamentos especializados para melhor atendê-lo</h1>
+                        <div class="item active">
+                            <div class="container">
+                                <div class="carousel-caption">
+                                    <h1>Departamentos especializados para melhor atendê-lo</h1>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

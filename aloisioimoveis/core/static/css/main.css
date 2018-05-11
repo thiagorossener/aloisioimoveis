@@ -332,9 +332,17 @@ header .search-box button.active {
 
 /* Caroulsel  */
 
-#home#home-carousel {
+#home-carousel {
     height: 150px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+#home-carousel .stamp {
+    position: absolute;
+    top: -100px;
+    right: 50px;
+    z-index: 2;
 }
 
 #home-carousel .carousel-caption {
@@ -342,7 +350,7 @@ header .search-box button.active {
 }
 
 #home-carousel .item {
-    height: 150px;
+    height: 160px;
     background-color: #fff;
 }
 
@@ -1035,6 +1043,10 @@ footer .fb-page a {
     }
 
     /* Carousel */
+    #home-carousel {
+        height: auto;
+        margin-bottom: 10px;
+    }
     #home-carousel .item {
         height: 170px;
     }
@@ -1046,6 +1058,10 @@ footer .fb-page a {
     #home-carousel .carousel-caption {
         top: 0;
         padding-top: 0;
+    }
+    #home-carousel .stamp {
+        position: initial;
+        margin: 0 auto;
     }
 
     /* Footer */
@@ -1089,6 +1105,10 @@ footer .fb-page a {
 
 /* Bootstrap .md */
 @media only screen and (max-width: 991px) {
+    #home-carousel .stamp {
+        top: 0;
+    }
+
     .results .dados-do-imovel {
         padding: 0px 20px 20px 20px;
     }
