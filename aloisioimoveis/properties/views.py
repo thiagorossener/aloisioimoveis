@@ -46,14 +46,18 @@ def land(request, pk):
 
 
 def _build_total_field_tuples(obj):
-    # Build field tuples like (col, total, field). Ex: (0, 1, 'bedroom'), (1, 2, 'room')
+    # Build field tuples like (col, total, field, extra). Ex: (0, 1, 'bedroom', { suite: 2 }), (1, 2, 'room', None)
     total_fields = [f.attname for f in obj._meta.fields if f.attname.startswith('total')]
     prop_dict = model_to_dict(obj)
     fields = []
     for field_name in total_fields:
-        if prop_dict[field_name] > 0:
-            col = len(fields) % 2
-            total = prop_dict[field_name]
-            field = field_name.split('total_')[1]
-            fields.append((col, total, field))
+        col = len(fields) % 2
+        total = prop_dict[field_name]
+        field = field_name.split('total_')[1]
+
+        if total > 0 and field != 'suite':
+            if field == 'bedroom' and prop_dict['total_suite'] > 0:
+                fields.append((col, total, field, { 'suites': prop_dict['total_suite'] }))
+            else:
+                fields.append((col, total, field, None))
     return fields

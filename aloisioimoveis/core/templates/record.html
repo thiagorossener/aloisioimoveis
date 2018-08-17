@@ -72,12 +72,17 @@
                                                     <div class="area">Área de {{ property.area }}</div>
                                                 </div><br><br>
                                             {% endif %}
-                                            {% for col, total, field in fields %}
+                                            {% for col, total, field, extra in fields %}
                                                 {% for cur_col in cols %}
                                                     <div class="col-md-6">
                                                         {% if col == cur_col %}
                                                             {% if field == 'bedroom' %}
-                                                                <p>{{ total }} quarto{{ total|pluralize:"s" }}</p>
+                                                                <p>
+                                                                    {{ total }} quarto{{ total|pluralize:"s" }}
+                                                                    {% if extra and extra.suites %}
+                                                                        + {{ extra.suites }} suíte{{ extra.suites|pluralize:"s" }}
+                                                                    {% endif %}
+                                                                </p>
                                                             {% elif field == 'maids_room' %}
                                                                 <p>{{ total }} quarto{{ total|pluralize:"s" }} de empregada</p>
                                                             {% elif field == 'maids_wc' %}
@@ -94,8 +99,6 @@
                                                                 <p>{{ total }} área{{ total|pluralize:"s" }} de serviço</p>
                                                             {% elif field == 'leisure_area' %}
                                                                 <p>{{ total }} rancho{{ total|pluralize:"s" }}</p>
-                                                            {% elif field == 'suite' %}
-                                                                <p>{{ total }} suíte{{ total|pluralize:"s" }}</p>
                                                             {% elif field == 'bathroom' %}
                                                                 <p>{{ total }} banheiro{{ total|pluralize:"s" }}</p>
                                                             {% elif field == 'coffe_room' %}
