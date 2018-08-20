@@ -55,9 +55,10 @@ def _build_total_field_tuples(obj):
         total = prop_dict[field_name]
         field = field_name.split('total_')[1]
 
-        if total > 0 and field != 'suite':
-            if field == 'bedroom' and prop_dict['total_suite'] > 0:
-                fields.append((col, total, field, { 'suites': prop_dict['total_suite'] }))
+        if total > 0:
+            if (field == 'bedroom' or field == 'suite') and prop_dict['total_bedroom'] > 0 and prop_dict['total_suite'] > 0:
+                if field == 'bedroom':
+                    fields.append((col, total, field, { 'suites': prop_dict['total_suite'] }))
             else:
                 fields.append((col, total, field, None))
     return fields

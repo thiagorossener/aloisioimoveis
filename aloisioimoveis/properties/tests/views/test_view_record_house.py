@@ -93,3 +93,28 @@ class HouseRecordViewTest(TestCase):
         for content, count in contents:
             with self.subTest():
                 self.assertContains(response, content, count)
+
+    def test_suite(self):
+        """Should show 2 suites and no bedroom"""
+        city = mommy.make(City, name='Taubaté')
+        neighborhood = mommy.make(Neighborhood, name='Belém', city=city)
+        house = mommy.make(House,
+                           num_record=123,
+                           intent=Property.RENT,
+                           obs='',
+                           price=100,
+                           conditions='',
+                           city=city,
+                           neighborhood=neighborhood,
+                           address='',
+                           total_bedroom=0,
+                           total_suite=2,
+                           )
+        response = self.client.get(r('records:house', house.pk))
+        contents = [
+            ('0 quarto', 0),
+            ('2 suítes', 1),
+        ]
+        for content, count in contents:
+            with self.subTest():
+                self.assertContains(response, content, count)
