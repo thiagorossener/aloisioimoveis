@@ -1,0 +1,94 @@
+/**
+ * Results
+ */
+
+.results img {
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.results .img-overlay {
+    position: relative;
+}
+
+.results .layer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(0deg, #000000 0%, rgba(79,78,78,0.00) 50%);
+    color: #fff;
+    -webkit-border-bottom-left-radius: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.results .layer-overlay .value {
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
+    right: 15px;
+}
+
+.results .layer-overlay .price {
+    display: block;
+    font-size: 25pt;
+    font-weight: 700;
+}
+
+.results .dados-do-imovel {
+    display: block;
+    font-size: 12pt;
+}
+
+.results .dados-do-imovel .info h3 {
+    font-size: 18pt;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.results .dados-do-imovel .info .bairro {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.results .dados-do-imovel .info .rua {
+    margin-top: 5px;
+    color: #999;
+}
+
+.results .dados-do-imovel .info span {
+    margin-right: 30px;
+}
+
+.results .dados-do-imovel .info .obs {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    font-size: 11pt;
+    color: #333;
+}
+
+.results .dados-do-imovel .actions {
+    margin-top: 30px;
+}
+
+.results .wrapper {
+    position: relative;
+    width: 100%; /* <-- just a default, can be anything. */
+}
+
+.results .four-by-three.aspect-ratio {
+    padding-bottom: 75%
+}
+
+.results .content {
+    position: absolute;
+    top: 0;  bottom: 0;  left: 0;  right: 0;
+    overflow: hidden;
+}

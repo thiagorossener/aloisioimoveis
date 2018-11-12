@@ -1,0 +1,87 @@
+/**
+ * Search Box
+ */
+
+.search-box {
+    display: block;
+    background: rgba(0, 0, 0, 0.5);
+    max-width: 780px;
+    position: relative;
+    margin: 0 auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 19px;
+    margin-top: 165px;
+}
+
+.search-box label {
+    color: #fff;
+    font-weight: 700;
+    font-size: 12pt;
+    margin-bottom: 10px;
+}
+
+.search-box #input-numero-da-ficha {
+    border: 0;
+    vertical-align: middle;
+    font-size: 12pt;
+    color: #CC1818;
+    outline: none;
+}
+
+.search-button-group {
+    vertical-align: middle;
+    padding-top: 12px;
+}
+
+.search-box #btn-search {
+    font-size: 12pt;
+    font-weight: 700;
+    height: 46px;
+    background-color: #CC1818;
+    color: #fff;
+    text-transform: uppercase;
+    outline: none;
+    margin-right: 0;
+    padding: 12px 16px;
+}
+
+.search-box #btn-search i {
+    font-size: 14pt;
+}
+
+.search-button-group a,
+.search-button-group button {
+    vertical-align: middle;
+}
+
+.search-button-group a {
+    text-decoration: none;
+    color: #fff;
+    margin-right: 12px;
+    font-size: 10pt;
+}
+
+.search-box button,
+.search-box button:hover,
+.search-box button:focus {
+    color: #CC1818;
+    background-color: #fff;
+    border: 0;
+    border-radius: 4px;
+}
+
+.search-box .open > .dropdown-toggle.btn-default {
+    color: #CC1818 !important;
+}
+
+.search-box button:focus,
+.search-box button:active {
+    outline: none !important;
+}
+
+.search-box button.active {
+    color: #fff !important;
+    background-color: #CC1818;
+}

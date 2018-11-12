@@ -1,0 +1,87 @@
+/**
+ * Contato
+ */
+
+.contato .form-group {
+    margin-bottom: 20px;
+}
+
+.contato .form-group .error {
+    background: #f2dede;
+}
+
+.contato .control-label {
+    padding-top: 0;
+    font-size: 14pt;
+}
+
+.contato .control-label .active {
+    color: #CC1818;
+}
+
+.contato .fa-stack-2x {
+    color: #e5e5e5;
+}
+
+.contato .fa-stack-1x {
+    color: #fff;
+    font-size: 14pt;
+}
+
+.contato .input-lg,
+.contato .textarea-lg {
+    color: #666;
+    border-radius: 0;
+    background-color: #f1f1f1;
+    min-height: 40px;
+    font-size: 12pt;
+    outline: none;
+    border: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.contato .input-lg:focus,
+.contato .textarea-lg:focus{
+    background: #e5e5e5;
+}
+
+.contato .control-label + textarea {
+    vertical-align: top;
+}
+
+.contato #btn-send {
+    font-size: 12pt;
+    font-weight: 700;
+    height: 40px;
+    background-color: #CC1818;
+    color: #fff;
+    text-transform: uppercase;
+    outline: none;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.contato .message {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+.contato .message.error {
+    background-color: #f2dede;
+    color: #a94442;
+}
+
+.contato .message.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+}
+
+.contato .errorlist {
+    list-style-type: none;
+    padding: 0;
+    color: #a94442;
+    margin-top: 5px;
+    margin-bottom: 0;
+}

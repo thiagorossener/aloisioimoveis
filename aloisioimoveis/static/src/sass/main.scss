@@ -1,3 +1,31 @@
-body {
-    background-color: blue;
-}
+@import "normalize.css/normalize";
+@import "include-media/dist/include-media";
+@import "bootstrap/dist/css/bootstrap";
+@import "font-awesome/scss/font-awesome";
+
+@import "variables";
+@import "mixins";
+@import "base";
+
+@import "components/credpago";
+@import "components/navbar";
+@import "components/search-box";
+@import "components/search-group";
+@import "components/search-area";
+@import "components/carousel";
+@import "components/form";
+@import "components/thumbnail";
+@import "components/load-more";
+@import "components/title";
+@import "components/order";
+@import "components/results";
+@import "components/details";
+@import "components/view";
+@import "components/gallery-scroll";
+@import "components/contato";
+@import "components/footer";
+@import "components/jumbotron";
+@import "components/copyright";
+@import "components/pagination";
+@import "components/btn-theme";
+

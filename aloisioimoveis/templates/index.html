@@ -67,32 +67,33 @@
 <section class="container">
     <div class="row">
         {% for property in properties %}
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    {% cloudinary  property.specific.photos.first.protected_thumbnail_md %}
-                    <div class="info">
-                        <span class="badge badge-finalidade">{{ property.intent }}</span>
-                        <span class="badge badge-preco badge-primary pull-right">{{ property.price|currency_brl }}</span>
-                    </div>
-                    <div class="caption">
-                        <h3>{{ property.specific.property_type }}</h3>
-                        <p>{{ property.neighborhood }} - {{ property.city }}</p>
-                        {% if property.house or property.apartment %}
-                            <p><span class="badge badge-room">2</span> <i class="fa fa-bed"></i></p>
-                        {% endif %}
-                        <a href="{{ property.specific.get_absolute_url }}" class="btn btn-primary" role="button">Ver detalhes</a>
-                    </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                {% cloudinary property.specific.photos.first.protected_thumbnail_md %}
+                <div class="info">
+                    <span class="badge badge-finalidade">{{ property.intent }}</span>
+                    <span class="badge badge-preco badge-primary pull-right">{{ property.price|currency_brl }}</span>
+                </div>
+                <div class="caption">
+                    <h3>{{ property.specific.property_type }}</h3>
+                    <p>{{ property.neighborhood }} - {{ property.city }}</p>
+                    {% if property.house or property.apartment %}
+                    <p><span class="badge badge-room">2</span> <i class="fa fa-bed"></i></p>
+                    {% endif %}
+                    <a href="{{ property.specific.get_absolute_url }}" class="btn btn-primary" role="button">Ver
+                        detalhes</a>
                 </div>
             </div>
+        </div>
         {% endfor %}
-{#        <div class="load-more">#}
-{#            <button class="btn btn-default">Carregar mais<br><i class="glyphicon glyphicon-chevron-down"></i></button>#}
-{#        </div>#}
+        {# <div class="load-more">#}
+            {# <button class="btn btn-default">Carregar mais<br><i class="glyphicon glyphicon-chevron-down"></i></button>#}
+            {# </div>#}
     </div>
 </section>
 
 {% endblock content %}
 
 {% block scripts %}
-<script src="{% static 'js/components/home-search.js' %}"  type="text/javascript"></script>
+<script src="{% static 'js/components/home-search.js' %}" type="text/javascript"></script>
 {% endblock scripts %}

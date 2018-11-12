@@ -1,0 +1,47 @@
+/**
+ * Navbar
+ */
+
+.navbar {
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.navbar .container {
+    min-height: 70px;
+}
+
+.navbar-nav > li > a, .navbar-brand {
+    height: 70px;
+}
+
+.navbar-brand {
+    margin-right: 40px;
+    padding: 9px 0px;
+}
+
+.navbar-nav > li > a {
+    line-height: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 12pt;
+}
+
+.navbar-inverse {
+    background-color: $color-red;
+    border: 0;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .navbar-nav>.active>a:hover,
+.navbar-inverse .navbar-nav>.active>a:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navbar-inverse .navbar-nav a:active {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}

@@ -45,11 +45,11 @@ def get_context(request, intent):
 
 
 def rent(request):
-    return render(request, 'rent_list.html', get_context(request, Property.RENT))
+    return render(request, 'core/rent_list.html', get_context(request, Property.RENT))
 
 
 def buy(request):
-    return render(request, 'buy_list.html', get_context(request, Property.BUY))
+    return render(request, 'core/buy_list.html', get_context(request, Property.BUY))
 
 
 def search(request):
@@ -123,11 +123,11 @@ def search(request):
         'results': results,
         'params': request.GET.dict(),
     }
-    return render(request, 'search.html', context)
+    return render(request, 'core/search.html', context)
 
 
 def company(request):
-    return render(request, 'company.html')
+    return render(request, 'core/company.html')
 
 
 def contact(request):
@@ -188,8 +188,8 @@ def contact(request):
     context = {
         'form': form
     }
-    return render(request, 'contact.html', context)
+    return render(request, 'core/contact.html', context)
 
 
 def credpago_rent(request):
-    return render(request, 'credpago_rent.html')
+    return render(request, 'core/credpago_rent.html')

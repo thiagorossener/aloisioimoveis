@@ -1,0 +1,17 @@
+/**
+ * Jumbotron
+ */
+
+.jumbotron {
+    background: rgba(0,0,0,.12) url("../img/cover-1960.jpg") top no-repeat;
+    background-position: 50% 60%;
+    background-color: #fff;
+    height: 500px;
+    padding: 0 !important;
+    @include media("<desktop") {
+        height: inherit;
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+        margin-bottom: 10px;
+    }
+}

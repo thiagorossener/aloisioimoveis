@@ -1,0 +1,8 @@
+{% extends 'sub_base.html' %}
+
+{% block title %}Comprar | {% endblock title %}
+
+{% block sub_content %}
+    {% include 'core/includes/properties_title_snippet.html' with title='Comprar' params=params %}
+    {% include 'core/includes/properties_list_snippet.html' with request=request properties=properties only %}
+{% endblock sub_content %}

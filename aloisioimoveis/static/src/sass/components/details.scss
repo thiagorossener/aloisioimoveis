@@ -1,0 +1,90 @@
+/**
+ * Details
+ */
+
+.details h3 {
+    font-size: 18pt;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.details .bairro {
+    font-size: 12pt;
+    margin-bottom: 5px;
+}
+
+.details .ficha {
+    font-size: 10pt;
+    color: #999;
+}
+
+.details .dados-do-imovel {
+    background-color: #f7eac1;
+    border: 1px solid #f7eac1;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top: 0;
+}
+
+.details .dados-do-imovel .value {
+    color: #CC1818;
+    text-align: center;
+}
+
+.details .dados-do-imovel .value .price {
+    font-size: 22pt;
+    font-weight: 700;
+}
+
+.details .dados-do-imovel .info {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 12pt;
+}
+
+.details .dados-do-imovel .body {
+    display: table;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.details .dados-do-imovel .body .col-left {
+    /*background-color: #4990E2;*/
+    background-color: #FBDA6E;
+    float: none;
+    display: table-cell;
+    vertical-align: middle;
+    /*-webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-bottom-left-radius: 4px;*/
+    padding-left: 30px;
+    padding-right: 30px;
+    /*left: -1px;*/
+}
+
+.details .obs {
+    margin-top: 15px;
+    font-size: 11pt;
+}
+
+.details .obs span {
+    font-weight: bold;
+}
+
+.details .obs p {
+    color: #333;
+    margin-top: 5px;
+}
+
+.details .more-info {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #f2f2f2;
+    color: #999;
+    font-size: 10pt;
+}

@@ -60,7 +60,7 @@ Vue.component('home-search', {
                                     placeholder="Nº da ficha"
                                     v-model="ficha"
                                     v-else />
-                                <a v-bind:href="submitButtonLink" id="btn-search" class="btn btn-lg" type="button"><i class="fa fa-search"></i> &nbsp;Buscar</a>
+                                <a v-bind:href="submitButtonLink" id="btn-search" class="btn btn-lg" role="button"><i class="fa fa-search"></i> &nbsp;Buscar</a>
                             </div>
                         </fieldset>
                     </form>

@@ -2,7 +2,7 @@ Vue.component('search-bar', {
 	template: `
 	<section class="top-page">
 	    <div class="container">
-	        <div id="search" class="search-box" v-cloak>
+	        <div id="search" class="search-area" v-cloak>
 	            <form class="form-inline">
 	                <fieldset>
 	                    <div class="form-group">
@@ -57,7 +57,7 @@ Vue.component('search-bar', {
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <a v-bind:href="submitButtonLink" id="btn-search" class="btn" type="button"><i class="fa fa-search"></i> &nbsp;Buscar</a>
+	                        <a v-bind:href="submitButtonLink" id="btn-search" class="btn" role="button"><i class="fa fa-search"></i> &nbsp;Buscar</a>
 	                    </div>
 	                </fieldset>
 	            </form>

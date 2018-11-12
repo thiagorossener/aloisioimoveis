@@ -1,0 +1,21 @@
+/**
+ * Title
+ */
+
+.title {
+    position: relative;
+    margin-bottom: 20px;
+    border-bottom: 2px solid rgba(204, 24, 24, 0.5);
+    margin-left: 0;
+    margin-right: 0;
+    color: #CC1818;
+}
+
+.title .col-md-6 {
+    padding: 0;
+}
+
+.title h2 {
+    text-transform: uppercase;
+    text-weight: 700;
+}

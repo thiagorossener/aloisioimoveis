@@ -1,0 +1,21 @@
+/**
+ * Btn Theme
+ */
+
+.btn-theme {
+    color: #fff;
+    font-size: 11pt;
+    background-color: #CC1818;
+    border: 0;
+    padding: 8px 25px;
+}
+
+.btn-theme:hover,
+.btn-theme:focus {
+    color: #fff;
+    background-color: #991010;
+    -webkit-transition: background-color 0.5s ease-out;
+    -moz-transition: background-color 0.5s ease-out;
+    -o-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
+}

@@ -1,0 +1,31 @@
+/**
+ * Search Group
+ */
+
+.search-group {
+    margin-left: 9px;
+}
+
+.search-group #btn-tipo-de-imovel {
+    width: 158px;
+}
+
+.search-group #btn-cidades,
+.search-group #btn-bairros {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.search-group #btn-cidades {
+    width: 175px;
+}
+
+.search-group #btn-bairros {
+    width: 189px;
+    margin-left: 9px;
+}
+
+.search-group .dropdown-menu-bairros {
+    margin-left: 9px;
+}

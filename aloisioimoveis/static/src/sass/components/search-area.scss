@@ -1,0 +1,98 @@
+/**
+ * Search Area
+ */
+
+.search-area {
+    display: block;
+    background-color: #F7EAC1;
+    width: 100%;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 21px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.search-area label {
+    color: #CC1818;
+    font-weight: 700;
+    font-size: 11pt;
+    margin-bottom: 10px;
+}
+
+.search-area #btn-search {
+    font-size: 10pt;
+    font-weight: 700;
+    height: 32px;
+    background-color: #CC1818;
+    color: #fff;
+    text-transform: uppercase;
+    outline: none;
+    margin-top: 29px;
+    margin-left: 15px;
+}
+
+.search-area #btn-search i {
+    font-size: 11pt;
+}
+
+.search-area button,
+.search-area button:hover,
+.search-area button:focus {
+    color: #CC1818;
+    background-color: #fff;
+    border: 0;
+    border-radius: 4px;
+}
+
+.search-area .open > .dropdown-toggle.btn-default {
+    color: #CC1818 !important;
+}
+
+.search-area button:focus,
+.search-area button:active {
+    outline: none !important;
+}
+
+.search-area button.active {
+    color: #fff !important;
+    background-color: #CC1818;
+}
+
+.search-area {
+    .search-group {
+        margin-left: 9px;
+    }
+
+    #finalidade button {
+        padding: 6px 30px;
+    }
+
+    .search-group #btn-tipo-de-imovel {
+        width: 100%;
+        min-width: 100px;
+    }
+
+    .search-group #btn-cidades,
+    .search-group #btn-bairros {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .search-group #btn-cidades {
+        width: 100%;
+        min-width: 150px;
+    }
+
+    .search-group #btn-bairros {
+        width: 100%;
+        min-width: 150px;
+        margin-left: 9px;
+    }
+
+    .search-group #btn-bairros + .dropdown-menu {
+        margin-left: 9px;
+    }
+}

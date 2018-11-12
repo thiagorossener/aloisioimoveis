@@ -1,0 +1,51 @@
+/**
+ * Footer
+ */
+
+footer {
+    background-color: #0c1a1e;
+    min-height: 350px;
+    margin-top: 35px;
+    font-size: 12pt !important;
+}
+
+footer .table {
+    margin-top: 30px;
+}
+
+footer .table > tbody > tr > td {
+    border: 0;
+    color: #fff;
+}
+
+footer .table > tbody > tr > td .fa {
+    font-size: 18pt;
+}
+
+footer .fb-page a {
+    color: #fff !important;
+    font-size: 26pt;
+}
+
+.footerleft {
+    margin-top:50px;
+    padding:0 36px;
+}
+
+.logofooter {
+    margin-bottom:10px;
+    font-size:25px;
+    color:#fff;
+    font-weight:700;
+}
+
+.footerleft p {
+    color:#fff;
+    font-size:12px !important;
+    margin-bottom:15px;
+}
+
+.footerleft p i {
+    width: 20px;
+    color: #999;
+}

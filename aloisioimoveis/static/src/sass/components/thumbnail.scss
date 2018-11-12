@@ -1,0 +1,80 @@
+/**
+ * Thumbnail
+ */
+
+.thumbnail {
+    padding: 0;
+    border-color: #e5e5e5
+}
+
+.thumbnail img {
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.thumbnail .caption {
+    padding: 19px !important;
+}
+
+.thumbnail .info {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.thumbnail .info .badge-finalidade,
+.thumbnail .info .badge-preco {
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+
+.thumbnail .info .badge-finalidade {
+    background-color: #333;
+    text-transform: uppercase;
+}
+
+.thumbnail .info .badge-preco {
+    /*background-color: #f7eac1;*/
+    background-color: #FBDA6E;
+    color: #CC1818;
+}
+
+.thumbnail h3 {
+    font-size: 14pt !important;
+    font-weight: 700 !important;
+    margin-top: 0px !important;
+}
+
+.thumbnail p {
+    font-size: 12pt;
+}
+
+.thumbnail .btn {
+    font-size: 12pt;
+    width: 100%;
+    padding: 8px 12px;
+    background-color: #CC1818;
+    border: 0;
+    margin-top: 9px;
+}
+
+.thumbnail .badge-room {
+    padding: 6px;
+    min-width: 24px;
+    border-radius: 12px;
+    background-color: #333;
+}
+
+.thumbnail .fa-bed {
+    font-size: 25pt;
+    vertical-align: middle;
+    margin-left: 8px;
+    color: #333;
+}

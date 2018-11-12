@@ -1,8 +1,0 @@
-{% extends 'sub_base.html' %}
-
-{% block title %}Alugar | {% endblock title %}
-
-{% block sub_content %}
-    {% include 'core/properties_title_snippet.html' with title='Alugar' params=params %}
-    {% include 'core/properties_list_snippet.html' with request=request properties=properties only %}
-{% endblock sub_content %}

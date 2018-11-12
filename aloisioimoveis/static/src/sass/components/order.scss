@@ -1,0 +1,23 @@
+/**
+ * Order
+ */
+
+.order {
+    position: absolute;
+    right: 0;
+    bottom: 14px;
+}
+
+.order .order-text {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.order button,
+.order button:hover,
+.order button:focus {
+    color: #CC1818;
+    background-color: #fff;
+    border: 1px solid #CC1818;
+    border-radius: 4px;
+}
