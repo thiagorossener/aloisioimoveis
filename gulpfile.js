@@ -111,9 +111,7 @@ gulp.task('runServer', function (cb) {
 gulp.task('browserSync', function () {
     browserSync.init(
         [`${paths.build}/css/*.css`, `${paths.build}/js/*.js`, `${paths.templates}/*.html`], {
-            // Proxying the django Docker container
-            // https://stackoverflow.com/questions/42456424/browsersync-within-a-docker-container
-            proxy: "django:8000",
+            proxy: "localhost:8000",
             open: false
         });
 });
