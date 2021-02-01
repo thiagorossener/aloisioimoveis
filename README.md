@@ -1,10 +1,15 @@
+# 🚨 This project has been discontinued
+
+This project was implemented between 2017-2018 and since then, it has been discontinued.
+
+Feel free to use the codebase, but keep in mind it's no longer supported.
+
 # Aloísio Imóveis
 
 Real estate website and system built in Django and Vue.js for [Aloísio Imóveis](http://aloisioimoveis.com.br/)
 
 [![Build Status](https://travis-ci.org/thiagorossener/aloisioimoveis.svg?branch=master)](https://travis-ci.org/thiagorossener/aloisioimoveis)
 [![Coverage Status](https://coveralls.io/repos/github/thiagorossener/aloisioimoveis/badge.svg?branch=master)](https://coveralls.io/github/thiagorossener/aloisioimoveis?branch=master)
-[![Code Health](https://landscape.io/github/thiagorossener/aloisioimoveis/master/landscape.svg?style=flat)](https://landscape.io/github/thiagorossener/aloisioimoveis/master)
 
 ![Aloísio Imóveis](http://res.cloudinary.com/dm7h7e8xj/image/upload/v1499797163/github-aloisioimoveis_tyxsk8.png)
 
